@@ -58,5 +58,51 @@ export default {
     display: inline-block;
     width: 23%;
     font-size: 10px;
-  }
+    height: 100%;
+    position: relative;
+    line-height: 74px;
+}
+
+.tab-bar li:nth-child(1)::before,
+.tab-bar li:nth-child(2)::before,
+.tab-bar li:nth-child(3)::before,
+.tab-bar li:nth-child(4)::before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tab-bar li:nth-child(1)::before {
+  background: url("https://resource.yuedaoec.com/test1/home@2x.png") no-repeat center;
+  background-size: cover;
+}
+
+.tab-bar li:nth-child(2)::before {
+  background: url("https://resource.yuedaoec.com/test1/sell@2x.png") no-repeat center;
+  background-size: cover;
+}
+
+.tab-bar li:nth-child(3)::before {
+  background: url("https://resource.yuedaoec.com/test1/order@2x.png") no-repeat center;
+  background-size: cover;
+}
+
+.tab-bar li:nth-child(4)::before {
+  background: url("https://resource.yuedaoec.com/test1/account@2x.png") no-repeat center;
+  background-size: cover;
+}
+
+.tab-bar li:nth-child(4).router-link-active::before {
+  background: url("https://resource.yuedaoec.com/test1/account_a@2x.png") no-repeat center;
+  background-size: cover;
+}
+
+
+.tab-bar li.router-link-active{  
+    color: #7041FF;
+}  
 </style>
