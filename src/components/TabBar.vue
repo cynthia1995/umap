@@ -96,7 +96,6 @@ export default {
   background-size: cover;
 }
 
-
 .tab-bar li.router-link-active{
     color: #7041FF;
 }
