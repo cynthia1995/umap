@@ -12,16 +12,16 @@
       <van-swipe-item><img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item>
       <van-swipe-item><img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item>
     </van-swipe>
-    <div class="main">
+    <section class="main">
       <van-button type="primary" block>Sell USDT</van-button>
-      <div class="part part1">
+      <div class="part part1 bg-dbeaff">
         <div class="line line1">
-          <p>
+          <p class="bg-edf5ff">
             UMAP
             <br />
             PRICE
           </p>
-          <p>
+          <p class="bg-ffffff">
             <b>1</b>
             USDT
             <b>&nbsp;=&nbsp;</b>
@@ -30,12 +30,12 @@
           </p>
         </div>
         <div class="line line2">
-          <p>
+          <p class="bg-edf5ff">
             MARKET
             <br />
             PRICE
           </p>
-          <p>
+          <p class="bg-ffffff">
             <b>1</b>
             USDT
             <b>&nbsp;=&nbsp;</b>
@@ -44,8 +44,8 @@
           </p>
         </div>
         <div class="line line3">
-          <p>YOU Earn</p>
-          <p>
+          <p class="bg-8ceaff">YOU Earn</p>
+          <p class="bg-00d0ff">
             <b>≈</b>
             &nbsp;₹
             <b>3.00</b>
@@ -53,8 +53,8 @@
           </p>
         </div>
       </div>
-      <div class="part part2"><count-to :start-val="0" :end-val="1150000000" :duration="2000" /></div>
-    </div>
+      <div class="part part2 text-center color-6d4ffd bg-f6f7fb fontweight-m"><count-to :start-val="0" :end-val="1150000000" :duration="2000" /></div>
+    </section>
   </div>
 </template>
 
@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 >>> .van-nav-bar {
   position: absolute;
   top: 0;
@@ -103,10 +103,9 @@ export default {
 
 .my-swipe .van-swipe-item {
   height: 310px;
-}
-
-.my-swipe .van-swipe-item img {
-  height: 100%;
+  img {
+    height: 100%;
+  }
 }
 
 >>> .van-swipe__indicators {
@@ -123,126 +122,79 @@ export default {
   width: 8px;
 }
 
+>>> .van-button--primary span {
+  font-weight: 500;
+}
+
 .main {
-  background-color: #ffffff;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  overflow: hidden;
-  position: relative;
   top: -20px;
-  padding: 20px 20px 60px;
-}
-
-.part {
-  position: relative;
-  margin-top: 20px;
-}
-
-.part1 {
-  padding-top: 39px;
-  background-color: #dbeaff;
-}
-
-.part2 {
-  padding-top: 24px;
-  background-color: #f6f7fb;
-  color: #6d4ffd;
-  font-size: 30px;
-  text-align: center;
-  font-weight: 600;
-  line-height: 60px;
-}
-
-.part1::before,
-.part2::before {
-  height: 24px;
-  width: 144px;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background: url(../../assets/img/sq_bg.png) no-repeat center;
-  background-size: cover;
-  line-height: 24px;
-  text-align: center;
-  font-size: 12px;
-  color: #1d2243;
-}
-
-.part1::before {
-  content: 'Broadcast Today';
-}
-
-.part2::before {
-  content: 'Limited USDT Volume';
-}
-
-.line {
-  height: 36px;
-  width: 90%;
-  margin: 0 auto 5px;
-  display: flex;
-  letter-spacing: 0.5px;
-}
-
-.line p {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.line3 {
-  height: 44px;
-  width: 100%;
-  margin: 20px auto 0;
-}
-
-.line p:nth-child(1) {
-  flex: 1;
-  background-color: #edf5ff;
-  font-size: 12px;
-}
-
-.line p:nth-child(2) {
-  flex: 3;
-  background-color: #ffffff;
-}
-
-.line p:nth-child(1) {
-  color: #4c528f;
-}
-
-.line1 p:nth-child(2) {
-  color: #1d2243;
-}
-
-.line2 p:nth-child(2) {
-  color: #8c9fad;
-}
-
-.line3 p:nth-child(1) {
-  background-color: #4ddeff !important;
-  color: #2f3462;
-  font-weight: 600;
-}
-
-.line3 p:nth-child(2) {
-  background: #00d0ff;
-  color: #ffffff;
-}
-
-.line b {
-  font-size: 20px;
-}
-
-.line3 b {
-  font-size: 24px;
-  color: #ffffff;
-}
-
-.line3 em {
-  font-size: 12px;
-  font-style: normal;
+  .part {
+    position: relative;
+    margin-top: 20px;
+    &.part1 {
+      padding-top: 39px;
+    }
+    &.part2 {
+      padding-top: 24px;
+      font-size: 30px;
+      line-height: 60px;
+    }
+    &.part1::before,
+    &.part2::before {
+      height: 24px;
+      width: 144px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: url(../../assets/img/sq_bg.png) no-repeat center;
+      background-size: cover;
+      line-height: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #1d2243;
+      font-weight: 600;
+    }
+    &.part1::before {
+      content: 'Broadcast Today';
+    }
+    &.part2::before {
+      content: 'Limited USDT Volume';
+    }
+    .line {
+      height: 36px;
+      width: 90%;
+      margin: 0 auto 5px;
+      p:nth-child(1) {
+        font-size: 12px;
+      }
+      b {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      &.line1 p:nth-child(2) {
+        color: #1d2243;
+      }
+      &.line2 p:nth-child(2) {
+        color: #8c9fad;
+      }
+      &.line3 {
+        height: 44px;
+        width: 100%;
+        margin: 20px auto 0;
+        &.line3 p:nth-child(1) {
+          font-weight: 600;
+        }
+        b {
+          font-size: 24px;
+          color: #ffffff;
+        }
+        em {
+          font-size: 12px;
+          font-style: normal;
+        }
+      }
+    }
+  }
 }
 </style>

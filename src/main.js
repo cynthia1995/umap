@@ -8,15 +8,22 @@ import {
   Button,
   Swipe,
   SwipeItem,
-  NavBar
-} from 'vant';
-import '@/assets/css/global.css'
+  NavBar,
+  Field,
+  Popup
+} from 'vant'
+import '@/assets/css/reset.scss'
+import '@/assets/css/common.scss'
+import tool from '@/assets/js/tool'
+Vue.use(tool)
 
 Vue.use(Toast);
 Vue.use(Button);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(NavBar);
+Vue.use(Field);
+Vue.use(Popup);
 
 Vue.config.productionTip = false
 

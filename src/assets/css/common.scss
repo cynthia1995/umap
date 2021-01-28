@@ -1,0 +1,122 @@
+$primary-fontsize: 14px;
+$primary-color: #1d2243;
+$color-6d4ffd: #6d4ffd;
+$color-4c528f: #4c528f;
+$primary-background-color: #6d4ffd;
+$background-color-8ceaff: #8ceaff;
+$background-color-00d0ff: #00d0ff;
+$background-color-dbeaff: #dbeaff;
+$background-color-f6f7fb: #f6f7fb;
+$background-color-edf5ff: #edf5ff;
+$background-color-ffffff: #ffffff;
+$text-center: center;
+$text-left: left;
+$text-right: right;
+$padding-20: 0 20px;
+$font-weight-reguler: 400;
+$font-weight-medium: 600;
+body,
+html {
+  font-size: $primary-fontsize;
+  color: $primary-color;
+  font-weight: $font-weight-reguler;
+}
+
+.van-button--primary {
+  background-color: $primary-background-color;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  border-radius: 4px;
+}
+
+section.main {
+  background-color: #ffffff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 20px 100px;
+}
+
+.white-color {
+  color: #ffffff;
+}
+
+.line {
+  display: flex;
+  letter-spacing: 0.2px;
+  margin: 0 auto;
+}
+
+.line p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.line p:nth-child(1) {
+  flex: 1;
+}
+
+.line p:nth-child(2) {
+  flex: 3;
+}
+
+.bg-edf5ff {
+  background-color: $background-color-edf5ff;
+  color: #4c528f;
+}
+
+.bg-ffffff {
+  background-color: $background-color-ffffff;
+}
+
+.bg-8ceaff {
+  background-color: $background-color-8ceaff;
+  color: #4c528f;
+}
+
+.bg-00d0ff {
+  background-color: $background-color-00d0ff;
+  color: #ffffff;
+}
+
+.bg-dbeaff {
+  background-color: $background-color-dbeaff;
+}
+
+.bg-f6f7fb {
+  background-color: $background-color-f6f7fb;
+}
+
+.color-6d4ffd {
+  color: $color-6d4ffd;
+}
+
+.color-4c528f {
+  color: $color-4c528f;
+}
+
+.text-center {
+  text-align: $text-center;
+}
+
+.text-left {
+  text-align: $text-left;
+}
+
+.text-right {
+  text-align: $text-right;
+}
+
+.padding-20 {
+  padding: $padding-20;
+}
+.fontweight-r {
+  font-weight: $font-weight-reguler;
+}
+.fontweight-m {
+  font-weight: $font-weight-medium;
+}
