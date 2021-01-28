@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home/Home.vue'
 import Sell from '@/components/Sell/Sell.vue'
 import SellAddress from '@/components/Sell/SellAddress.vue'
+import UploadVoucher from '@/components/Sell/UploadVoucher.vue'
 import Orders from '@/components/Orders/Orders.vue'
 import Account from '@/components/Account/Account.vue'
 
@@ -42,5 +43,13 @@ export default new Router({
     path: '/selladdress',
     name: 'SellAddress',
     component: SellAddress
+  }, {
+    path: '/selladdress',
+    name: 'SellAddress',
+    component: SellAddress
+  }, {
+    path: '/uploadvoucher',
+    name: 'UploadVoucher',
+    component: UploadVoucher
   }]
 })

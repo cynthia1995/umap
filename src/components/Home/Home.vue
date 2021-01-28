@@ -86,46 +86,40 @@ export default {
   width: 100%;
   background-color: transparent;
 }
-
 >>> .van-hairline--bottom::after {
   border: none;
 }
-
+>>> .van-button--primary span {
+  font-weight: 600;
+}
 .van-nav-bar__title img {
   height: 20px;
   width: 66px;
 }
-
 .van-nav-bar__right img {
   width: 24px;
   height: 24px;
 }
-
 .my-swipe .van-swipe-item {
   height: 310px;
   img {
     height: 100%;
   }
 }
-
 >>> .van-swipe__indicators {
   bottom: 35px;
 }
-
 >>> .van-swipe__indicator {
   height: 4px;
   width: 4px;
   border-radius: 0;
 }
-
 >>> .van-swipe__indicator--active {
   width: 8px;
 }
-
 >>> .van-button--primary span {
   font-weight: 500;
 }
-
 .main {
   top: -20px;
   .part {
