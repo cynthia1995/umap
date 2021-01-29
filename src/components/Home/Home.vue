@@ -16,44 +16,44 @@
       <van-button type="primary" block>Sell USDT</van-button>
       <div class="part part1 bg-dbeaff">
         <div class="line line1">
-          <p class="bg-edf5ff">
+          <p class="bg-edf5ff fontsize12 text-center">
             UMAP
             <br />
             PRICE
           </p>
           <p class="bg-ffffff">
-            <b>1</b>
+            <b class="fontsize20 fontweight-m">1</b>
             USDT
-            <b>&nbsp;=&nbsp;</b>
+            <b class="fontsize20">&nbsp;=&nbsp;</b>
             ₹
-            <b>85.10</b>
+            <b class="fontsize20 fontweight-m">85.10</b>
           </p>
         </div>
         <div class="line line2">
-          <p class="bg-edf5ff">
+          <p class="bg-edf5ff fontsize12 text-center">
             MARKET
             <br />
             PRICE
           </p>
           <p class="bg-ffffff">
-            <b>1</b>
+            <b class="fontsize20 fontweight-m">1</b>
             USDT
-            <b>&nbsp;=&nbsp;</b>
+            <b class="fontsize20">&nbsp;=&nbsp;</b>
             ₹
-            <b>82.10</b>
+            <b class="fontsize20 fontweight-m">82.10</b>
           </p>
         </div>
         <div class="line line3">
-          <p class="bg-8ceaff">YOU Earn</p>
+          <p class="bg-8ceaff fontweight-m fontsize12">YOU Earn</p>
           <p class="bg-00d0ff">
-            <b>≈</b>
+            <b class="fontsize24 white-color">≈</b>
             &nbsp;₹
-            <b>3.00</b>
-            <em>&nbsp;/Sell 1 USDT</em>
+            <b class="fontsize20">3.00</b>
+            <em class="fontsize12">&nbsp;/Sell 1 USDT</em>
           </p>
         </div>
       </div>
-      <div class="part part2 text-center color-6d4ffd bg-f6f7fb fontweight-m"><count-to :start-val="0" :end-val="1150000000" :duration="2000" /></div>
+      <div class="part part2 text-center color-6d4ffd bg-f6f7fb fontweight-m"><count-to class="fontweight-m" :start-val="0" :end-val="1150000000" :duration="2000" /></div>
     </section>
   </div>
 </template>
@@ -79,26 +79,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
->>> .van-nav-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: transparent;
-}
->>> .van-hairline--bottom::after {
-  border: none;
-}
->>> .van-button--primary span {
-  font-weight: 600;
-}
 .van-nav-bar__title img {
   height: 20px;
   width: 66px;
-}
-.van-nav-bar__right img {
-  width: 24px;
-  height: 24px;
 }
 .my-swipe .van-swipe-item {
   height: 310px;
@@ -117,16 +100,13 @@ export default {
 >>> .van-swipe__indicator--active {
   width: 8px;
 }
->>> .van-button--primary span {
-  font-weight: 500;
-}
 .main {
   top: -20px;
   .part {
     position: relative;
     margin-top: 20px;
     &.part1 {
-      padding-top: 39px;
+      padding-top: 40px;
     }
     &.part2 {
       padding-top: 24px;
@@ -159,13 +139,6 @@ export default {
       height: 36px;
       width: 90%;
       margin: 0 auto 5px;
-      p:nth-child(1) {
-        font-size: 12px;
-      }
-      b {
-        font-size: 20px;
-        font-weight: bold;
-      }
       &.line1 p:nth-child(2) {
         color: #1d2243;
       }
@@ -176,15 +149,7 @@ export default {
         height: 44px;
         width: 100%;
         margin: 20px auto 0;
-        &.line3 p:nth-child(1) {
-          font-weight: 600;
-        }
-        b {
-          font-size: 24px;
-          color: #ffffff;
-        }
         em {
-          font-size: 12px;
           font-style: normal;
         }
       }

@@ -1,5 +1,5 @@
 <template>
-  <div class="sellAdress">
+  <div class="sellAdress paddingtop-50">
     <van-nav-bar @click-left="onClickLeft">
       <template #left>
         <img src="../../assets/img/Left-white@2x.png" alt="" />
@@ -22,7 +22,6 @@
         <h5 class="fontweight-m">ADDRESS</h5>
         <div class="fontweight-m">
           {{ address }}
-          <!-- <img src="../../assets/img/Copy@2x.png" alt="" /> -->
           <span title="" v-clipboard:copy="address" v-clipboard:success="onCopy" v-clipboard:error="onError" style="cursor: copy;">
             <img src="../../assets/img/Copy@2x.png" alt="" />
           </span>
@@ -66,20 +65,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
->>> .van-nav-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: transparent;
-}
->>> .van-hairline--bottom::after {
-  border: none;
-}
-.van-nav-bar__left img {
-  height: 24px;
-  width: 24px;
-}
 >>> .van-tabs__nav {
   width: 170px;
   margin: 0 auto;
@@ -107,12 +92,8 @@ export default {
   height: 136px;
   margin: 0 auto;
 }
->>> .van-button--primary span {
-  font-weight: 600;
-}
 .sellAdress {
   background-color: #2f3462;
-  padding-top: 50px;
   .title {
     font-size: 28px;
   }

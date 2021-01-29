@@ -1,18 +1,18 @@
 <template>
   <div class="sell">
-    <h3 class="white-color fontweight-m">Sell USDT</h3>
+    <h3 class="white-color fontweight-m fontsize28">Sell USDT</h3>
     <div class="line line1">
-      <p class="bg-8ceaff">
+      <p class="bg-8ceaff flex fontsize12">
         <img src="../../assets/img/USDT@2x.png" alt="" />
         USDT/INR
       </p>
       <p class="bg-00d0ff">
         ₹
-        <b>81.33</b>
+        <b class="fontweight-m fontsize30">81.33</b>
       </p>
     </div>
     <section class="main">
-      <p class="notice text-center">{{ notice }}</p>
+      <p class="notice text-center fontsize12">{{ notice }}</p>
       <div class="exchange">
         <div class="line line2 bg-ffffff">
           <p class="bg-edf5ff fontweight-m">VOLUME USDT</p>
@@ -24,7 +24,7 @@
         </div>
         <span @click="exchange"></span>
       </div>
-      <p class="info color-4c528f">Limit ₹8800.00 - ₹3,000,000.00</p>
+      <p class="info color-4c528f fontsize12">Limit ₹8800.00 - ₹3,000,000.00</p>
       <div class="icons">
         <img src="../../assets/img/UPI@2x.png" alt="" />
         <img src="../../assets/img/card_icon@2x.png" alt="" />
@@ -37,34 +37,34 @@
       </p>
     </section>
     <van-popup class="confirmPopup" v-model="confirmOrder" round position="bottom">
-      <h4 class="text-center fontweight-m">{{ confirmOrderTit }}</h4>
+      <h4 class="text-center fontweight-m fontsize16">{{ confirmOrderTit }}</h4>
       <div class="confirmContent">
-        <p>
+        <p class="flex">
           <b>
             VOLUME
-            <em>(USDT)</em>
+            <em class="inlineblock">(USDT)</em>
           </b>
           <span>{{ volumeUSDT }}</span>
         </p>
-        <p>
+        <p class="flex">
           <b>
             AT PRICE
-            <em>(Per USDT)</em>
+            <em class="inlineblock">(Per USDT)</em>
           </b>
           <span>₹{{ perUSDT }}</span>
         </p>
-        <p>
+        <p class="flex">
           <b>0.25% Fee</b>
           <span>
-            <em>₹2000.00</em>
+            <em class="inlineblock">₹2000.00</em>
             ₹0.00
           </span>
         </p>
-        <div class="fontweight-m">
+        <div class="fontweight-m flex">
           <b>Total</b>
           <span>
             ₹
-            <i>
+            <i class="fontsize20">
               {{
                 noFee
                   ? (perUSDT * parseFloat(volumeUSDT.replace('₹', '')) - perUSDT * parseFloat(volumeUSDT.replace('₹', '')) * fee).toFixed(2)
@@ -92,7 +92,7 @@ export default {
       perUSDT: 80.0,
       fee: 0.0025,
       noFee: false
-    }
+    };
   },
   methods: {
     focus1(event) {
@@ -131,9 +131,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
->>> .van-button--primary span {
-  font-weight: 600;
-}
 >>> .van-field__control {
   font-size: 20px;
   text-align: center;
@@ -146,7 +143,6 @@ export default {
   background: url(../../assets/img/bg_sell@2x.png) no-repeat center top;
   background-size: 100%;
   h3 {
-    font-size: 28px;
     padding: 22px 20px 0;
   }
   .line1 {
@@ -156,8 +152,6 @@ export default {
     margin: 48px auto 30px;
     height: 70px;
     p:nth-child(1) {
-      flex: 1;
-      font-size: 12px;
       img {
         width: 26px;
         height: 26px;
@@ -167,17 +161,12 @@ export default {
     p:nth-child(2) {
       flex: 2;
     }
-    b {
-      font-size: 30px;
-      font-weight: 600;
-    }
   }
   .main {
     background-color: #f7f8fc;
     border-top-left-radius: 0;
     .notice {
       color: #8f92a1;
-      font-size: 12px;
       padding: 0 50px;
       line-height: 18px;
     }
@@ -196,7 +185,6 @@ export default {
       }
     }
     .info {
-      font-size: 12px;
       padding: 5px 10px;
     }
     .line2,
@@ -240,7 +228,6 @@ export default {
   box-sizing: border-box;
   h4 {
     color: #14181f;
-    font-size: 16px;
     padding: 30px 20px 20px;
   }
   .confirmOrderTit {
@@ -259,20 +246,14 @@ export default {
     }
     div {
       border-top: 1px solid #e7ebee;
-      display: flex;
       justify-content: space-between;
-      i {
-        font-size: 20px;
-      }
     }
     p {
-      display: flex;
       justify-content: space-between;
       span {
         em {
           color: #bac7cf;
           text-decoration: line-through;
-          display: inline-block;
           margin-right: 3px;
         }
       }

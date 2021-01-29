@@ -1,35 +1,138 @@
-$primary-fontsize: 14px;
-$primary-color: #1d2243;
-$color-6d4ffd: #6d4ffd;
-$color-4c528f: #4c528f;
-$primary-background-color: #6d4ffd;
-$background-color-8ceaff: #8ceaff;
-$background-color-00d0ff: #00d0ff;
-$background-color-dbeaff: #dbeaff;
-$background-color-f6f7fb: #f6f7fb;
-$background-color-edf5ff: #edf5ff;
-$background-color-ffffff: #ffffff;
-$text-center: center;
-$text-left: left;
-$text-right: right;
-$padding-20: 0 20px;
-$font-weight-reguler: 400;
-$font-weight-medium: 600;
-body,
-html {
-  font-size: $primary-fontsize;
-  color: $primary-color;
-  font-weight: $font-weight-reguler;
+.white-color {
+  color: #ffffff;
+}
+.color-6d4ffd {
+  color: #6d4ffd;
+}
+.color-00d0ff {
+  color: #00d0ff;
+}
+.color-ff5a75 {
+  color: #ff5a75;
+}
+.color-8c9fad {
+  color: #8c9fad;
+}
+.bg-edf5ff {
+  background-color: #edf5ff;
+  color: #4c528f;
+}
+.bg-ffffff {
+  background-color: #ffffff;
+}
+.bg-8ceaff {
+  background-color: #8ceaff;
+  color: #4c528f;
+}
+.bg-00d0ff {
+  background-color: #00d0ff;
+  color: #ffffff;
+}
+.bg-dbeaff {
+  background-color: #dbeaff;
+}
+.bg-f6f7fb {
+  background-color: #f6f7fb;
+}
+.color-6d4ffd {
+  color: #6d4ffd;
+}
+.color-4c528f {
+  color: #4c528f;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.padding-20 {
+  padding: 0 20px;
+}
+.paddingtop-50 {
+  padding-top: 50px;
+}
+.fontweight-r {
+  font-weight: 400;
+}
+.fontweight-m {
+  font-weight: 600;
+}
+.fontsize10 {
+  font-size: 10px;
+}
+.fontsize12 {
+  font-size: 12px;
+}
+.fontsize16 {
+  font-size: 16px;
+}
+.fontsize20 {
+  font-size: 20px;
+}
+.fontsize24 {
+  font-size: 24px;
+}
+.fontsize28 {
+  font-size: 28px;
+}
+.fontsize30 {
+  font-size: 30px;
+}
+.block {
+  display: block;
+}
+.inlineblock {
+  display: inline-block;
+}
+.flex {
+  display: flex;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }
 
-.van-button--primary {
-  background-color: $primary-background-color;
-  font-size: 16px;
+//页面样式
+body,
+html {
+  font-size: 14px;
+  color: #1d2243;
   font-weight: 400;
+  background-color: #ffffff;
+}
+.van-button--primary {
+  background-color: #6d4ffd;
+  font-size: 16px;
   border: none;
   border-radius: 4px;
 }
-
+.van-button--primary span {
+  font-weight: 600;
+}
+.van-nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+}
+.van-hairline--bottom::after {
+  border: none;
+}
+.van-nav-bar__right img {
+  width: 24px;
+  height: 24px;
+}
+.van-nav-bar__left img {
+  height: 24px;
+  width: 24px;
+}
 section.main {
   background-color: #ffffff;
   border-top-left-radius: 20px;
@@ -38,85 +141,20 @@ section.main {
   position: relative;
   padding: 20px 20px 100px;
 }
-
-.white-color {
-  color: #ffffff;
-}
-
 .line {
   display: flex;
   letter-spacing: 0.2px;
   margin: 0 auto;
 }
-
 .line p {
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .line p:nth-child(1) {
   flex: 1;
 }
-
 .line p:nth-child(2) {
   flex: 3;
-}
-
-.bg-edf5ff {
-  background-color: $background-color-edf5ff;
-  color: #4c528f;
-}
-
-.bg-ffffff {
-  background-color: $background-color-ffffff;
-}
-
-.bg-8ceaff {
-  background-color: $background-color-8ceaff;
-  color: #4c528f;
-}
-
-.bg-00d0ff {
-  background-color: $background-color-00d0ff;
-  color: #ffffff;
-}
-
-.bg-dbeaff {
-  background-color: $background-color-dbeaff;
-}
-
-.bg-f6f7fb {
-  background-color: $background-color-f6f7fb;
-}
-
-.color-6d4ffd {
-  color: $color-6d4ffd;
-}
-
-.color-4c528f {
-  color: $color-4c528f;
-}
-
-.text-center {
-  text-align: $text-center;
-}
-
-.text-left {
-  text-align: $text-left;
-}
-
-.text-right {
-  text-align: $text-right;
-}
-
-.padding-20 {
-  padding: $padding-20;
-}
-.fontweight-r {
-  font-weight: $font-weight-reguler;
-}
-.fontweight-m {
-  font-weight: $font-weight-medium;
 }

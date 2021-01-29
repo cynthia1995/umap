@@ -1,0 +1,1 @@
+<template>  <div class="Add paddingtop-50">    <NavTit :title="title" :noTit="false"></NavTit>  </div></template><script>import NavTit from '../NavAndTit.vue';export default {  name: 'Add',  components: {    NavTit  },  data() {    return {      title: 'Add'    };  },  created() {},  mounted() {},  methods: {}};</script><style lang="scss" scoped></style>
