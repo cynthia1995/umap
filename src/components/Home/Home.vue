@@ -89,15 +89,15 @@ export default {
     height: 100%;
   }
 }
->>> .van-swipe__indicators {
+/deep/ .van-swipe__indicators {
   bottom: 35px;
 }
->>> .van-swipe__indicator {
+/deep/ .van-swipe__indicator {
   height: 4px;
   width: 4px;
   border-radius: 0;
 }
->>> .van-swipe__indicator--active {
+/deep/ .van-swipe__indicator--active {
   width: 8px;
 }
 .main {

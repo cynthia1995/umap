@@ -5,6 +5,7 @@ import Sell from '@/components/Sell/Sell.vue'
 import SellAddress from '@/components/Sell/SellAddress.vue'
 import UploadVoucher from '@/components/Sell/UploadVoucher.vue'
 import Orders from '@/components/Orders/Orders.vue'
+import OrderDetail from '@/components/Orders/OrderDetail.vue'
 import Account from '@/components/Account/Account.vue'
 import HelpAndSupport from '@/components/Account/HelpAndSupport.vue'
 import Answer from '@/components/Account/Answer.vue'
@@ -13,6 +14,9 @@ import Settings from '@/components/Account/Settings.vue'
 import Payment from '@/components/Account/Payment.vue'
 import AddMethod from '@/components/Account/AddMethod.vue'
 import Add from '@/components/Account/Add.vue'
+import Login from '@/components/Account/Login.vue'
+import Register from '@/components/Account/Register.vue'
+import ForgetPwd from '@/components/Account/ForgetPwd.vue'
 
 Vue.use(Router)
 
@@ -39,6 +43,10 @@ export default new Router({
     meta: {
       navShow: true
     }
+  }, {
+    path: '/orderdetail/:id',
+    name: 'OrderDetail',
+    component: OrderDetail,
   }, {
     path: '/account',
     name: 'Account',
@@ -86,5 +94,17 @@ export default new Router({
     path: '/add',
     name: 'Add',
     component: Add
+  }, {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  }, {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+  }, {
+    path: '/login',
+    name: 'ForgetPwd',
+    component: ForgetPwd,
   }]
 })

@@ -25,7 +25,7 @@
         <span @click="exchange"></span>
       </div>
       <p class="info color-4c528f fontsize12">Limit ₹8800.00 - ₹3,000,000.00</p>
-      <div class="icons">
+      <div class="icons flex">
         <img src="../../assets/img/UPI@2x.png" alt="" />
         <img src="../../assets/img/card_icon@2x.png" alt="" />
         <img src="../../assets/img/UPI_icon@2x.png" alt="" />
@@ -61,10 +61,10 @@
           </span>
         </p>
         <div class="fontweight-m flex">
-          <b>Total</b>
+          <b>TOTAL</b>
           <span>
             ₹
-            <i class="fontsize20">
+            <i class="fontsize20 fontweight-m">
               {{
                 noFee
                   ? (perUSDT * parseFloat(volumeUSDT.replace('₹', '')) - perUSDT * parseFloat(volumeUSDT.replace('₹', '')) * fee).toFixed(2)
@@ -125,13 +125,19 @@ export default {
     },
     sellSubmit() {
       this.confirmOrder = false;
+      this.$router.push({
+        path: '/uploadvoucher',
+        query: {
+          // name: name
+        }
+      });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
->>> .van-field__control {
+/deep/ .van-field__control {
   font-size: 20px;
   text-align: center;
   font-weight: 600;
@@ -204,7 +210,6 @@ export default {
       }
     }
     .icons {
-      display: flex;
       justify-content: center;
       margin: 30px auto 10px;
       img {
@@ -232,32 +237,6 @@ export default {
   }
   .confirmOrderTit {
     background-color: #f7f8fc;
-  }
-  .confirmContent {
-    background-color: #f7f8fc;
-    margin: 0 10px 20px;
-    padding: 0 20px;
-    line-height: 50px;
-    b {
-      color: #4c528f;
-      em {
-        color: #8c9fad;
-      }
-    }
-    div {
-      border-top: 1px solid #e7ebee;
-      justify-content: space-between;
-    }
-    p {
-      justify-content: space-between;
-      span {
-        em {
-          color: #bac7cf;
-          text-decoration: line-through;
-          margin-right: 3px;
-        }
-      }
-    }
   }
 }
 </style>

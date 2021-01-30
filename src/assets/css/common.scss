@@ -13,6 +13,12 @@
 .color-8c9fad {
   color: #8c9fad;
 }
+.color-8f92a1 {
+  color: #8f92a1;
+}
+.color-03ad8f {
+  color: #03ad8f;
+}
 .bg-edf5ff {
   background-color: #edf5ff;
   color: #4c528f;
@@ -55,6 +61,18 @@
 .paddingtop-50 {
   padding-top: 50px;
 }
+.margintop-10 {
+  margin-top: 10px;
+}
+.margintop-20 {
+  margin-top: 20px;
+}
+.marginbottom-10 {
+  margin-bottom: 10px;
+}
+.marginbottom-20 {
+  margin-bottom: 20px;
+}
 .fontweight-r {
   font-weight: 400;
 }
@@ -69,6 +87,9 @@
 }
 .fontsize16 {
   font-size: 16px;
+}
+.fontsize18 {
+  font-size: 18px;
 }
 .fontsize20 {
   font-size: 20px;
@@ -105,6 +126,8 @@ html {
   color: #1d2243;
   font-weight: 400;
   background-color: #ffffff;
+  width: 100%;
+  height: 100%;
 }
 .van-button--primary {
   background-color: #6d4ffd;
@@ -157,4 +180,83 @@ section.main {
 }
 .line p:nth-child(2) {
   flex: 3;
+}
+.confirmContent {
+  background-color: #f7f8fc;
+  margin: 20px 20px;
+  padding: 0 20px;
+  line-height: 50px;
+  b {
+    color: #4c528f;
+    em {
+      color: #8c9fad;
+    }
+  }
+  div {
+    border-top: 0.5px solid #e7ebee;
+    justify-content: space-between;
+  }
+  p {
+    justify-content: space-between;
+    span {
+      em {
+        color: #bac7cf;
+        text-decoration: line-through;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+.bottomSubmit {
+  background-color: #ffda45;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 10px 10px;
+  p {
+    line-height: 30px;
+    color: #4c528f;
+  }
+}
+.van-form {
+  padding-top: 30px;
+}
+.van-cell {
+  display: block;
+  padding: 10px 0;
+  &::after {
+    border-color: #e7ebee;
+  }
+  input {
+    font-weight: 600;
+  }
+}
+.van-field__control {
+  height: 30px;
+  &::placeholder {
+    color: #bac7cf;
+    font-weight: 400;
+  }
+}
+.van-field__label {
+  width: 100%;
+  span {
+    font-weight: 600;
+    font-size: 12px;
+  }
+}
+.van-field__error-message {
+  color: #ff5a75;
+  display: none;
+}
+.van-icon-photograph::before {
+  content: '\F0A2';
+  color: #6d4ffd;
+}
+/deep/ .van-uploader__preview-image {
+  width: 100%;
+  height: 100%;
+  min-width: 80px;
+  min-height: 80px;
 }

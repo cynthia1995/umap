@@ -17,9 +17,13 @@ import {
   SwipeItem,
   NavBar,
   Field,
+  Form,
   Popup,
   Tab,
-  Tabs
+  Tabs,
+  Uploader,
+  CountDown,
+  List
 } from 'vant'
 
 Vue.use(Toast);
@@ -28,9 +32,13 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(NavBar);
 Vue.use(Field);
+Vue.use(Form);
 Vue.use(Popup);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Uploader);
+Vue.use(CountDown);
+Vue.use(List);
 
 Vue.config.productionTip = false
 

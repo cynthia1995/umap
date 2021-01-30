@@ -4,22 +4,22 @@
     <div v-if="noAdded" class="added white-color">
       <ul class="methodList">
         <li v-for="(item, index) in methodList" :key="index">
-          <p class="p1 fontsize12 flex">
+          <p class="p1 flex">
             <img class="icon" :src="item.icon" alt="" />
-            <span class="fontweight-m">{{ item.accountName }}</span>
+            <span class="fontweight-m fontsize12">{{ item.accountName }}</span>
           </p>
-          <p class="p3 fontsize12 flex">{{ item.userName }}</p>
-          <p class="p2 fontweight-m flex fontsize20">
-            <span class="fontweight-m">{{ item.addressCode }}</span>
+          <p class="p2 fontsize12 flex">{{ item.userName }}</p>
+          <p class="p3 fontweight-m flex">
+            <span class="fontweight-m fontsize20">{{ item.addressCode }}</span>
             <img class="qrCode" src="../../assets/img/trc20.png" alt="" />
           </p>
         </li>
       </ul>
-      <div class="padding-20"><van-button icon="plus" type="primary" color="#6d4ffd" plain>Add</van-button></div>
+      <div class="padding-20"><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
     </div>
     <div v-else class="noadded text-center color-8c9fad">
       <p>{{ addedTxt }}</p>
-      <van-button @click="toAddMethod($event)" type="primary" block>Add</van-button>
+      <van-button type="primary" block @click="toAddMethod">Add</van-button>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    toAddMethod(event) {
+    toAddMethod() {
       this.$router.push({
         path: '/addmethod',
         query: {}
@@ -66,13 +66,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
->>> .van-button--primary {
+/deep/ .van-button--primary.addedBtn {
   background-color: #ffffff;
   border: 1px solid #e7ebee !important;
   margin-top: 20px;
   width: 100%;
 }
->>> .van-icon-plus::before {
+/deep/ .van-icon-plus::before {
   font-weight: 600;
   position: relative;
   top: -2px;
@@ -84,15 +84,22 @@ export default {
   height: 150px;
   background-size: cover;
   margin: 20px auto 0;
-  padding: 20px 30px;
+  padding: 20px 25px;
   box-sizing: border-box;
+  .p1 {
+    line-height: 18px;
+    margin-bottom: 46px;
+  }
   .p2 {
     margin-bottom: 6px;
+  }
+  .p3 {
+    line-height: 30px;
   }
   .icon {
     height: 18px;
     width: 18px;
-    margin: 0 10px 46px 0;
+    margin-right: 10px;
   }
   .qrCode {
     width: 30px;

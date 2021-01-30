@@ -65,29 +65,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
->>> .van-tabs__nav {
+/deep/ .van-tabs__nav {
   width: 170px;
   margin: 0 auto;
 }
->>> .van-tab {
+/deep/ .van-tab {
   color: #8c9fad;
   background: url(../../assets/img/check_n@2x.png) no-repeat left center;
   background-size: 14px 14px;
 }
->>> .van-tab--active {
+/deep/ .van-tab--active {
   color: #6d4ffd;
   background: url(../../assets/img/check_s@2x.png) no-repeat left center;
   background-size: 14px 14px;
 }
->>> .van-tabs__line {
+/deep/ .van-tabs__line {
   display: none;
 }
->>> .van-tab__pane {
+/deep/ .van-tab__pane {
   background: url(../../assets/img/Focous@2x.png) no-repeat center;
   background-size: 160px 160px;
   padding: 20px;
 }
->>> .van-tab__pane img {
+/deep/ .van-tab__pane img {
   width: 136px;
   height: 136px;
   margin: 0 auto;
