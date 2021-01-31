@@ -23,7 +23,9 @@ import {
   Tabs,
   Uploader,
   CountDown,
-  List
+  List,
+  Checkbox,
+  CheckboxGroup
 } from 'vant'
 
 Vue.use(Toast);
@@ -39,6 +41,8 @@ Vue.use(Tabs);
 Vue.use(Uploader);
 Vue.use(CountDown);
 Vue.use(List);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
 
 Vue.config.productionTip = false
 

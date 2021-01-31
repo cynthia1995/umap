@@ -16,6 +16,7 @@ import AddMethod from '@/components/Account/AddMethod.vue'
 import Add from '@/components/Account/Add.vue'
 import Login from '@/components/Account/Login.vue'
 import Register from '@/components/Account/Register.vue'
+import VerificationCode from '@/components/Account/VerificationCode.vue'
 import ForgetPwd from '@/components/Account/ForgetPwd.vue'
 
 Vue.use(Router)
@@ -103,7 +104,11 @@ export default new Router({
     name: 'Register',
     component: Register,
   }, {
-    path: '/login',
+    path: '/verificationcode',
+    name: 'VerificationCode',
+    component: VerificationCode,
+  }, {
+    path: '/forgetpwd',
     name: 'ForgetPwd',
     component: ForgetPwd,
   }]

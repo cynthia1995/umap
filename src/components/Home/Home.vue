@@ -100,6 +100,9 @@ export default {
 /deep/ .van-swipe__indicator--active {
   width: 8px;
 }
+.van-cell {
+  border: 0;
+}
 .main {
   top: -20px;
   .part {

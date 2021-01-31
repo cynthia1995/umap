@@ -73,6 +73,9 @@
 .marginbottom-20 {
   margin-bottom: 20px;
 }
+.margin0auto {
+  margin: 0 auto;
+}
 .fontweight-r {
   font-weight: 400;
 }
@@ -117,6 +120,9 @@
 }
 .right {
   float: right;
+}
+.radius4 {
+  border-radius: 4px;
 }
 
 //页面样式
@@ -220,12 +226,14 @@ section.main {
   }
 }
 .van-form {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 .van-cell {
   display: block;
   padding: 10px 0;
+  border-bottom: 1px solid #e7ebee;
   &::after {
+    display: none;
     border-color: #e7ebee;
   }
   input {

@@ -120,6 +120,9 @@ export default {
     text-indent: 18px;
   }
 }
+.confirmContent{
+  margin-bottom: 10px;
+}
 /deep/ .van-cell {
   input {
     &[name='transferVoucher'] {
@@ -131,6 +134,9 @@ export default {
     position: relative;
     background: url(../../assets/img/arrow@2x.png) no-repeat right 38px;
     background-size: 24px;
+  }
+  &:nth-child(6) {
+    border-bottom: 0;
   }
 }
 /deep/ .van-button--primary {

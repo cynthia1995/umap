@@ -1,40 +1,25 @@
 <template>
-  <div class="forgetPwd paddingtop-50">
+  <div class="verificationCode paddingtop-50">
     <van-nav-bar @click-left="onClickLeft">
       <template #left>
         <img src="../../assets/img/Left-white@2x.png" alt="" />
       </template>
     </van-nav-bar>
-    <h3 class="title text-center fontsize18 white-color marginbottom-20 fontweight-m">{{ title }}</h3>
+    <h3 class="title text-center fontsize18 white-color marginbottom-20 fontweight-m">{{title}}</h3>
     <section class="main">
       <van-form @submit="onSubmit">
         <van-field
-          v-model="form.mobile"
-          name="mobile"
-          label="Phone Number"
-          placeholder="Please Enter your registered phone"
-          :rules="[{ required: true, message: 'Please Enter your registered phone' }]"
-        />
-        <van-field v-model="form.code" name="code" label="Verfication" placeholder="Phone Verificaiton code" :rules="[{ required: true, message: 'Phone Verificaiton code' }]">
+          v-model="form.code"
+          name="code"
+          label="E-mail/Mobile OTP"
+          placeholder="Please Enter E-mail/Mobile OTP"
+          :rules="[{ required: true, message: 'Please Enter E-mail/Mobile OTP' }]"
+        >
           <template #button>
             <van-button @click="send()" :disabled="disabled" size="small" type="primary">{{ btnTxt }}</van-button>
           </template>
         </van-field>
-        <van-field
-          v-model="form.password"
-          name="password"
-          label="Reset Pssword"
-          placeholder="Enter the new Password"
-          :rules="[{ required: true, message: 'Enter the new Password' }]"
-        />
-        <van-field
-          v-model="form.confirmpwd"
-          name="confirmpwd"
-          label="Re-Enter the new Password"
-          placeholder="Re-Enter the new Password"
-          :rules="[{ required: true, message: 'Re-Enter the new Password' }]"
-        />
-        <van-button type="primary" block native-type="submit">Next</van-button>
+        <van-button type="primary" block native-type="submit">Confirm</van-button>
       </van-form>
     </section>
   </div>
@@ -45,16 +30,14 @@ export default {
   name: 'Login',
   data() {
     return {
-      title: 'Forget Password',
+      title: 'Create a free acount',
       checked: false,
+      flag: false,
       disabled: false,
       btnTxt: 'send',
       countDown: 5,
       form: {
-        mobile: '',
-        code: '',
-        password: '',
-        confirmpwd: ''
+        code: ''
       }
     };
   },
@@ -94,7 +77,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.forgetPwd {
+.verificationCode {
   background: url(../../assets/img/Base@2x.png) no-repeat center top;
   background-size: 100%;
 }
