@@ -24,13 +24,7 @@
           placeholder="Please Enter Your Phone Number"
           :rules="[{ required: true, message: 'Please Enter Your Phone Number' }]"
         />
-        <van-field
-          v-model="form.referralId"
-          name="referralId"
-          label="Referral ID(Optional)"
-          placeholder="Please Enter Referral ID"
-          :rules="[{ required: true, message: 'Please Enter Referral ID' }]"
-        />
+        <van-field v-model="form.referral" name="referral" label="Referral ID(Optional)" placeholder="Please Enter Referral ID" :rules="[{ required: false }]" />
         <van-button type="primary" block native-type="submit">Register</van-button>
         <div class="agree">
           <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
@@ -46,6 +40,7 @@
 </template>
 
 <script>
+import { register } from '@/api/api';
 export default {
   name: 'Login',
   data() {
@@ -66,13 +61,24 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
+    register() {
+      register(this.form)
+        .then(res => {
+          if (res.code === 200) {
+            this.$router.push({
+              path: '/verificationcode',
+              query: {}
+            });
+            console.log(res.data);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     onSubmit() {
       if (this.checked) {
-        console.log(this.form);
-        this.$router.push({
-          path: '/verificationcode',
-          query: {}
-        });
+        this.register();
       } else {
         this.$toast('请阅读条款');
       }

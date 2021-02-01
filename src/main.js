@@ -8,6 +8,10 @@ import App from './App'
 import router from './router'
 import tool from '@/utils/tool'
 import VueClipboard from 'vue-clipboard2'
+import { setStore, getStore, removeStore } from '@/utils/storage'
+Vue.prototype.setStore = setStore
+Vue.prototype.getStore = getStore
+Vue.prototype.removeStore = removeStore
 Vue.use(tool)
 Vue.use(VueClipboard)
 import {
