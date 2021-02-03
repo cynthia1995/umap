@@ -18,6 +18,7 @@
       <div class="padding-20"><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
     </div>
     <div v-else class="noadded text-center color-8c9fad">
+      <img src="../../assets/img/noPay@2x.png" alt="">
       <p>{{ addedTxt }}</p>
       <van-button type="primary" block @click="toAddMethod">Add</van-button>
     </div>
@@ -108,10 +109,14 @@ export default {
   }
 }
 .noadded {
-  padding: 200px 70px 0;
+  padding: 20px 70px 0;
   line-height: 20px;
   p {
     margin-bottom: 20px;
+  }
+  img {
+    width: 255px;
+    margin: 0 auto 20px;
   }
 }
 </style>

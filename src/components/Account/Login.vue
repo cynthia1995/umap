@@ -5,7 +5,7 @@
         <img src="../../assets/img/Left-white@2x.png" alt="" />
       </template>
     </van-nav-bar>
-    <img class="logo" src="../../assets/img/logo@2x.png" alt="" />
+    <img class="logo" src="../../assets/img/logo_login@2x.png" alt="" />
     <section class="main">
       <van-tabs v-model="active" @change="changeType">
         <van-tab title="Email">
@@ -141,8 +141,8 @@ export default {
   }
 }
 .logo {
-  width: 133px;
-  margin: 100px auto 150px;
+  width: 100px;
+  margin: 60px auto 150px;
 }
 .main {
   padding-top: 0;
@@ -155,7 +155,7 @@ export default {
   padding-top: 30px;
 }
 .slideUp {
-  top: -260px;
+  top: -270px;
 }
 .van-tabs {
   top: -44px;
