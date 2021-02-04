@@ -137,6 +137,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.van-cell {
+  border-bottom: 0;
+}
 /deep/ .van-field__control {
   font-size: 20px;
   text-align: center;

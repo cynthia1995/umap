@@ -1,7 +1,7 @@
 <template>
   <div class="orders">
-    <h3 class="fontweight-m fontsize28 flex">
-      <b>Orders</b>
+    <h3 class="flex">
+      <b class="fontweight-m fontsize28">Orders</b>
       <span class="fontsize12 color-8c9fad">Tether-USDT</span>
     </h3>
     <van-tabs v-model="active">
@@ -154,7 +154,7 @@ export default {
       openActive: 0,
       completedActive: 0,
       isLogin: true,
-      noOpen: false,
+      noOpen: true,
       noCompleted: false,
       orderList: [
         {

@@ -93,5 +93,11 @@ export default {
       height: 0;
     }
   }
+  &:nth-child(3) {
+    border-bottom: 0;
+  }
+}
+/deep/ .van-button--primary {
+  margin-top: 30px;
 }
 </style>
