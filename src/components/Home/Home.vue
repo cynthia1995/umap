@@ -2,7 +2,7 @@
   <div class="home">
     <van-nav-bar @click-right="onClickRight">
       <template #title>
-        <img src="../../assets/img/logo@2x.png" alt="" />
+        <img src="../../assets/img/logo4@2x.png" alt="" />
       </template>
       <template #right>
         <img src="../../assets/img/help@2x.png" alt="" />
@@ -16,7 +16,7 @@
       <van-button type="primary" block>Sell USDT</van-button>
       <div class="part part1 bg-dbeaff">
         <div class="line line1">
-          <p class="bg-edf5ff fontsize12 text-center">
+          <p class="bg-edf5ff fontsize10 text-center fontweight-m">
             UMAP
             <br />
             PRICE
@@ -30,7 +30,7 @@
           </p>
         </div>
         <div class="line line2">
-          <p class="bg-edf5ff fontsize12 text-center">
+          <p class="bg-edf5ff fontsize10 text-center fontweight-m">
             MARKET
             <br />
             PRICE
@@ -48,8 +48,8 @@
           <p class="bg-00d0ff">
             <b class="fontsize24 white-color">≈</b>
             &nbsp;₹
-            <b class="fontsize20">3.00</b>
-            <em class="fontsize12">&nbsp;/Sell 1 USDT</em>
+            <b class="fontsize24 fontweight-m">3.00</b>
+            <em class="fontsize10">&nbsp;/Sell 1 USDT</em>
           </p>
         </div>
       </div>
@@ -68,9 +68,7 @@ export default {
   data() {
     return {};
   },
-  created() {
-    
-  },
+  created() {},
   mounted() {},
   methods: {
     onClickRight() {
@@ -83,7 +81,7 @@ export default {
 <style lang="scss" scoped>
 .van-nav-bar__title img {
   height: 20px;
-  width: 66px;
+  width: 88px;
 }
 .my-swipe .van-swipe-item {
   height: 310px;
@@ -105,8 +103,13 @@ export default {
 .van-cell {
   border: 0;
 }
+.home {
+  background: url(../../assets/img/logo3@2x.png) no-repeat center bottom 200px;
+}
 .main {
   top: -20px;
+  background: url(../../assets/img/logo3@2x.png) no-repeat center bottom 50px #ffffff;
+  background-size: 77px 20px;
   .part {
     position: relative;
     margin-top: 20px;
@@ -117,17 +120,16 @@ export default {
       padding-top: 24px;
       font-size: 30px;
       line-height: 60px;
+      span {
+        letter-spacing: 2px;
+      }
     }
     &.part1::before,
     &.part2::before {
-      height: 24px;
-      width: 144px;
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      background: url(../../assets/img/sq_bg.png) no-repeat center;
-      background-size: cover;
       line-height: 24px;
       text-align: center;
       font-size: 12px;
@@ -135,10 +137,18 @@ export default {
       font-weight: 600;
     }
     &.part1::before {
-      content: 'Broadcast Today';
+      height: 24px;
+      width: 144px;
+      background: url(../../assets/img/sq_bg.png) no-repeat center;
+      background-size: cover;
+      content: 'BROADCAST TODAY';
     }
     &.part2::before {
-      content: 'Limited USDT Volume';
+      height: 24px;
+      width: 168px;
+      background: url(../../assets/img/sq_bg2.png) no-repeat center;
+      background-size: cover;
+      content: 'LIMITED USDT VOLUME';
     }
     .line {
       height: 36px;

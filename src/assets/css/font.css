@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('../font/Roboto-Regular-14.ttf') format('truetype')
+}
+
+body,
+html {
+  font-family: 'MyWebFont', Arial, Helvetica, sans-serif;
+}
