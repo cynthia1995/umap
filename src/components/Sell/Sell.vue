@@ -7,7 +7,7 @@
         USDT/INR
       </p>
       <p class="bg-00d0ff">
-        ₹
+        <span class="fontsize20" style="position: relative;top: 3px;left: -1px;">₹</span>
         <b class="fontweight-m fontsize30">81.33</b>
       </p>
     </div>
@@ -15,11 +15,11 @@
       <p class="notice text-center fontsize12">{{ notice }}</p>
       <div class="exchange">
         <div class="line line2 bg-ffffff">
-          <p class="bg-edf5ff fontweight-m">VOLUME USDT</p>
+          <p class="bg-f7f8fc">VOLUME USDT</p>
           <p class="bg-ffffff"><van-field v-model="volumeUSDT" @focus="focus1($event)" placeholder="₹00.00" /></p>
         </div>
         <div class="line line3 bg-ffffff">
-          <p class="bg-edf5ff fontweight-m">TOTAL INR</p>
+          <p class="bg-f7f8fc">TOTAL INR</p>
           <p class="bg-ffffff"><van-field v-model="totalINR" @focus="focus2($event)" placeholder="₹00.00" /></p>
         </div>
         <span @click="exchange"></span>
@@ -44,18 +44,18 @@
             VOLUME
             <em class="inlineblock">(USDT)</em>
           </b>
-          <span>{{ volumeUSDT }}</span>
+          <span class="fontweight-m">{{ volumeUSDT }}</span>
         </p>
         <p class="flex">
           <b>
             AT PRICE
             <em class="inlineblock">(Per USDT)</em>
           </b>
-          <span>₹{{ perUSDT }}</span>
+          <span class="fontweight-m">₹{{ perUSDT }}</span>
         </p>
         <p class="flex">
           <b>0.25% Fee</b>
-          <span>
+          <span class="fontweight-m">
             <em class="inlineblock">₹2000.00</em>
             ₹0.00
           </span>
@@ -146,7 +146,11 @@ export default {
   font-weight: 600;
   &::placeholder {
     color: #bac7cf;
+    font-weight: 600;
   }
+}
+.confirmContent {
+  margin: 0 10px 20px;
 }
 .sell {
   background: url(../../assets/img/bg_sell@2x.png) no-repeat center top;
@@ -156,9 +160,9 @@ export default {
   }
   .line1 {
     width: 80%;
-    border-radius: 4px;
+    border-radius: 2px;
     overflow: hidden;
-    margin: 48px auto 30px;
+    margin: 38px auto 40px;
     height: 70px;
     p:nth-child(1) {
       img {
@@ -194,7 +198,7 @@ export default {
       }
     }
     .info {
-      padding: 5px 10px;
+      padding: 10px 0 0;
     }
     .line2,
     .line3 {

@@ -92,6 +92,7 @@ export default {
     border: 1px solid #6d4ffd;
     color: #6d4ffd;
     font-size: 14px;
+    height: 30px;
   }
   /deep/ .van-button--disabled {
     background-color: #e7ebee;

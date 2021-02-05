@@ -93,7 +93,7 @@ export default {
   background-size: 100%;
 }
 .agree {
-  margin-top: 20px;
+  margin-top: 10px;
   height: 14px;
   /deep/ .van-checkbox {
     height: 14px;
@@ -125,5 +125,8 @@ export default {
 /deep/ .van-checkbox__icon--checked {
   background: url(../../assets/img/CheckIcon_s@2x.png) no-repeat left center;
   background-size: 14px;
+}
+/deep/ .van-button--primary {
+  margin-top: 30px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="Payment paddingtop-50">
+  <div class="Payment paddingtop-50 padding-20">
     <NavTit :title="title" :noTit="false"></NavTit>
     <div v-if="noAdded" class="added white-color">
       <ul class="methodList">
@@ -15,7 +15,7 @@
           </p>
         </li>
       </ul>
-      <div class="padding-20"><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
+      <div><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
     </div>
     <div v-else class="noadded text-center color-8c9fad">
       <img src="../../assets/img/noPay@2x.png" alt="">
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       title: 'Payment',
-      noAdded: true,
+      noAdded: false,
       addedTxt: 'Please make sure that you’re using your own accont.',
       methodList: [
         {
@@ -117,6 +117,11 @@ export default {
   img {
     width: 255px;
     margin: 0 auto 20px;
+  }
+  /deep/ .van-button--primary {
+    height: 40px;
+    width: 140px;
+    margin: 0 auto;
   }
 }
 </style>

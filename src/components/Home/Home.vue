@@ -22,7 +22,7 @@
             PRICE
           </p>
           <p class="bg-ffffff">
-            <b class="fontsize20 fontweight-m">1</b>
+            <b class="fontsize20 fontweight-m relativetop">1</b>
             USDT
             <b class="fontsize20">&nbsp;=&nbsp;</b>
             ₹
@@ -36,7 +36,7 @@
             PRICE
           </p>
           <p class="bg-ffffff">
-            <b class="fontsize20 fontweight-m">1</b>
+            <b class="fontsize20 fontweight-m relativetop">1</b>
             USDT
             <b class="fontsize20">&nbsp;=&nbsp;</b>
             ₹
@@ -44,7 +44,7 @@
           </p>
         </div>
         <div class="line line3">
-          <p class="bg-8ceaff fontweight-m fontsize12">YOU Earn</p>
+          <p class="bg-8ceaff fontweight-m fontsize12 color-2f3462">YOU EARN</p>
           <p class="bg-00d0ff">
             <b class="fontsize24 white-color">≈</b>
             &nbsp;₹
@@ -166,6 +166,8 @@ export default {
         margin: 20px auto 0;
         em {
           font-style: normal;
+          position: relative;
+          top: 2px;
         }
       }
     }

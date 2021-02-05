@@ -13,6 +13,7 @@ html {
   font-size: 16px;
   border: none;
   border-radius: 4px;
+  height: 50px;
 }
 .van-button--primary span {
   font-weight: 600;
@@ -72,8 +73,17 @@ section.main {
     }
   }
   div {
-    border-top: 0.5px solid #e7ebee;
     justify-content: space-between;
+    position: relative;
+    &::before {
+      content: '';
+      border-bottom: 1px solid #e7ebee;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      transform: scaleY(0.5);
+    }
   }
   p {
     justify-content: space-between;
@@ -104,13 +114,15 @@ section.main {
 .van-cell {
   display: block;
   padding: 10px 0;
-  border-bottom: 1px solid #e7ebee;
   &::after {
-    display: none;
     border-color: #e7ebee;
+    width: 100%;
+    left: 0;
   }
   input {
     font-weight: 600;
+    padding: 0 10px;
+    box-sizing: border-box;
   }
 }
 .van-field__control {
@@ -122,9 +134,12 @@ section.main {
 }
 .van-field__label {
   width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
   span {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 12px;
+    color: #1d2243;
   }
 }
 .van-field__error-message {
@@ -145,6 +160,10 @@ section.main {
 .van-notify {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+.van-nav-bar__left,
+.van-nav-bar__right {
+  padding: 0 20px;
 }
 
 //
@@ -170,8 +189,15 @@ section.main {
 .color-03ad8f {
   color: #03ad8f;
 }
+.color-2f3462 {
+  color: #2f3462;
+}
 .bg-edf5ff {
   background-color: #edf5ff;
+  color: #4c528f;
+}
+.bg-f7f8fc {
+  background-color: #f7f8fc;
   color: #4c528f;
 }
 .bg-ffffff {
@@ -274,4 +300,20 @@ section.main {
 }
 .radius4 {
   border-radius: 4px;
+}
+.relativetop {
+  position: relative;
+  top: -2px;
+}
+.thinBorder {
+  position: relative;
+  &::after {
+    content: '';
+    border-bottom: 1px solid #e7ebee;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    transform: scaleY(0.5);
+  }
 }

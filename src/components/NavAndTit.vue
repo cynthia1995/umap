@@ -10,7 +10,7 @@
         <img v-else src="../assets/img/kefu_black@2x.png" alt="" />
       </template>
     </van-nav-bar>
-    <h3 v-if="!noTit" :class="isWhite ? 'title fontweight-m fontsize28 padding-20 white-color' : 'title fontweight-m fontsize28 padding-20'">{{ title }}</h3>
+    <h3 v-if="!noTit" :class="isWhite ? 'title fontweight-m fontsize28 white-color' : 'title fontweight-m fontsize28'">{{ title }}</h3>
   </div>
 </template>
 

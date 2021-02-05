@@ -110,6 +110,8 @@ export default {
     focus(event) {
       console.log('event');
       document.getElementsByClassName('main')[0].className = 'main slideUp';
+      const toRegister = document.getElementsByClassName('toRegister')[0];
+      toRegister.className = "toRegister block white-color margin0auto text-center radius4 fixed";
     },
     toggleEye() {
       this.show = !this.show;
@@ -136,6 +138,7 @@ export default {
 .login {
   background: url(../../assets/img/Base@2x.png) no-repeat center top;
   background-size: 100%;
+  padding-bottom: 180px;
   .title {
     font-size: 28px;
   }
@@ -147,15 +150,17 @@ export default {
 .main {
   padding-top: 0;
   overflow: visible;
-  position: relative;
-  top: 0;
+  position: absolute;
+  top: 380px;
   transition: ease 0.5s;
+  width: 100%;
+  box-sizing: border-box;
 }
 .van-form {
   padding-top: 30px;
 }
 .slideUp {
-  top: -270px;
+  top: 90px;
 }
 .van-tabs {
   top: -44px;
@@ -189,7 +194,7 @@ export default {
   }
 }
 .agree {
-  margin-top: 20px;
+  margin-top: 10px;
   height: 14px;
   /deep/ .van-checkbox {
     height: 14px;
@@ -233,5 +238,13 @@ export default {
   width: 140px;
   height: 40px;
   line-height: 40px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+  &.fixed {
+    position: fixed;
+  }
 }
 </style>

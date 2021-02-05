@@ -154,8 +154,8 @@ export default {
       openActive: 0,
       completedActive: 0,
       isLogin: true,
-      noOpen: true,
-      noCompleted: false,
+      noOpen: false,
+      noCompleted: true,
       orderList: [
         {
           id: 2124,
@@ -239,6 +239,11 @@ export default {
     width: 230px;
     margin: 0 auto 50px;
   }
+  /deep/ .van-button--primary {
+    width: 140px;
+    height: 40px;
+    margin: 0 auto;
+  }
 }
 .noOpen,
 .noCompleted {
@@ -247,6 +252,9 @@ export default {
     width: 255px;
     margin: 0 auto 20px;
   }
+}
+/deep/ .van-tabs__nav--line {
+  padding: 0 20px 15px;
 }
 /deep/ .van-tabs__wrap {
   border-bottom-left-radius: 20px;
@@ -257,12 +265,16 @@ export default {
   font-size: 18px;
   color: #bac7cf;
   flex: 0;
-  padding: 0 25px;
+  padding: 0;
+  margin-right: 35px;
+  span {
+    font-weight: 400;
+  }
   &.van-tab--active {
     color: #1d2243;
-  }
-  span {
-    font-weight: 600;
+    span {
+      font-weight: 600;
+    }
   }
 }
 /deep/ .van-tabs__line {
@@ -277,21 +289,31 @@ export default {
     border: none;
     background-color: transparent;
     height: 34px;
+    margin: 0;
+  }
+  /deep/ .van-tabs__wrap {
+    border-radius: 0;
   }
   /deep/ .van-tab {
     background-color: #ffffff;
     border: 1px solid #ffffff;
-    margin: 0 5px;
+    margin: 0;
     font-size: 14px;
     height: 30px;
     line-height: 30px;
-    font-weight: 600;
     border-radius: 4px;
+    padding: 0 4px;
     flex: 1;
     &.van-tab--active {
       color: #6d4ffd;
       border-color: #6d4ffd;
       background-color: transparent;
+    }
+    &:nth-child(1) {
+      margin-right: 5px;
+    }
+    &:nth-child(2) {
+      margin-left: 5px;
     }
   }
   /deep/ .van-tabs__content {

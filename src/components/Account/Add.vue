@@ -1,7 +1,7 @@
 <template>
-  <div class="Add paddingtop-50">
+  <div class="Add paddingtop-50 padding-20">
     <NavTit :title="title" :noTit="false"></NavTit>
-    <div v-if="$route.query.name === 'IMPS'" class="padding-20">
+    <div v-if="$route.query.name === 'IMPS'">
       <van-form @submit="onSubmitIMPS" class="imps">
         <van-field v-model="impsForm.name" name="name" label="Name" placeholder="Please Enter Your Name" :rules="[{ required: true, message: 'Please Enter Your Name' }]" />
         <van-field
@@ -22,7 +22,7 @@
         <van-button type="primary" block native-type="submit">Save</van-button>
       </van-form>
     </div>
-    <div v-else-if="$route.query.name === 'UPI'" class="padding-20">
+    <div v-else-if="$route.query.name === 'UPI'">
       <van-form @submit="onSubmitUPI" class="upiForm">
         <van-field v-model="upiForm.name" name="name" label="Name" placeholder="Please Enter Your Name" :rules="[{ required: true, message: 'Please Enter Your Name' }]" />
         <van-field

@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .tab-bar {
   width: 100%;
   position: fixed;
@@ -36,6 +36,7 @@ export default {
     height: 100%;
     position: relative;
     line-height: 74px;
+    color: #8c9fad;
     &::before {
       content: '';
       position: absolute;
@@ -79,6 +80,7 @@ export default {
     }
     &.router-link-active {
       color: #7041ff;
+      font-weight: 600;
     }
   }
 }
