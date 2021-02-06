@@ -13,7 +13,7 @@
       <van-swipe-item><img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item>
     </van-swipe>
     <section class="main">
-      <van-button type="primary" block>Sell USDT</van-button>
+      <van-button type="primary" block @click="toSell">Sell USDT</van-button>
       <div class="part part1 bg-dbeaff">
         <div class="line line1">
           <p class="bg-edf5ff fontsize10 text-center fontweight-m">
@@ -22,11 +22,11 @@
             PRICE
           </p>
           <p class="bg-ffffff">
-            <b class="fontsize20 fontweight-m relativetop">1</b>
-            USDT
+            <b class="fontsize20 fontweight-m">1</b>
+            <span class="relativetop2">USDT</span>
             <b class="fontsize20">&nbsp;=&nbsp;</b>
-            ₹
-            <b class="fontsize20 fontweight-m">85.10</b>
+            <em class="relativetop2">₹</em>
+            <b class="fontsize20 fontweight-m">{{ homeInfo.todayPrice.mapuPrice }}</b>
           </p>
         </div>
         <div class="line line2">
@@ -36,43 +36,66 @@
             PRICE
           </p>
           <p class="bg-ffffff">
-            <b class="fontsize20 fontweight-m relativetop">1</b>
-            USDT
+            <b class="fontsize20 fontweight-m">1</b>
+            <span class="relativetop2">USDT</span>
             <b class="fontsize20">&nbsp;=&nbsp;</b>
-            ₹
-            <b class="fontsize20 fontweight-m">82.10</b>
+            <em class="relativetop2">₹</em>
+            <b class="fontsize20 fontweight-m">{{ homeInfo.todayPrice.marketPrice }}</b>
           </p>
         </div>
         <div class="line line3">
           <p class="bg-8ceaff fontweight-m fontsize12 color-2f3462">YOU EARN</p>
           <p class="bg-00d0ff">
             <b class="fontsize24 white-color">≈</b>
-            &nbsp;₹
-            <b class="fontsize24 fontweight-m">3.00</b>
+            &nbsp;
+            <span class="relativetop2">₹</span>
+            <b class="fontsize24 fontweight-m">{{ homeInfo.todayPrice.eran }}</b>
             <em class="fontsize10">&nbsp;/Sell 1 USDT</em>
           </p>
         </div>
       </div>
-      <div class="part part2 text-center color-6d4ffd bg-f6f7fb fontweight-m"><count-to class="fontweight-m" :start-val="0" :end-val="1150000000" :duration="2000" /></div>
+      <div class="part part2 text-center color-6d4ffd bg-f6f7fb fontweight-m">
+        <count-to class="fontweight-m" :start-val="0" :end-val="homeInfo.todayLimteVolume" :duration="2000" />
+      </div>
     </section>
   </div>
 </template>
 
 <script>
 import CountTo from 'vue-count-to';
+import { getHome } from '@/api/api';
 export default {
   name: 'Home',
   components: {
     CountTo
   },
   data() {
-    return {};
+    return {
+      homeInfo: {}
+    };
   },
-  created() {},
+  created() {
+    getHome()
+      .then(res => {
+        if (res.success) {
+          this.homeInfo = res.result;
+          console.log(this.homeInfo);
+        } else {
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   mounted() {},
   methods: {
     onClickRight() {
       this.$toast('按钮');
+    },
+    toSell() {
+      this.$router.push({
+        path: '/sell'
+      });
     }
   }
 };

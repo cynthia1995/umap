@@ -5,16 +5,10 @@
         <img src="../../assets/img/Left-white@2x.png" alt="" />
       </template>
     </van-nav-bar>
-    <h3 class="title text-center fontsize18 white-color marginbottom-20 fontweight-m">{{title}}</h3>
+    <h3 class="title text-center fontsize18 white-color marginbottom-20 fontweight-m">{{ title }}</h3>
     <section class="main">
       <van-form @submit="onSubmit">
-        <van-field
-          v-model="form.code"
-          name="code"
-          label="E-mail/Mobile OTP"
-          placeholder="Please Enter E-mail/Mobile OTP"
-          :rules="[{ required: true, message: 'Please Enter E-mail/Mobile OTP' }]"
-        >
+        <van-field v-model="form.code" name="code" label="E-mail/Mobile OTP" placeholder="Please Enter E-mail/Mobile OTP" :error-message="errMsg.code" @blur="checkCode($event)">
           <template #button>
             <van-button @click="send()" :disabled="disabled" size="small" type="primary">{{ btnTxt }}</van-button>
           </template>
@@ -26,6 +20,7 @@
 </template>
 
 <script>
+import { verifyRegister } from '@/api/api';
 export default {
   name: 'Login',
   data() {
@@ -38,14 +33,27 @@ export default {
       countDown: 5,
       form: {
         code: ''
-      }
+      },
+      errMsg: {
+        code: ''
+      },
+      phone: ''
     };
   },
-  created() {},
+  created() {
+    this.phone = this.$route.query.phone;
+  },
   mounted() {},
   methods: {
     onClickLeft() {
       this.$router.go(-1);
+    },
+    checkCode(event) {
+      if (!this.form.code) {
+        this.errMsg.code = 'E-mail cannot be empty';
+      } else {
+        this.errMsg.code = '';
+      }
     },
     send() {
       const countDown = this.countDown;
@@ -65,12 +73,21 @@ export default {
       }, 1000);
     },
     onSubmit() {
-      console.log(this.form);
-      // if (this.checked) {
-      //   console.log(this.form);
-      // } else {
-      //   this.$toast('请阅读条款');
-      // }
+      this.checkCode();
+      verifyRegister({
+        code: this.form.code,
+        phone: this.phone
+      })
+        .then(res => {
+          if (res.success) {
+            this.$toast(res.message);
+          } else {
+            this.$toast(res.message);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

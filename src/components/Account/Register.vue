@@ -8,23 +8,18 @@
     <h3 class="title text-center fontsize18 white-color marginbottom-20 fontweight-m">{{ title }}</h3>
     <section class="main">
       <van-form @submit="onSubmit">
-        <van-field v-model="form.email" name="email" label="Email" placeholder="Please Enter Your Email" :rules="[{ required: true, message: 'Please Enter Your Email' }]" />
+        <van-field v-model="form.email" name="email" label="Email" placeholder="Please Enter Your Email" @blur="checkEmail($event)" :error-message="errMsg.email" />
         <van-field
           v-model="form.password"
           name="password"
           label="Password"
           placeholder="Please Enter Your Password"
           type="password"
-          :rules="[{ required: true, message: 'Please Enter Your Password' }]"
+          @blur="checkPassword($event)"
+          :error-message="errMsg.password"
         />
-        <van-field
-          v-model="form.mobile"
-          name="mobile"
-          label="Phone Number"
-          placeholder="Please Enter Your Phone Number"
-          :rules="[{ required: true, message: 'Please Enter Your Phone Number' }]"
-        />
-        <van-field v-model="form.referral" name="referral" label="Referral ID(Optional)" placeholder="Please Enter Referral ID" :rules="[{ required: false }]" />
+        <van-field v-model="form.phone" name="mobile" label="Phone Number" placeholder="Please Enter Your Phone Number" @blur="checkPhone($event)" :error-message="errMsg.phone" />
+        <van-field v-model="form.referralId" name="referral" label="Referral ID(Optional)" placeholder="Please Enter Referral ID" :rules="[{ required: false }]" />
         <van-button type="primary" block native-type="submit">Register</van-button>
         <div class="agree">
           <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
@@ -47,11 +42,18 @@ export default {
     return {
       title: 'Create a free acount',
       checked: false,
+      emailPattern: /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/,
+      phonePattern: /^(6|7|8|9)\\d{9}$/,
       form: {
         email: '',
-        mobile: '',
+        phone: '',
         password: '',
         referralId: ''
+      },
+      errMsg: {
+        email: '',
+        phone: '',
+        password: ''
       }
     };
   },
@@ -61,26 +63,62 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
-    register() {
-      register(this.form)
-        .then(res => {
-          if (res.code === 200) {
-            this.$router.push({
-              path: '/verificationcode',
-              query: {}
-            });
-            console.log(res.data);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    checkEmail(event) {
+      if (!this.form.email) {
+        this.errMsg.email = 'E-mail cannot be empty';
+      } else {
+        if (!this.emailPattern.test(this.form.email)) {
+          this.errMsg.email = 'E-mail format is incorrect';
+        } else {
+          this.errMsg.email = '';
+        }
+      }
+    },
+    checkPhone(event) {
+      // if (!this.form.phone) {
+      //   this.errMsg.phone = 'Phone Number cannot be empty';
+      // } else {
+      //   if (!this.phonePattern.test(this.form.phone)) {
+      //     this.errMsg.phone = 'Phone Number format is incorrect';
+      //   } else {
+      //     this.errMsg.phone = '';
+      //   }
+      // }
+    },
+    checkPassword(event) {
+      if (!this.form.password) {
+        this.errMsg.password = 'Password cannot be empty';
+      } else {
+        this.errMsg.password = '';
+      }
     },
     onSubmit() {
-      if (this.checked) {
-        this.register();
+      this.checkEmail();
+      this.checkPhone();
+      this.checkPassword();
+      if (this.errMsg.email && this.errMsg.phone && this.errMsg.password) {
       } else {
-        this.$toast('请阅读条款');
+        if (this.checked) {
+          register(this.form)
+            .then(res => {
+              if (res.success) {
+                this.$router.push({
+                  path: '/verificationcode',
+                  query: {
+                    email: this.form.email,
+                    phone: this.form.phone
+                  }
+                });
+              } else {
+                this.$toast(res.messages);
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        } else {
+          this.$toast('请阅读条款');
+        }
       }
     }
   }

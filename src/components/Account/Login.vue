@@ -16,7 +16,8 @@
               name="email"
               label="Email"
               placeholder="Please Enter Your Email"
-              :rules="[{ required: true, message: 'Please Enter Your Email' }]"
+              @blur="checkEmail($event)"
+              :error-message="errMsg.email"
             />
             <van-field
               @focus="focus($event)"
@@ -48,8 +49,8 @@
           <van-form @submit="onSubmit">
             <van-field
               @focus="focus($event)"
-              v-model="form.mobile"
-              name="mobile"
+              v-model="form.phone"
+              name="phone"
               label="Mobile"
               placeholder="Please Enter Your Mobile"
               :rules="[{ required: true, message: 'Please Enter Your Mobile' }]"
@@ -69,7 +70,7 @@
               </template>
             </van-field>
             <router-link class="color-6d4ffd block margintop-10 fontweight-m" to="/forgetpwd">Forget Password?</router-link>
-            <van-button :disabled="form.mobile && form.password ? false : true" type="primary" block native-type="submit">Log In</van-button>
+            <van-button :disabled="form.phone && form.password ? false : true" type="primary" block native-type="submit">Log In</van-button>
             <div class="agree">
               <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
               <label for="agree">
@@ -87,6 +88,7 @@
 </template>
 
 <script>
+import { login } from '@/api/api';
 export default {
   name: 'Login',
   data() {
@@ -94,9 +96,16 @@ export default {
       active: 0,
       checked: false,
       show: false,
+      emailPattern: /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/,
+      phonePattern: /^(6|7|8|9)\\d{9}$/,
       form: {
         email: '',
-        mobile: '',
+        phone: '',
+        password: ''
+      },
+      errMsg: {
+        email: '',
+        phone: '',
         password: ''
       }
     };
@@ -104,6 +113,17 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    checkEmail(event) {
+      if (!this.form.email) {
+        this.errMsg.email = 'E-mail cannot be empty';
+      } else {
+        if (!this.emailPattern.test(this.form.email)) {
+          this.errMsg.email = 'E-mail format is incorrect';
+        } else {
+          this.errMsg.email = '';
+        }
+      }
+    },
     onClickLeft() {
       this.$router.go(-1);
     },
@@ -111,7 +131,7 @@ export default {
       console.log('event');
       document.getElementsByClassName('main')[0].className = 'main slideUp';
       const toRegister = document.getElementsByClassName('toRegister')[0];
-      toRegister.className = "toRegister block white-color margin0auto text-center radius4 fixed";
+      toRegister.className = 'toRegister block white-color margin0auto text-center radius4 fixed';
     },
     toggleEye() {
       this.show = !this.show;
@@ -119,13 +139,27 @@ export default {
     changeType() {
       this.form = {
         email: '',
-        mobile: '',
+        phone: '',
         password: ''
       };
     },
     onSubmit() {
       if (this.checked) {
-        console.log(this.form);
+        login(this.form)
+          .then(res => {
+            // console.log(res);
+            if (res.success) {
+              console.log(res.result.token);
+              // localStorage.setItem('token')
+              this.setStore('token', res.result.token);
+              this.$router.push({ path: '/home' });
+            } else {
+              this.$toast(res.messages);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
       } else {
         this.$toast('请阅读条款');
       }

@@ -16,11 +16,11 @@
       <div class="exchange">
         <div class="line line2 bg-ffffff">
           <p class="bg-f7f8fc">VOLUME USDT</p>
-          <p class="bg-ffffff"><van-field v-model="volumeUSDT" @focus="focus1($event)" placeholder="₹00.00" /></p>
+          <p class="bg-ffffff"><van-field v-model="volumeUSDT" @input="input1" placeholder="₹00.00" /></p>
         </div>
         <div class="line line3 bg-ffffff">
           <p class="bg-f7f8fc">TOTAL INR</p>
-          <p class="bg-ffffff"><van-field v-model="totalINR" @focus="focus2($event)" placeholder="₹00.00" /></p>
+          <p class="bg-ffffff"><van-field v-model="totalINR" @input="input2" placeholder="₹00.00" /></p>
         </div>
         <span @click="exchange"></span>
       </div>
@@ -95,16 +95,24 @@ export default {
     };
   },
   methods: {
-    focus1(event) {
-      // console.log(event);
-      if (this.volumeUSDT == '') {
-        this.volumeUSDT = '₹' + this.volumeUSDT;
+    input1(value) {
+      const reg = new RegExp('₹', 'g');
+      console.log(this.volumeUSDT);
+      if (this.volumeUSDT.length > 0) {
+        this.volumeUSDT = '₹' + value.replace(reg, '');
+      }
+      if (this.volumeUSDT == '₹') {
+        this.volumeUSDT = '';
       }
     },
-    focus2(event) {
-      // console.log(event);
-      if (this.totalINR == '') {
-        this.totalINR = '₹' + this.totalINR;
+    input2(value) {
+      const reg = new RegExp('₹', 'g');
+      console.log(this.totalINR);
+      if (this.totalINR.length > 0) {
+        this.totalINR = '₹' + value.replace(reg, '');
+      }
+      if (this.totalINR == '₹') {
+        this.totalINR = '';
       }
     },
     exchange() {

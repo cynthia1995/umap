@@ -144,7 +144,8 @@ section.main {
 }
 .van-field__error-message {
   color: #ff5a75;
-  display: none;
+  padding-left: 10px;
+  // display: none;
 }
 .van-icon-photograph::before {
   content: '\F0A2';
@@ -164,6 +165,10 @@ section.main {
 .van-nav-bar__left,
 .van-nav-bar__right {
   padding: 0 20px;
+}
+
+.van-tabs__line {
+  border-radius: 0;
 }
 
 //
@@ -304,6 +309,10 @@ section.main {
 .relativetop {
   position: relative;
   top: -2px;
+}
+.relativetop2 {
+  position: relative;
+  top: 2px;
 }
 .thinBorder {
   position: relative;
