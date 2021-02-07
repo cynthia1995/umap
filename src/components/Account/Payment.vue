@@ -5,55 +5,60 @@
       <ul class="methodList">
         <li v-for="(item, index) in methodList" :key="index">
           <p class="p1 flex">
-            <img class="icon" :src="item.icon" alt="" />
-            <span class="fontweight-m fontsize12">{{ item.accountName }}</span>
+            <img class="icon" :src="getIcon(item.paymentType)" alt="" />
+            <span class="fontweight-m fontsize12">{{ item.account }}</span>
           </p>
-          <p class="p2 fontsize12 flex">{{ item.userName }}</p>
+          <p class="p2 fontsize12 flex">{{ item.name }}</p>
           <p class="p3 fontweight-m flex">
-            <span class="fontweight-m fontsize20">{{ item.addressCode }}</span>
-            <img class="qrCode" src="../../assets/img/trc20.png" alt="" />
+            <span v-if="item.paymentType == 'IMPS'" class="fontweight-m fontsize20">{{ item.isfcCode }}</span>
+            <img v-if="item.paymentType == 'UPI'" class="qrCode" :src="item.qrCode" alt="" />
           </p>
         </li>
       </ul>
       <div><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
     </div>
     <div v-else class="noadded text-center color-8c9fad">
-      <img src="../../assets/img/noPay@2x.png" alt="">
+      <img src="../../assets/img/noPay@2x.png" alt="" />
       <p>{{ addedTxt }}</p>
       <van-button type="primary" block @click="toAddMethod">Add</van-button>
     </div>
+    <Loading :loading="loading"></Loading>
   </div>
 </template>
 
 <script>
 import NavTit from '../NavAndTit.vue';
+import { getPaymentList, getUserInfo } from '@/api/api';
+import Loading from '../Loading.vue';
 export default {
   name: 'Payment',
   components: {
-    NavTit
+    NavTit,
+    Loading
   },
   data() {
     return {
       title: 'Payment',
-      noAdded: false,
+      noAdded: true,
       addedTxt: 'Please make sure that you’re using your own accont.',
-      methodList: [
-        {
-          icon: require('@/assets/img/UPI_icon@2x.png'),
-          accountName: '3409409049094',
-          userName: 'Kun Max Yuan',
-          addressCode: 'KSIB34034893883948'
-        },
-        {
-          icon: require('@/assets/img/UPI@2x.png'),
-          accountName: '3409409049094',
-          userName: 'Kun Max Yuan',
-          addressCode: 'Receipt QR code'
-        }
-      ]
+      methodList: []
     };
   },
-  created() {},
+  created() {
+    this.loading = true;
+    getPaymentList()
+      .then(res => {
+        if (res.code == 200) {
+          this.loading = false;
+          this.methodList = res.result;
+        } else {
+          this.loading = false;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   mounted() {},
   methods: {
     toAddMethod() {

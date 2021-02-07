@@ -16,22 +16,22 @@ export const login = (params) => { //登录
 }
 // phone
 export const verifyPhone = (params) => { //忘记密码,发送验证码
-  return getRequest('/exchange/m/sell/forget/verifyPhone/{phone}'.replace('{phone}', params.phone), params)
+  return getRequest('/exchange/m/sell/forget/verifyPhone/{phone}'.replace('{phone}', params.phone))
 }
 // phone, smsCode, newpwd
 export const resetPwd = (params) => { //修改密码
-  return postRequest('/exchange/m/sell/forget/newpwd/{phone}'.replace('{phone}', params.phone), params)
+  return postRequest('/exchange/m/sell/forget/newpwd/{phone}'.replace('{phone}', params.phone))
 }
 // dictcode
 export const getdict = (params) => { //获取系统数据字典
-  return getRequest('/exchange/m/sell/getdict/{dictcode}'.replace('{dictcode}', params.dictcode), params)
+  return getRequest('/exchange/m/sell/getdict/{dictcode}'.replace('{dictcode}', params.dictcode))
 }
 // paramName
 export const getSysParam = (params) => { //获取系统参数
-  return getRequest('/exchange/m/sell/getSysParam/{paramName}'.replace('{paramName}', params.paramName), params)
+  return getRequest('/exchange/m/sell/getSysParam/{paramName}'.replace('{paramName}', params.paramName))
 }
-export const getHome = (params) => { //卖家端首页
-  return getRequest('/exchange/m/sell/home', params)
+export const getHome = () => { //卖家端首页
+  return getRequest('/exchange/m/sell/home')
 }
 // paymentType	收款方式类型	string	Y	字典：payment_type
 // name	实名	string	Y
@@ -44,7 +44,7 @@ export const addPayment = (params) => { //卖家添加收款方式
 }
 //id
 export const editDefaultPayment = (params) => { //卖家修改默认收款方式
-  return getRequest('/exchange/m/sell//editDefaultPayment/{id}'.replace('{id}', params.id), params)
+  return getRequest('/exchange/m/sell//editDefaultPayment/{id}'.replace('{id}', params.id))
 }
 export const getPaymentList = (params) => { //卖家收款方式列表
   return getRequest('/exchange/m/sell/getPaymentList', params)
@@ -57,11 +57,11 @@ export const getUserInfo = (params) => { //获取卖家信息
 }
 //searchType(open, completed)
 export const getOrders = (params) => { //订单（商品）列表
-  return getRequest('/exchange/m/sell/orderList/{searchType}'.replace('{searchType}', params.searchType), params)
+  return getRequest('/exchange/m/sell/orderList/{searchType}'.replace('{searchType}', params.searchType))
 }
 //goodsId
 export const orderDetail = (params) => { //订单（商品）列表
-  return getRequest('/exchange/m/sell//exchange/m/sell/orderDetail/{goodsId}'.replace('{goodsId}', params.goodsId), params)
+  return getRequest('/exchange/m/sell/orderDetail/{goodsId}'.replace('{goodsId}', params.goodsId))
 }
 // goodsId	商品ID	string	Y
 // addrType	地址类型	string	Y
@@ -82,5 +82,5 @@ export const confirmOrder = (params) => { //发布并确认商品
 }
 // orderId
 export const confirmPay = (params) => { //卖家确认订单（商品）收款
-  return postRequest('/exchange/m/sell/confirmPay/{orderId}'.replace('{orderId}', params.orderId), params)
+  return postRequest('/exchange/m/sell/confirmPay/{orderId}'.replace('{orderId}', params.orderId))
 }

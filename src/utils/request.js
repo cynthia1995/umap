@@ -25,40 +25,39 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
   const data = response.data
 
-  // 根据返回的code值来做不同的处理(和后端约定)
-  // switch (data.code) {
-  //   case 401:
-  //     // 未登录 清除已登录状态
-  //     Cookies.set('userInfo', '')
-  //     setStore('token', '')
-  //     if (router.history.current.name !== 'login') {
-  //       if (data.messages !== null) {
-  //         Notify(data.messages)
-  //       } else {
-  //         Notify('未知错误，请重新登录')
-  //       }
-  //       router.push('/login')
-  //     }
-  //     break
-  //   case 403:
-  //     // 没有权限
-  //     if (data.messages !== null) {
-  //       Notify(data.messages)
-  //     } else {
-  //       Notify('未知错误')
-  //     }
-  //     break
-  //   case 500:
-  //     // 错误
-  //     if (data.messages !== null) {
-  //       Notify(data.messages)
-  //     } else {
-  //       Notify('未知错误')
-  //     }
-  //     break
-  //   default:
-  //     return data
-  // }
+  switch (data.code) {
+    case 401:
+      // 未登录 清除已登录状态
+      Cookies.set('token', '')
+      setStore('token', '')
+      if (router.history.current.name !== 'login') {
+        if (data.message !== null) {
+          Notify(data.message)
+        } else {
+          Notify('未知错误，请重新登录')
+        }
+        router.push('/login')
+      }
+      break
+    case 403:
+      // 没有权限
+      if (data.message !== null) {
+        Notify(data.message)
+      } else {
+        Notify('未知错误')
+      }
+      break
+    case 500:
+      // 错误
+      if (data.message !== null) {
+        Notify(data.message)
+      } else {
+        Notify('未知错误')
+      }
+      break
+    default:
+      return data
+  }
 
   return data
 }, (err) => {
@@ -68,32 +67,32 @@ axios.interceptors.response.use(response => {
 })
 
 export const getRequest = (url, params) => {
-  const token = getStore('token')
+  const token = Cookies.get('token');
   return axios({
     method: 'get',
     url: `${base}${url}`,
     params: params,
     headers: {
-      'token': token
+      'App-Access-Token': token
     }
   })
 }
 
 export const postRequest = (url, params) => {
-  const token = getStore('token')
+  const token = Cookies.get('token');
   return axios({
     method: 'post',
     url: `${base}${url}`,
     data: params,
     headers: {
       'Content-Type': 'application/json',
-      'token': token
+      'App-Access-Token': token
     }
   })
 }
 
 export const putRequest = (url, params) => {
-  const token = getStore('token')
+  const token = Cookies.get('token');
   return axios({
     method: 'put',
     url: `${base}${url}`,
@@ -107,19 +106,19 @@ export const putRequest = (url, params) => {
     }],
     headers: {
       'Content-Type': 'application/json',
-      'token': token
+      'App-Access-Token': token
     }
   })
 }
 
 export const deleteRequest = (url, params) => {
-  const token = getStore('token')
+  const token = Cookies.get('token');
   return axios({
     method: 'delete',
     url: `${base}${url}`,
     params: params,
     headers: {
-      'token': token
+      'App-Access-Token': token
     }
   })
 }

@@ -4,67 +4,34 @@
       <b class="fontweight-m fontsize28">Orders</b>
       <span class="fontsize12 color-8c9fad">Tether-USDT</span>
     </h3>
-    <van-tabs v-model="active">
+    <van-tabs v-model="active" @click="onClick">
       <van-tab title="Open">
         <div v-if="isLogin">
-          <div class="noOpen" v-if="noOpen">
-            <p class="text-center">
-              <img src="../../assets/img/noOrder@2x.png" alt="" />
-              <b class="fontsize18 block marginbottom-10 fontweight-m">Looks like there’s no trades here</b>
-              <span class="color-8f92a1">Sell USDT to see all your trades here</span>
-            </p>
-          </div>
+          <NoOrder v-if="noOpen" style="margin-top: 10px;"></NoOrder>
           <div class="open subTabs" v-else>
             <van-tabs v-model="openActive" type="card">
-              <van-tab title="ERC20">
-                <ul class="orderList">
-                  <li v-for="(item, index) in orderList" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.id)">
+              <van-tab v-for="(item, index) in addressType" :title="item">
+                <ul class="orderList" v-if="openList[item] && openList[item].length > 0">
+                  <li v-for="(subItem, subIndex) in openList[item]" :key="subIndex" class="marginbottom-10 flex" @click="orderDetail(subItem.goodsId)">
                     <p class="text-center">
                       <b class="fontsize12">
                         ₹
-                        <span class="fontsize16 fontweight-m">{{ item.price }}</span>
+                        <span class="fontsize16 fontweight-m">{{ subItem.price }}</span>
                         <em class="block margintop-10 color-8c9fad">PRICE</em>
                       </b>
                     </p>
                     <p class="text-center">
                       <b class="fontsize12">
-                        <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
+                        <span class="fontsize16 fontweight-m">{{ subItem.quantity }}</span>
                         <em class="block margintop-10 color-8c9fad">QUANTITY</em>
                       </b>
                     </p>
                     <p class="status fontsize16 flex text-left">
-                      <span :class="'color-6d4ffd fontweight-m status' + item.status" v-if="item.status == '0'">Transfer USDT</span>
-                      <span :class="'color-03ad8f fontweight-m status' + item.status" v-else-if="item.status == '1'">Under Review</span>
-                      <span :class="'color-03ad8f fontweight-m status' + item.status" v-else-if="item.status == '2'">Wait Payment</span>
-                      <span :class="'white-color fontweight-m text-center status' + item.status" v-else-if="item.status == '3'">Payment Confirm</span>
+                      <span :class="'color-6d4ffd fontweight-m status' + subItem.status">{{ getStatus(subItem.status) }}</span>
                     </p>
                   </li>
                 </ul>
-              </van-tab>
-              <van-tab title="TRC20">
-                <ul class="orderList">
-                  <li v-for="(item, index) in orderList" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.id)">
-                    <p class="text-center">
-                      <b class="fontsize12">
-                        ₹
-                        <span class="fontsize16 fontweight-m">{{ item.price }}</span>
-                        <em class="block margintop-10 color-8c9fad">PRICE</em>
-                      </b>
-                    </p>
-                    <p class="text-center">
-                      <b class="fontsize12">
-                        <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
-                        <em class="block margintop-10 color-8c9fad">QUANTITY</em>
-                      </b>
-                    </p>
-                    <p class="status fontsize16 flex text-left">
-                      <span :class="'color-6d4ffd fontweight-m status' + item.status" v-if="item.status == '0'">Transfer USDT</span>
-                      <span :class="'color-03ad8f fontweight-m status' + item.status" v-else-if="item.status == '1'">Under Review</span>
-                      <span :class="'color-03ad8f fontweight-m status' + item.status" v-else-if="item.status == '2'">Wait Payment</span>
-                      <span :class="'white-color fontweight-m text-center status' + item.status" v-else-if="item.status == '3'">Payment Confirm</span>
-                    </p>
-                  </li>
-                </ul>
+                <NoOrder v-else></NoOrder>
               </van-tab>
             </van-tabs>
           </div>
@@ -77,60 +44,31 @@
       </van-tab>
       <van-tab title="Completed">
         <div v-if="isLogin">
-          <div class="noCompleted" v-if="noCompleted">
-            <p class="text-center">
-              <img src="../../assets/img/noOrder@2x.png" alt="" />
-              <b class="fontsize18 block marginbottom-10 fontweight-m">Looks like there’s no trades here</b>
-              <span class="color-8f92a1">Sell USDT to see all your trades here</span>
-            </p>
-          </div>
+          <NoOrder v-if="noCompleted" style="margin-top: 10px;"></NoOrder>
           <div class="completed subTabs" v-else>
             <van-tabs v-model="completedActive" type="card">
-              <van-tab title="ERC20">
-                <ul class="orderList">
-                  <li v-for="(item, index) in orderList2" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.id)">
+              <van-tab v-for="(item, index) in addressType" :title="item">
+                <ul class="orderList" v-if="completedList[item] && completedList[item].length > 0">
+                  <li v-for="(subItem, subIndex) in completedList[item]" :key="subIndex" class="marginbottom-10 flex" @click="orderDetail(subItem.goodsId)">
                     <p class="text-center">
                       <b class="fontsize12">
                         ₹
-                        <span class="fontsize16 fontweight-m">{{ item.price }}</span>
+                        <span class="fontsize16 fontweight-m">{{ subItem.price }}</span>
                         <em class="block margintop-10 color-8c9fad">PRICE</em>
                       </b>
                     </p>
                     <p class="text-center">
                       <b class="fontsize12">
-                        <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
+                        <span class="fontsize16 fontweight-m">{{ subItem.quantity }}</span>
                         <em class="block margintop-10 color-8c9fad">QUANTITY</em>
                       </b>
                     </p>
                     <p class="status fontsize16 flex text-left">
-                      <span :class="'color-6d4ffd fontweight-m status' + item.status" v-if="item.status == '4'">Completed</span>
-                      <span :class="'color-8c9fad fontweight-m status' + item.status" v-else-if="item.status == '5'">Canceled</span>
+                      <span :class="'color-6d4ffd fontweight-m status' + subItem.status">{{ getStatus(subItem.status) }}</span>
                     </p>
                   </li>
                 </ul>
-              </van-tab>
-              <van-tab title="TRC20">
-                <ul class="orderList">
-                  <li v-for="(item, index) in orderList2" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.id)">
-                    <p class="text-center">
-                      <b class="fontsize12">
-                        ₹
-                        <span class="fontsize16 fontweight-m">{{ item.price }}</span>
-                        <em class="block margintop-10 color-8c9fad">PRICE</em>
-                      </b>
-                    </p>
-                    <p class="text-center">
-                      <b class="fontsize12">
-                        <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
-                        <em class="block margintop-10 color-8c9fad">QUANTITY</em>
-                      </b>
-                    </p>
-                    <p class="status fontsize16 flex text-left">
-                      <span :class="'color-6d4ffd fontweight-m status' + item.status" v-if="item.status == '4'">Completed</span>
-                      <span :class="'color-8c9fad fontweight-m status' + item.status" v-else-if="item.status == '5'">Canceled</span>
-                    </p>
-                  </li>
-                </ul>
+                <NoOrder v-else></NoOrder>
               </van-tab>
             </van-tabs>
           </div>
@@ -142,65 +80,94 @@
         </div>
       </van-tab>
     </van-tabs>
+    <Loading :loading="loading"></Loading>
   </div>
 </template>
 
 <script>
+import { getOrders, getdict } from '@/api/api';
+import NoOrder from '../NoOrder.vue';
+import Loading from '../Loading.vue';
 export default {
   name: 'Orders',
+  components: {
+    NoOrder,
+    Loading
+  },
   data() {
     return {
       active: 0,
       openActive: 0,
       completedActive: 0,
       isLogin: true,
-      noOpen: false,
+      noOpen: true,
       noCompleted: true,
-      orderList: [
-        {
-          id: 2124,
-          price: '84.22',
-          quantity: '4000',
-          status: '0'
-        },
-        {
-          id: 523,
-          price: '84.22',
-          quantity: '4000',
-          status: '1'
-        },
-        {
-          id: 545,
-          price: '84.22',
-          quantity: '4000',
-          status: '2'
-        },
-        {
-          id: 897,
-          price: '84.22',
-          quantity: '4000',
-          status: '3'
-        }
-      ],
-      orderList2: [
-        {
-          id: 2124,
-          price: '84.22',
-          quantity: '4000',
-          status: '4'
-        },
-        {
-          id: 523,
-          price: '84.22',
-          quantity: '4000',
-          status: '5'
-        }
-      ]
+      addressType: [],
+      searchType: 'open',
+      openList: {},
+      completedList: {},
+      loading: false
     };
   },
-  created() {},
+  created() {
+    this.loading = true;
+    getdict({
+      dictcode: 'addr_type'
+    }).then(res => {
+      for (let i = 0; i < res.result[0].itemList.length; i++) {
+        this.addressType.push(res.result[0].itemList[i].itemText);
+      }
+    });
+    this.getOrders();
+  },
   mounted() {},
   methods: {
+    getOrders() {
+      const self = this;
+      getOrders({
+        searchType: self.searchType
+      })
+        .then(res => {
+          if (res.success) {
+            this.loading = false;
+            if (self.searchType == 'open') {
+              res.result.forEach(function(ele) {
+                self.openList[ele.addressType] = ele.goodsList;
+              });
+              if (Object.keys(self.openList).length > 0) {
+                self.noOpen = false;
+              }
+            } else if (self.searchType == 'completed') {
+              res.result.forEach(function(ele) {
+                self.completedList[ele.addressType] = ele.goodsList;
+              });
+              if (Object.keys(self.completedList).length > 0) {
+                self.noCompleted = false;
+              }
+            }
+          } else {
+            this.loading = false;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    onClick(name, title) {
+      if (name === 0) {
+        this.searchType = 'open';
+        if (this.noOpen) {
+          this.loading = true;
+          this.getOrders();
+        }
+      } else if (name === 1) {
+        this.searchType = 'completed';
+        if (this.noCompleted) {
+          this.loading = true;
+          this.getOrders();
+        }
+      }
+    },
     toLogin() {
       this.$router.push({
         path: '/login',
@@ -218,6 +185,7 @@ export default {
 .orders {
   background-color: #f7f8fc;
   min-height: 100%;
+  padding-bottom: 70px;
   h3 {
     padding: 20px 20px 10px;
     background-color: #ffffff;
@@ -336,7 +304,7 @@ export default {
       background-size: 22px;
       padding-right: 28px;
     }
-    .status3 {
+    .statusPaymentConfirm {
       padding: 0;
       background: #ff5a75;
       border-radius: 4px;
@@ -344,6 +312,17 @@ export default {
       height: 30px;
       width: 130px;
       line-height: 30px;
+      color: #ffffff;
+      text-align: center;
+    }
+    .statusOnSale,
+    .statusUnderReview,
+    .statusWaitPayment {
+      color: #03ad8f;
+    }
+    .statusDisapproved,
+    .satusCanceled{
+      color: #8c9fad;
     }
   }
 }

@@ -97,7 +97,6 @@ export default {
       this.checkPhone();
       this.checkPassword();
       if (this.errMsg.email && this.errMsg.phone && this.errMsg.password) {
-      } else {
         if (this.checked) {
           register(this.form)
             .then(res => {
@@ -119,6 +118,7 @@ export default {
         } else {
           this.$toast('请阅读条款');
         }
+      } else {
       }
     }
   }

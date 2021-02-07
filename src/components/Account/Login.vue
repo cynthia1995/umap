@@ -89,6 +89,7 @@
 
 <script>
 import { login } from '@/api/api';
+import Cookies from 'js-cookie'
 export default {
   name: 'Login',
   data() {
@@ -147,11 +148,9 @@ export default {
       if (this.checked) {
         login(this.form)
           .then(res => {
-            // console.log(res);
             if (res.success) {
               console.log(res.result.token);
-              // localStorage.setItem('token')
-              this.setStore('token', res.result.token);
+              Cookies.set('token', res.result.token, { expires: 7 });
               this.$router.push({ path: '/home' });
             } else {
               this.$toast(res.messages);

@@ -30,7 +30,9 @@ import {
   CountDown,
   List,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+  Overlay,
+  Loading
 } from 'vant'
 
 Vue.use(Toast);
@@ -48,6 +50,8 @@ Vue.use(CountDown);
 Vue.use(List);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
+Vue.use(Overlay);
+Vue.use(Loading);
 
 Vue.config.productionTip = false
 

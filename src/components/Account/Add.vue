@@ -1,39 +1,34 @@
 <template>
   <div class="Add paddingtop-50 padding-20">
-    <NavTit :title="title" :noTit="false"></NavTit>
-    <div v-if="$route.query.name === 'IMPS'">
-      <van-form @submit="onSubmitIMPS" class="imps">
-        <van-field v-model="impsForm.name" name="name" label="Name" placeholder="Please Enter Your Name" :rules="[{ required: true, message: 'Please Enter Your Name' }]" />
+    <NavTit :title="title + type" :noTit="false"></NavTit>
+    <div>
+      <van-form @submit="onSubmit" class="imps">
+        <van-field v-model="form.name" name="name" label="Name" placeholder="Please Enter Your Name" :rules="[{ required: true, message: 'Name cannot be empty' }]" />
         <van-field
-          v-model="impsForm.bankAccount"
+          v-model="form.account"
           name="bankAccount"
           label="Bank account"
           placeholder="Please Enter Your Bank account"
-          :rules="[{ required: true, message: 'Please Enter Your Bank account' }]"
+          :rules="[{ required: true, message: 'Bank account cannot be empty' }]"
         />
         <van-field
-          v-model="impsForm.ifscCode"
+          v-if="type == 'IMPS'"
+          v-model="form.ifscCode"
           name="ifscCode"
           label="IFSC code"
           placeholder="Please Enter IFSC code"
-          :rules="[{ required: true, message: 'Please Enter IFSC code' }]"
+          :rules="[{ required: true, message: 'IFSC code cannot be empty' }]"
         />
-        <van-field v-model="impsForm.backName" name="backName" label="Bank name(optional)" :rules="[{ required: true, message: '' }]" />
-        <van-button type="primary" block native-type="submit">Save</van-button>
-      </van-form>
-    </div>
-    <div v-else-if="$route.query.name === 'UPI'">
-      <van-form @submit="onSubmitUPI" class="upiForm">
-        <van-field v-model="upiForm.name" name="name" label="Name" placeholder="Please Enter Your Name" :rules="[{ required: true, message: 'Please Enter Your Name' }]" />
         <van-field
-          v-model="upiForm.Account"
-          name="account"
-          label="Account"
-          placeholder="Please Enter Your account"
-          :rules="[{ required: true, message: 'Please Enter Your Bank account' }]"
+          v-if="type == 'IMPS'"
+          v-model="form.bankName"
+          name="bankName"
+          label="Bank name(optional)"
+          placeholder="Please Enter Your Bank name"
+          :rules="[{ required: true, message: 'Bank name cannot be empty' }]"
         />
-        <van-field v-model="upiForm.qrCode" name="qrCode" label="Add your receipt QR code (optional)" :rules="[{ required: true, message: 'Please Upload Your QRCode' }]" />
-        <van-uploader v-model="fileList" multiple :max-count="1" :after-read="afterRead" />
+        <van-field v-if="type == 'UPI'" class="qrCode" v-model="form.qrCode" name="qrCode" label="Add your receipt QR code (optional)" :rules="[{ required: false }]" />
+        <van-uploader v-if="type == 'UPI'" v-model="fileList" multiple :max-count="1" :after-read="afterRead" />
         <van-button type="primary" block native-type="submit">Save</van-button>
       </van-form>
     </div>
@@ -42,6 +37,7 @@
 
 <script>
 import NavTit from '../NavAndTit.vue';
+import { addPayment } from '@/api/api';
 export default {
   name: 'Add',
   components: {
@@ -49,52 +45,66 @@ export default {
   },
   data() {
     return {
-      title: 'Add ' + this.$route.query.name,
-      impsForm: {
-        name: '',
-        bankAccount: '',
-        ifscCode: '',
-        backName: '2023092093209'
-      },
-      upiForm: {
+      title: 'Add ',
+      type: '',
+      form: {
+        paymentType: this.$route.query.type,
         name: '',
         account: '',
+        ifscCode: '',
+        bankName: '',
         qrCode: ''
+      },
+      errMsg: {
+        name: '',
+        account: '',
+        ifscCode: '',
+        bankName: ''
       },
       fileList: []
     };
   },
-  created() {},
+  created() {
+    this.type = this.$route.query.type;
+  },
   mounted() {},
   methods: {
-    onSubmitIMPS() {
-      console.log(this.impsForm);
+    addPayment(parmas) {
+      addPayment(parmas)
+        .then(res => {
+          if (res.code == 200) {
+            this.$toast(res.message);
+            setTimeout(() => {
+              this.$router.push({
+                path: 'payment',
+                query: {}
+              });
+            }, 1000);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
-    onSubmitUPI() {
-      console.log(this.upiForm);
+    onSubmit() {
+      console.log(this.form);
+      this.addPayment(this.form);
     },
     afterRead(file) {
-      this.upiForm.qrCode = file.content;
-      console.log(this.upiForm);
+      this.form.qrCode = file.content;
+      console.log(this.form);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-/deep/ .van-form.upiForm {
-  .van-cell:nth-child(3)::after {
+.qrCode {
+  &::after {
     border: none;
   }
-}
-/deep/ .van-cell {
-  input {
-    &[name='qrCode'] {
-      height: 0;
-    }
-  }
-  &:nth-child(3) {
-    border-bottom: 0;
+  /deep/ input {
+    display: none;
   }
 }
 /deep/ .van-button--primary {

@@ -9,5 +9,43 @@ export default {
         return false;
       }
     }
+    Vue.prototype.getIcon = function(paymentType) {
+      if (paymentType === 'IMPS') {
+        return require('@/assets/img/UPI_icon@2x.png');
+      } else if (paymentType === 'UPI') {
+        return require('@/assets/img/UPI@2x.png');
+      }
+    }
+    Vue.prototype.getStatus = function(status) {
+      switch (status) {
+        case 'TransferUSDT':
+          return 'Transfer USDT';
+          break;
+        case 'UnderReview':
+          return 'Under Review';
+          break;
+        case 'Disapproved':
+          return 'Disapproved';
+          break;
+        case 'OnSale':
+          return 'Wait Payment';
+          break;
+        case 'WaitPayment':
+          return 'Wait Payment';
+          break;
+        case 'PaymentConfirm':
+          return 'Payment Confirm';
+          break;
+        case 'Complete':
+          return 'Complete';
+          break;
+        case 'Canceled':
+          return 'Canceled';
+          break;
+        default:
+          return '';
+          break;
+      }
+    }
   }
 }

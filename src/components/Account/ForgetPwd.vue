@@ -13,9 +13,9 @@
           name="mobile"
           label="Phone Number"
           placeholder="Please Enter your registered phone"
-          :rules="[{ required: true, message: 'Please Enter your registered phone' }]"
+          :rules="[{ required: true, message: 'registered phone cannot be empty' }]"
         />
-        <van-field v-model="form.code" name="code" label="Verfication" placeholder="Phone Verificaiton code" :rules="[{ required: true, message: 'Phone Verificaiton code' }]">
+        <van-field v-model="form.code" name="code" label="Verfication" placeholder="Phone Verificaiton code" :rules="[{ required: true, message: 'Phone Verificaiton code cannot be empty' }]">
           <template #button>
             <van-button @click="send()" :disabled="disabled" size="small" type="primary">{{ btnTxt }}</van-button>
           </template>
@@ -25,7 +25,7 @@
           name="password"
           label="Reset Pssword"
           placeholder="Enter the new Password"
-          :rules="[{ required: true, message: 'Enter the new Password' }]"
+          :rules="[{ required: true, message: 'New Password cannot be empty' }]"
         />
         <van-field
           v-model="form.confirmpwd"
