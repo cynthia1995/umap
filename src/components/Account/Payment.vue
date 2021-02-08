@@ -3,7 +3,7 @@
     <NavTit :title="title" :noTit="false"></NavTit>
     <div v-if="noAdded" class="added white-color">
       <ul class="methodList">
-        <li v-for="(item, index) in methodList" :key="index">
+        <li v-for="(item, index) in methodList" :key="index" @click="selectMethod(item)">
           <p class="p1 flex">
             <img class="icon" :src="getIcon(item.paymentType)" alt="" />
             <span class="fontweight-m fontsize12">{{ item.account }}</span>
@@ -66,12 +66,27 @@ export default {
         path: '/addmethod',
         query: {}
       });
+    },
+    selectMethod(item) {
+      if (this.$route.query.from == 'UploadVoucher') {
+        console.log(item);
+        console.log({
+          payType: item.paymentType,
+          account: item.bankAccount
+        });
+      }
+      // payType account name isfcCode qrCode
+      // this.$store.commit('coverAddress', this.addressList[this.active].address);
+      // this.$router.go(-1);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.Payment {
+  padding-bottom: 40px;
+}
 /deep/ .van-button--primary.addedBtn {
   background-color: #ffffff;
   border: 1px solid #e7ebee !important;

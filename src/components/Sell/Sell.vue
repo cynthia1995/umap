@@ -8,7 +8,7 @@
       </p>
       <p class="bg-00d0ff">
         <span class="fontsize20" style="position: relative;top: 3px;left: -1px;">₹</span>
-        <b class="fontweight-m fontsize30">81.33</b>
+        <b class="fontweight-m fontsize30">{{ this.mapuPrice }}</b>
       </p>
     </div>
     <section class="main">
@@ -16,24 +16,20 @@
       <div class="exchange">
         <div class="line line2 bg-ffffff">
           <p class="bg-f7f8fc">VOLUME USDT</p>
-          <p class="bg-ffffff"><van-field v-model="volumeUSDT" @input="input1" placeholder="₹00.00" /></p>
+          <p class="bg-ffffff"><van-field v-model="volumeUSDT" type="number" @input="input1" placeholder="00.00" /></p>
         </div>
         <div class="line line3 bg-ffffff">
           <p class="bg-f7f8fc">TOTAL INR</p>
-          <p class="bg-ffffff"><van-field v-model="totalINR" @input="input2" placeholder="₹00.00" /></p>
+          <p class="bg-ffffff"><van-field v-model="totalINR" readonly placeholder="₹00.00" /></p>
         </div>
         <span @click="exchange"></span>
       </div>
-      <p class="info color-4c528f fontsize12">Limit ₹8800.00 - ₹3,000,000.00</p>
-      <div class="icons flex">
-        <img src="../../assets/img/UPI@2x.png" alt="" />
-        <img src="../../assets/img/card_icon@2x.png" alt="" />
-        <img src="../../assets/img/UPI_icon@2x.png" alt="" />
-      </div>
+      <!-- <p class="info color-4c528f fontsize12">Limit ₹8800.00 - ₹3,000,000.00</p> -->
+      <div class="icons flex"><img v-for="(item, index) in payList" :key="index" :src="getIcon(item)" alt="" /></div>
       <van-button type="primary" block @click="confirmSubmit">Sell USDT</van-button>
       <p class="msg text-center">
-        <span>₹0.00</span>
-        ₹3.45 fee included
+        <span>₹{{ fee.toFixed(2) }}</span>
+        fee included
       </p>
     </section>
     <van-popup class="confirmPopup" v-model="confirmOrder" round position="bottom">
@@ -51,13 +47,14 @@
             AT PRICE
             <em class="inlineblock">(Per USDT)</em>
           </b>
-          <span class="fontweight-m">₹{{ perUSDT }}</span>
+          <span class="fontweight-m">₹{{ mapuPrice }}</span>
         </p>
         <p class="flex">
-          <b>0.25% Fee</b>
+          <!-- <b>0.25% Fee</b> -->
+          <b>Fee</b>
           <span class="fontweight-m">
-            <em class="inlineblock">₹2000.00</em>
-            ₹0.00
+            <!-- <em class="inlineblock">₹2000.00</em> -->
+            ₹{{ fee.toFixed(2) }}
           </span>
         </p>
         <div class="fontweight-m flex">
@@ -65,11 +62,12 @@
           <span>
             ₹
             <i class="fontsize20 fontweight-m">
-              {{
+              {{ (volumeUSDT * mapuPrice).toFixed(2) }}
+              <!-- {{
                 noFee
                   ? (perUSDT * parseFloat(volumeUSDT.replace('₹', '')) - perUSDT * parseFloat(volumeUSDT.replace('₹', '')) * fee).toFixed(2)
                   : (perUSDT * parseFloat(volumeUSDT.replace('₹', ''))).toFixed(2)
-              }}
+              }} -->
             </i>
           </span>
         </div>
@@ -80,8 +78,10 @@
 </template>
 
 <script>
+import { getHome, getPaymentList, confirmOrder } from '@/api/api';
 export default {
   name: 'Sell',
+  components: {},
   data() {
     return {
       notice: 'When you want to sell USDT and cash out to INR.It’s safe and hassle free!',
@@ -89,56 +89,93 @@ export default {
       volumeUSDT: '',
       totalINR: '',
       confirmOrder: false,
-      perUSDT: 80.0,
-      fee: 0.0025,
-      noFee: false
+      fee: 0.0,
+      noFee: false,
+      mapuPrice: 0,
+      payList: []
     };
   },
+  created() {
+    this.loading = true;
+    getHome()
+      .then(res => {
+        if (res.code == 200) {
+          this.homeInfo = res.result;
+          this.mapuPrice = this.homeInfo.todayPrice.mapuPrice;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    this.getPaymentList();
+  },
+  mounted() {},
   methods: {
-    input1(value) {
-      const reg = new RegExp('₹', 'g');
-      console.log(this.volumeUSDT);
-      if (this.volumeUSDT.length > 0) {
-        this.volumeUSDT = '₹' + value.replace(reg, '');
-      }
-      if (this.volumeUSDT == '₹') {
-        this.volumeUSDT = '';
-      }
+    getPaymentList() {
+      getPaymentList()
+        .then(res => {
+          if (res.code == 200) {
+            let payment = [];
+            for (let i = 0; i < res.result.length; i++) {
+              payment.push(res.result[i].paymentType);
+            }
+            this.payList = this.unique(payment);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
-    input2(value) {
-      const reg = new RegExp('₹', 'g');
-      console.log(this.totalINR);
-      if (this.totalINR.length > 0) {
-        this.totalINR = '₹' + value.replace(reg, '');
+    input1(value) {
+      if (this.volumeUSDT.indexOf('.') > 0 && this.volumeUSDT.split('.')[1].length > 2) {
+        this.volumeUSDT = this.volumeUSDT.substring(0, this.volumeUSDT.length - 1);
       }
-      if (this.totalINR == '₹') {
+      if (this.volumeUSDT == '') {
         this.totalINR = '';
+      } else {
+        this.totalINR = (parseFloat(this.volumeUSDT) * this.mapuPrice).toFixed(2);
       }
     },
     exchange() {
       const flag = this.volumeUSDT;
       this.volumeUSDT = this.totalINR;
-      this.totalINR = flag;
+      this.totalINR = (this.volumeUSDT * this.mapuPrice).toFixed(2);
     },
     confirmSubmit() {
-      if (this.volumeUSDT && this.volumeUSDT) {
-        if (this.isNumber(this.volumeUSDT.replace('₹', '')) && this.isNumber(this.totalINR.replace('₹', ''))) {
+      if (!this.volumeUSDT) {
+        this.$toast('VOLUME USDT Cannot be empty');
+      } else {
+        if (this.payList.length > 0) {
           this.confirmOrder = true;
         } else {
-          this.$toast('必须输入数字');
+          this.$toast('To add payment method');
         }
-      } else {
-        this.$toast('输入不能为空');
       }
     },
     sellSubmit() {
       this.confirmOrder = false;
-      this.$router.push({
-        path: '/uploadvoucher',
-        query: {
-          // name: name
-        }
-      });
+      confirmOrder({
+        volume: this.volumeUSDT,
+        price: this.mapuPrice,
+        fee: this.fee,
+        total: (this.volumeUSDT * this.mapuPrice).toFixed(2)
+      })
+        .then(res => {
+          if (res.code == 200) {
+            console.log(res);
+            this.$router.push({
+              path: '/uploadvoucher',
+              query: {
+                id: res.result.id
+              }
+            });
+            this.volumeUSDT = '';
+            this.totalINR = '';
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

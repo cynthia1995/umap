@@ -1,13 +1,12 @@
+import Vue from 'vue'
 import axios from 'axios'
 import {
   Notify
 } from 'vant';
-import {
-  getStore,
-  setStore
-} from './storage.js'
 import router from '../router/index.js'
 import Cookies from 'js-cookie'
+import store from '../store/index.js'
+
 // 统一请求路径前缀
 // const base = '/ccma-server/api'   // 服务器地址/
 const base = 'http://47.243.16.119:8080' // 本地///
@@ -15,26 +14,27 @@ const base = 'http://47.243.16.119:8080' // 本地///
 axios.defaults.timeout = 15000
 
 axios.interceptors.request.use(config => {
+  store.commit('showLoading')
   return config
 }, err => {
-  Notify('请求超时')
+  Notify('request timeout')
   return Promise.reject(err)
 })
 
 // http response 拦截器
 axios.interceptors.response.use(response => {
+  store.commit('hideLoading')
   const data = response.data
 
   switch (data.code) {
     case 401:
       // 未登录 清除已登录状态
       Cookies.set('token', '')
-      setStore('token', '')
       if (router.history.current.name !== 'login') {
         if (data.message !== null) {
           Notify(data.message)
         } else {
-          Notify('未知错误，请重新登录')
+          Notify('Unknown error, please login again')
         }
         router.push('/login')
       }
@@ -44,7 +44,7 @@ axios.interceptors.response.use(response => {
       if (data.message !== null) {
         Notify(data.message)
       } else {
-        Notify('未知错误')
+        Notify('Unknown error')
       }
       break
     case 500:
@@ -52,15 +52,15 @@ axios.interceptors.response.use(response => {
       if (data.message !== null) {
         Notify(data.message)
       } else {
-        Notify('未知错误')
+        Notify('Unknown error')
       }
       break
     default:
       return data
   }
-
   return data
 }, (err) => {
+  store.commit('hideLoading')
   // 返回状态码不为200时候的错误处理
   Notify(err.toString())
   return Promise.resolve(err)

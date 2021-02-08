@@ -9,61 +9,79 @@
     <p class="desc padding-20">{{ desc }}</p>
     <b class="text1 text-center fontweight-m">{{ transferAmount }}</b>
     <span class="ammount text-center">
-      <em class="fontweight-m">7948</em>
+      <em class="fontweight-m">{{ $route.query.amount }}</em>
       USDT
     </span>
     <section class="main">
       <h4 class="text-center fontweight-m">Address Type</h4>
       <van-tabs v-model="active">
-        <van-tab title="ERC20"><img src="../../assets/img/erc20.png" alt="" /></van-tab>
-        <van-tab title="TRC20"><img src="../../assets/img/trc20.png" alt="" /></van-tab>
+        <van-tab v-for="(item, index) in addressList" :key="index" :title="item.addrType">
+          <div class="qrCode"><img :src="item.qrcUrl" alt="" /></div>
+          <div class="copyAddress">
+            <h5 class="fontweight-m">ADDRESS</h5>
+            <div class="fontweight-m">
+              {{ item.address }}
+              <span title="" v-clipboard:copy="item.address" v-clipboard:success="onCopy" v-clipboard:error="onError" style="cursor: copy;">
+                <img src="../../assets/img/Copy@2x.png" alt="" />
+              </span>
+            </div>
+          </div>
+        </van-tab>
       </van-tabs>
-      <div class="copyAddress">
-        <h5 class="fontweight-m">ADDRESS</h5>
-        <div class="fontweight-m">
-          {{ address }}
-          <span title="" v-clipboard:copy="address" v-clipboard:success="onCopy" v-clipboard:error="onError" style="cursor: copy;">
-            <img src="../../assets/img/Copy@2x.png" alt="" />
-          </span>
-        </div>
-      </div>
       <div class="infos">
         Instructions: Open the app, log in the personal account, enter the home page and click "borrow now" to enter the borrowing page; After filling in the relevant identity
         information and real name authentication, you can see the initial credit line of the system; After confirming the loan information, you can submit it. The system enters the
         approval process. After approval, the loan will be released. Open the app, log in the personal account, enter the home page and click "borrow now" to enter the borrowing
         page;
       </div>
-      <div class="fixedSell"><van-button type="primary" block>Sell USDT</van-button></div>
+      <div class="fixedSell"><van-button type="primary" block @click="selectAddress">Sell USDT</van-button></div>
     </section>
   </div>
 </template>
 
 <script>
+import { getCoinsAddrList } from '@/api/api';
 export default {
   name: 'SellAdress',
+  components: {},
   data() {
     return {
       title: 'Transfer USDT',
       desc: 'You’ll have to transfer your USDT from XXX th the address below',
       transferAmount: 'Amount to transfer',
-      address: '0sfioajweoffalsfejfwoiefjalknfnoeieffoijfqpwoijpejw',
-      active: 0
+      active: 0,
+      addressList: []
     };
   },
+  created() {
+    getCoinsAddrList()
+      .then(res => {
+        if (res.success) {
+          this.addressList = res.result;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  mounted() {},
   methods: {
     onClickLeft() {
       this.$router.go(-1);
     },
     onCopy() {
-      this.$toast('已成功复制到剪切板');
+      this.$toast('Copied to clipboard');
     },
     onError() {
-      this.$toast('复制失败，请重试！');
+      this.$toast('Copy failed, please try again');
+    },
+    selectAddress() {
+      this.$store.commit('coverAddress', this.addressList[this.active].address);
+      this.$router.go(-1);
     }
   }
 };
 </script>
-
 <style lang="scss" scoped>
 /deep/ .van-tabs__nav {
   width: 140px;
@@ -86,10 +104,10 @@ export default {
 /deep/ .van-tabs__line {
   display: none;
 }
-/deep/ .van-tab__pane {
+.qrCode {
   background: url(../../assets/img/Focous@2x.png) no-repeat center;
   background-size: 160px 160px;
-  padding: 20px;
+  padding: 13px;
 }
 /deep/ .van-tab__pane img {
   width: 136px;
@@ -158,7 +176,7 @@ export default {
 .fixedSell {
   position: fixed;
   padding: 10px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   bottom: 0;
   left: 0;
   width: 100%;

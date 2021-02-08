@@ -9,6 +9,19 @@ export default {
         return false;
       }
     }
+    Vue.prototype.unique = function(arr) {
+      if (!Array.isArray(arr)) {
+        console.log('type error!')
+        return
+      }
+      var array = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (array.indexOf(arr[i]) === -1) {
+          array.push(arr[i])
+        }
+      }
+      return array;
+    }
     Vue.prototype.getIcon = function(paymentType) {
       if (paymentType === 'IMPS') {
         return require('@/assets/img/UPI_icon@2x.png');
@@ -46,6 +59,10 @@ export default {
           return '';
           break;
       }
+    }
+    Vue.prototype.showLoading = function() {
+      // console.log(this.$store.commit);
+      this.$store.commit('showLoading');
     }
   }
 }

@@ -2,16 +2,26 @@
   <div id="app">
     <router-view />
     <TabBar></TabBar>
+    <Loading></Loading>
   </div>
 </template>
 
 <script>
 import TabBar from './components/TabBar.vue';
+import Loading from './components/Loading.vue';
 export default {
   name: 'App',
   components: {
-    TabBar
-  }
+    TabBar,
+    Loading
+  },
+  data() {
+    return {
+    };
+  },
+  created() {
+  },
+  methods: {}
 };
 </script>
 

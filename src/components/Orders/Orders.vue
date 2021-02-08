@@ -10,7 +10,7 @@
           <NoOrder v-if="noOpen" style="margin-top: 10px;"></NoOrder>
           <div class="open subTabs" v-else>
             <van-tabs v-model="openActive" type="card">
-              <van-tab v-for="(item, index) in addressType" :title="item">
+              <van-tab v-for="(item, index) in addressType" :title="item" :key="index">
                 <ul class="orderList" v-if="openList[item] && openList[item].length > 0">
                   <li v-for="(subItem, subIndex) in openList[item]" :key="subIndex" class="marginbottom-10 flex" @click="orderDetail(subItem.goodsId)">
                     <p class="text-center">
@@ -47,7 +47,7 @@
           <NoOrder v-if="noCompleted" style="margin-top: 10px;"></NoOrder>
           <div class="completed subTabs" v-else>
             <van-tabs v-model="completedActive" type="card">
-              <van-tab v-for="(item, index) in addressType" :title="item">
+              <van-tab v-for="(item, index) in addressType" :title="item" :key="index">
                 <ul class="orderList" v-if="completedList[item] && completedList[item].length > 0">
                   <li v-for="(subItem, subIndex) in completedList[item]" :key="subIndex" class="marginbottom-10 flex" @click="orderDetail(subItem.goodsId)">
                     <p class="text-center">
@@ -80,19 +80,16 @@
         </div>
       </van-tab>
     </van-tabs>
-    <Loading :loading="loading"></Loading>
   </div>
 </template>
 
 <script>
 import { getOrders, getdict } from '@/api/api';
 import NoOrder from '../NoOrder.vue';
-import Loading from '../Loading.vue';
 export default {
   name: 'Orders',
   components: {
-    NoOrder,
-    Loading
+    NoOrder
   },
   data() {
     return {
@@ -105,12 +102,10 @@ export default {
       addressType: [],
       searchType: 'open',
       openList: {},
-      completedList: {},
-      loading: false
+      completedList: {}
     };
   },
   created() {
-    this.loading = true;
     getdict({
       dictcode: 'addr_type'
     }).then(res => {
@@ -128,8 +123,7 @@ export default {
         searchType: self.searchType
       })
         .then(res => {
-          if (res.success) {
-            this.loading = false;
+          if (res.code == 200) {
             if (self.searchType == 'open') {
               res.result.forEach(function(ele) {
                 self.openList[ele.addressType] = ele.goodsList;
@@ -145,8 +139,6 @@ export default {
                 self.noCompleted = false;
               }
             }
-          } else {
-            this.loading = false;
           }
         })
         .catch(err => {
@@ -157,13 +149,11 @@ export default {
       if (name === 0) {
         this.searchType = 'open';
         if (this.noOpen) {
-          this.loading = true;
           this.getOrders();
         }
       } else if (name === 1) {
         this.searchType = 'completed';
         if (this.noCompleted) {
-          this.loading = true;
           this.getOrders();
         }
       }

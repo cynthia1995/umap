@@ -9,7 +9,7 @@
       </template>
     </van-nav-bar>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item><img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item>
+      <!-- <van-swipe-item v-for="(item, index) in homeInfo.advList" :key="index"><img :src="item" alt="" /></van-swipe-item> -->
       <van-swipe-item><img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item>
     </van-swipe>
     <section class="main">
@@ -105,6 +105,11 @@ export default {
 .van-nav-bar__title img {
   height: 20px;
   width: 88px;
+  object-fit: cover;
+}
+.my-swipe {
+  width: 100%;
+  height: 310px;
 }
 .my-swipe .van-swipe-item {
   height: 310px;
