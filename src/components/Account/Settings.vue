@@ -15,12 +15,13 @@
         <span class="color-8c9fad">v1.2.1</span>
       </li>
     </ul>
-    <div class="fixedLogout"><van-button type="primary" block>Logout</van-button></div>
+    <div class="fixedLogout"><van-button type="primary" @click="logOut" block>Logout</van-button></div>
   </div>
 </template>
 
 <script>
 import NavTit from '../NavAndTit.vue';
+import Cookies from 'js-cookie';
 export default {
   name: 'Settings',
   components: {
@@ -34,7 +35,14 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    logOut() {
+      Cookies.remove('token');
+      this.$router.push({
+        path: '/home'
+      });
+    }
+  }
 };
 </script>
 

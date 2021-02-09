@@ -30,39 +30,36 @@ export default {
       }
     }
     Vue.prototype.getStatus = function(status) {
-      switch (status) {
-        case 'TransferUSDT':
+      const status1 = status.toLowerCase();
+      switch (status1) {
+        case 'transferusdt':
           return 'Transfer USDT';
           break;
-        case 'UnderReview':
+        case 'underreview':
           return 'Under Review';
           break;
-        case 'Disapproved':
+        case 'disapproved':
           return 'Disapproved';
           break;
-        case 'OnSale':
+        case 'onsale':
           return 'Wait Payment';
           break;
-        case 'WaitPayment':
+        case 'waitpayment':
           return 'Wait Payment';
           break;
-        case 'PaymentConfirm':
+        case 'paymentconfirm':
           return 'Payment Confirm';
           break;
-        case 'Complete':
+        case 'complete':
           return 'Complete';
           break;
-        case 'Canceled':
+        case 'canceled':
           return 'Canceled';
           break;
         default:
           return '';
           break;
       }
-    }
-    Vue.prototype.showLoading = function() {
-      // console.log(this.$store.commit);
-      this.$store.commit('showLoading');
     }
   }
 }

@@ -6,12 +6,14 @@
         <li v-for="(item, index) in methodList" :key="index" @click="selectMethod(item)">
           <p class="p1 flex">
             <img class="icon" :src="getIcon(item.paymentType)" alt="" />
-            <span class="fontweight-m fontsize12">{{ item.account }}</span>
+            <span v-if="item.paymentType == 'IMPS'" class="fontweight-m fontsize12">{{ item.bankAccount }}</span>
+            <span v-else-if="item.paymentType == 'UPI'" class="fontweight-m fontsize12">{{ item.upiAccount }}</span>
           </p>
-          <p class="p2 fontsize12 flex">{{ item.name }}</p>
+          <p v-if="item.paymentType == 'IMPS'" class="p2 fontsize12 flex">{{ item.impsName }}</p>
+          <p v-else-if="item.paymentType == 'UPI'" class="p2 fontsize12 flex">{{ item.upiName }}</p>
           <p class="p3 fontweight-m flex">
-            <span v-if="item.paymentType == 'IMPS'" class="fontweight-m fontsize20">{{ item.isfcCode }}</span>
-            <img v-if="item.paymentType == 'UPI'" class="qrCode" :src="item.qrCode" alt="" />
+            <span v-if="item.paymentType == 'IMPS'" class="fontweight-m fontsize20">{{ item.ifscCode }}</span>
+            <img v-if="item.paymentType == 'UPI'" class="qrCode" :src="item.upiQrc" alt="" />
           </p>
         </li>
       </ul>
@@ -22,37 +24,33 @@
       <p>{{ addedTxt }}</p>
       <van-button type="primary" block @click="toAddMethod">Add</van-button>
     </div>
-    <Loading :loading="loading"></Loading>
   </div>
 </template>
 
 <script>
 import NavTit from '../NavAndTit.vue';
 import { getPaymentList, getUserInfo } from '@/api/api';
-import Loading from '../Loading.vue';
 export default {
   name: 'Payment',
   components: {
-    NavTit,
-    Loading
+    NavTit
   },
   data() {
     return {
       title: 'Payment',
       noAdded: true,
       addedTxt: 'Please make sure that you’re using your own accont.',
-      methodList: []
+      methodList: [],
+      id: ''
     };
   },
   created() {
+    this.id = this.$route.query.id;
     this.loading = true;
     getPaymentList()
       .then(res => {
         if (res.code == 200) {
-          this.loading = false;
           this.methodList = res.result;
-        } else {
-          this.loading = false;
         }
       })
       .catch(err => {
@@ -69,15 +67,26 @@ export default {
     },
     selectMethod(item) {
       if (this.$route.query.from == 'UploadVoucher') {
-        console.log(item);
-        console.log({
-          payType: item.paymentType,
-          account: item.bankAccount
-        });
+        let payment = {};
+        if (item.paymentType == 'IMPS') {
+          payment.payType = item.paymentType;
+          payment.account = item.bankAccount;
+          payment.name = item.impsName;
+          payment.isfcCode = item.ifscCode;
+          payment.id = item.id;
+        } else if (item.paymentType == 'UPI') {
+          payment.payType = item.paymentType;
+          payment.account = item.upiAccount;
+          payment.name = item.upiName;
+          payment.isfcCode = item.upiQrc;
+          payment.id = item.id;
+        }
+        this.setStore('payment_' + this.id, payment);
+        // this.$store.commit('coverPayment', {});
+        // this.$store.commit('coverPayment', payment);
+        // console.log(this.$store.state.payment);
+        this.$router.go(-1);
       }
-      // payType account name isfcCode qrCode
-      // this.$store.commit('coverAddress', this.addressList[this.active].address);
-      // this.$router.go(-1);
     }
   }
 };

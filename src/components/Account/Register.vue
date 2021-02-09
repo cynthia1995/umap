@@ -57,7 +57,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    this.$store.state.loading = false;
+  },
   mounted() {},
   methods: {
     onClickLeft() {
@@ -93,10 +95,11 @@ export default {
       }
     },
     onSubmit() {
+      console.log('dss');
       this.checkEmail();
       this.checkPhone();
       this.checkPassword();
-      if (this.errMsg.email && this.errMsg.phone && this.errMsg.password) {
+      if (!this.errMsg.email && !this.errMsg.phone && !this.errMsg.password) {
         if (this.checked) {
           register(this.form)
             .then(res => {

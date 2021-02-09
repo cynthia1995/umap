@@ -20,7 +20,7 @@ export const verifyPhone = (params) => { //忘记密码,发送验证码
 }
 // phone, smsCode, newpwd
 export const resetPwd = (params) => { //修改密码
-  return postRequest('/exchange/m/sell/forget/newpwd/{phone}'.replace('{phone}', params.phone))
+  return postRequest('/exchange/m/sell/forget/newpwd/{phone}'.replace('{phone}', params.phone), params)
 }
 // dictcode
 export const getdict = (params) => { //获取系统数据字典
@@ -82,5 +82,5 @@ export const confirmOrder = (params) => { //发布并确认商品
 }
 // orderId
 export const confirmPay = (params) => { //卖家确认订单（商品）收款
-  return postRequest('/exchange/m/sell/confirmPay/{orderId}'.replace('{orderId}', params.orderId))
+  return getRequest('/exchange/m/sell/confirmPay/{orderId}'.replace('{orderId}', params.orderId))
 }

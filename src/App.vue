@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view></router-view>
     <TabBar></TabBar>
     <Loading></Loading>
   </div>
@@ -16,11 +16,9 @@ export default {
     Loading
   },
   data() {
-    return {
-    };
+    return {};
   },
-  created() {
-  },
+  created() {},
   methods: {}
 };
 </script>

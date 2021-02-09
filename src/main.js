@@ -11,10 +11,10 @@ import Vuex from 'vuex'
 import store from './store'
 import tool from '@/utils/tool'
 import VueClipboard from 'vue-clipboard2'
-// import { setStore, getStore, removeStore } from '@/utils/storage'
-// Vue.prototype.setStore = setStore
-// Vue.prototype.getStore = getStore
-// Vue.prototype.removeStore = removeStore
+import { setStore, getStore, removeStore } from '@/utils/storage'
+Vue.prototype.setStore = setStore
+Vue.prototype.getStore = getStore
+Vue.prototype.removeStore = removeStore
 
 Vue.use(Vuex);
 Vue.use(tool)

@@ -111,7 +111,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    this.$store.state.loading = false;
+  },
   mounted() {},
   methods: {
     checkEmail(event) {

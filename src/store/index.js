@@ -24,7 +24,7 @@ const store = new Vuex.Store({
     coverAddress(state, address){
       state.address = address
     },
-    payment(state, payment){
+    coverPayment(state, payment){
       state.payment = payment
     }
   }

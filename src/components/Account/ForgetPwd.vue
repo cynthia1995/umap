@@ -9,13 +9,19 @@
     <section class="main">
       <van-form @submit="onSubmit">
         <van-field
-          v-model="form.mobile"
-          name="mobile"
+          v-model="form.phone"
+          name="phone"
           label="Phone Number"
           placeholder="Please Enter your registered phone"
           :rules="[{ required: true, message: 'registered phone cannot be empty' }]"
         />
-        <van-field v-model="form.code" name="code" label="Verfication" placeholder="Phone Verificaiton code" :rules="[{ required: true, message: 'Phone Verificaiton code cannot be empty' }]">
+        <van-field
+          v-model="form.smsCode"
+          name="smsCode"
+          label="Verfication"
+          placeholder="Phone Verificaiton code"
+          :rules="[{ required: true, message: 'Phone Verificaiton code cannot be empty' }]"
+        >
           <template #button>
             <van-button @click="send()" :disabled="disabled" size="small" type="primary">{{ btnTxt }}</van-button>
           </template>
@@ -28,8 +34,8 @@
           :rules="[{ required: true, message: 'New Password cannot be empty' }]"
         />
         <van-field
-          v-model="form.confirmpwd"
-          name="confirmpwd"
+          v-model="form.newpwd"
+          name="newpwd"
           label="Re-Enter the new Password"
           placeholder="Re-Enter the new Password"
           :rules="[{ required: true, message: 'Re-Enter the new Password' }]"
@@ -41,6 +47,7 @@
 </template>
 
 <script>
+import { resetPwd, verifyPhone } from '@/api/api';
 export default {
   name: 'Login',
   data() {
@@ -49,12 +56,12 @@ export default {
       checked: false,
       disabled: false,
       btnTxt: 'send',
-      countDown: 5,
+      countDown: 60,
       form: {
-        mobile: '',
-        code: '',
+        phone: '',
+        smsCode: '',
         password: '',
-        confirmpwd: ''
+        newpwd: ''
       }
     };
   },
@@ -65,29 +72,48 @@ export default {
       this.$router.go(-1);
     },
     send() {
-      const countDown = this.countDown;
-      this.disabled = true;
-      this.btnTxt = 'Resend in ' + this.countDown + 's';
-      let timer = setInterval(() => {
-        this.countDown--;
-        if (this.countDown >= 0) {
-          this.btnTxt = 'Resend in ' + this.countDown + 's';
-          this.disabled = true;
-        } else {
-          this.countDown = countDown;
-          this.disabled = false;
-          this.btnTxt = 'Resend';
-          clearInterval(timer);
-        }
-      }, 1000);
+      if (this.form.phone) {
+        verifyPhone({
+          phone: this.form.phone
+        }).then(res => {
+          if (res.code == 200) {
+            this.$toast('Verification code sent successfully');
+            const countDown = this.countDown;
+            this.disabled = true;
+            this.btnTxt = 'Resend in ' + this.countDown + 's';
+            let timer = setInterval(() => {
+              this.countDown--;
+              if (this.countDown >= 0) {
+                this.btnTxt = 'Resend in ' + this.countDown + 's';
+                this.disabled = true;
+              } else {
+                this.countDown = countDown;
+                this.disabled = false;
+                this.btnTxt = 'Resend';
+                clearInterval(timer);
+              }
+            }, 1000);
+          }
+        });
+      } else {
+        this.$toast('Please input mobile phone number first');
+      }
     },
     onSubmit() {
       console.log(this.form);
-      // if (this.checked) {
-      //   console.log(this.form);
-      // } else {
-      //   this.$toast('请阅读条款');
-      // }
+      if (this.form.password === this.form.newpwd) {
+        resetPwd(this.form)
+          .then(res => {
+            if (res.code == 200) {
+              this.$toast('Password modified successfully');
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        this.$toast('The two passwords are inconsistent');
+      }
     }
   }
 };

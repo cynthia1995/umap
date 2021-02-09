@@ -50,10 +50,12 @@ export default {
       desc: 'You’ll have to transfer your USDT from XXX th the address below',
       transferAmount: 'Amount to transfer',
       active: 0,
-      addressList: []
+      addressList: [],
+      id: ''
     };
   },
   created() {
+    this.id = this.$route.query.id;
     getCoinsAddrList()
       .then(res => {
         if (res.success) {
@@ -76,7 +78,13 @@ export default {
       this.$toast('Copy failed, please try again');
     },
     selectAddress() {
-      this.$store.commit('coverAddress', this.addressList[this.active].address);
+      this.setStore('address_' + this.id, {
+        address: this.addressList[this.active].address,
+        addrType: this.addressList[this.active].addrType
+      });
+      // this.$store.commit('coverAddress', '');
+      // this.$store.commit('coverAddress', this.addressList[this.active].address);
+      // console.log(this.$store.state.address);
       this.$router.go(-1);
     }
   }

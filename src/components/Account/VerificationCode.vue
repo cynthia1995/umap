@@ -9,9 +9,9 @@
     <section class="main">
       <van-form @submit="onSubmit">
         <van-field v-model="form.code" name="code" label="E-mail/Mobile OTP" placeholder="Please Enter E-mail/Mobile OTP" :error-message="errMsg.code" @blur="checkCode($event)">
-          <template #button>
+          <!-- <template #button>
             <van-button @click="send()" :disabled="disabled" size="small" type="primary">{{ btnTxt }}</van-button>
-          </template>
+          </template> -->
         </van-field>
         <van-button type="primary" block native-type="submit">Confirm</van-button>
       </van-form>
@@ -81,6 +81,11 @@ export default {
         .then(res => {
           if (res.success) {
             this.$toast(res.message);
+            setTimeout(() => {
+              this.$router.push({
+                path: '/login'
+              });
+            }, 2000);
           } else {
             this.$toast(res.message);
           }
