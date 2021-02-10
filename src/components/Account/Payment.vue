@@ -13,16 +13,17 @@
           <p v-else-if="item.paymentType == 'UPI'" class="p2 fontsize12 flex">{{ item.upiName }}</p>
           <p class="p3 fontweight-m flex">
             <span v-if="item.paymentType == 'IMPS'" class="fontweight-m fontsize20">{{ item.ifscCode }}</span>
+            <span v-if="item.paymentType == 'UPI'" class="fontweight-m fontsize20">Receipt QR code</span>
             <img v-if="item.paymentType == 'UPI'" class="qrCode" :src="item.upiQrc" alt="" />
           </p>
         </li>
       </ul>
-      <div><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
+      <div v-if="this.from !== 'UploadVoucher'"><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
     </div>
     <div v-else class="noadded text-center color-8c9fad">
       <img src="../../assets/img/noPay@2x.png" alt="" />
       <p>{{ addedTxt }}</p>
-      <van-button type="primary" block @click="toAddMethod">Add</van-button>
+      <van-button v-if="this.from !== 'UploadVoucher'" type="primary" block @click="toAddMethod">Add</van-button>
     </div>
   </div>
 </template>
@@ -41,11 +42,13 @@ export default {
       noAdded: true,
       addedTxt: 'Please make sure that you’re using your own accont.',
       methodList: [],
-      id: ''
+      id: '',
+      from: ''
     };
   },
   created() {
     this.id = this.$route.query.id;
+    this.from = this.$route.query.from;
     this.loading = true;
     getPaymentList()
       .then(res => {
@@ -66,7 +69,7 @@ export default {
       });
     },
     selectMethod(item) {
-      if (this.$route.query.from == 'UploadVoucher') {
+      if (this.from == 'UploadVoucher') {
         let payment = {};
         if (item.paymentType == 'IMPS') {
           payment.payType = item.paymentType;
@@ -78,7 +81,7 @@ export default {
           payment.payType = item.paymentType;
           payment.account = item.upiAccount;
           payment.name = item.upiName;
-          payment.isfcCode = item.upiQrc;
+          payment.qrCode = item.upiQrc;
           payment.id = item.id;
         }
         this.setStore('payment_' + this.id, payment);

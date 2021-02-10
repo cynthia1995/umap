@@ -130,6 +130,9 @@ export default {
       if (this.volumeUSDT.indexOf('.') > 0 && this.volumeUSDT.split('.')[1].length > 2) {
         this.volumeUSDT = this.volumeUSDT.substring(0, this.volumeUSDT.length - 1);
       }
+      if (this.volumeUSDT == '0') {
+        this.volumeUSDT = '';
+      }
       if (this.volumeUSDT == '') {
         this.totalINR = '';
       } else {

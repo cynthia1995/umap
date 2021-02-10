@@ -65,7 +65,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    this.$store.state.loading = false;
+  },
   mounted() {},
   methods: {
     onClickLeft() {
@@ -106,6 +108,9 @@ export default {
           .then(res => {
             if (res.code == 200) {
               this.$toast('Password modified successfully');
+              this.$router.push({
+                path: '/login'
+              })
             }
           })
           .catch(err => {

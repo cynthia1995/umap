@@ -287,7 +287,7 @@ export default {
   }
   .status {
     align-items: center;
-    flex: 2.5;
+    flex: 1.8;
     justify-content: flex-end;
     span {
       background: url(../../assets/img/arrow@2x.png) no-repeat right center;

@@ -20,7 +20,7 @@ export const verifyPhone = (params) => { //忘记密码,发送验证码
 }
 // phone, smsCode, newpwd
 export const resetPwd = (params) => { //修改密码
-  return postRequest('/exchange/m/sell/forget/newpwd/{phone}'.replace('{phone}', params.phone), params)
+  return postRequest('/exchange/m/sell/forget/newpwd', params)
 }
 // dictcode
 export const getdict = (params) => { //获取系统数据字典
@@ -72,7 +72,6 @@ export const orderDetail = (params) => { //订单（商品）列表
 export const uploadcertificate = (params) => { //上传转币凭证
   return postRequest('/exchange/m/sell/uploadcertificate', params)
 }
-
 // volume	发布数量	double	Y	两位小数
 // price	单价	double	Y	前端提交的为单位为卢比，后端接口要对当前的价格进行核实并重新计算
 // fee	手续费	double	Y	默认为0
@@ -83,4 +82,13 @@ export const confirmOrder = (params) => { //发布并确认商品
 // orderId
 export const confirmPay = (params) => { //卖家确认订单（商品）收款
   return getRequest('/exchange/m/sell/confirmPay/{orderId}'.replace('{orderId}', params.orderId))
+}
+export const userQaList = (params) => { //用户问答列表
+  return getRequest('/exchange/m/sell/userQaList')
+}
+export const userQaDetail = (params) => { //用户问答内容
+  return getRequest('/exchange/m/sell/userQaDetail/{id}'.replace('{id}', params.id))
+}
+export const upload = (params) => { //上传oss
+  return postRequest('/exchange/m/sell/upload')
 }

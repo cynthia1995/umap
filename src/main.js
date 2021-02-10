@@ -36,7 +36,8 @@ import {
   Checkbox,
   CheckboxGroup,
   Overlay,
-  Loading
+  Loading,
+  Icon
 } from 'vant'
 
 Vue.use(Toast);
@@ -56,6 +57,7 @@ Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Overlay);
 Vue.use(Loading);
+Vue.use(Icon);
 
 Vue.config.productionTip = false
 

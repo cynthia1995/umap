@@ -41,6 +41,7 @@ export default {
     };
   },
   created() {
+    this.$store.state.loading = false;
     this.phone = this.$route.query.phone;
   },
   mounted() {},

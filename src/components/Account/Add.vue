@@ -28,7 +28,12 @@
           :rules="[{ required: true, message: 'Bank name cannot be empty' }]"
         />
         <van-field v-if="type == 'UPI'" class="qrCode" v-model="form.qrCode" name="qrCode" label="Add your receipt QR code (optional)" :rules="[{ required: false }]" />
-        <van-uploader v-if="type == 'UPI'" v-model="fileList" multiple :max-count="1" :after-read="afterRead" />
+        <!-- <van-uploader v-if="type == 'UPI'" v-model="fileList" multiple :max-count="1" :after-read="afterRead" /> -->
+        <div v-if="type == 'UPI'" class="uploader">
+          <van-icon v-if="!form.qrCode" name="plus" size="24px" color="#6d4ffd"/>
+          <img v-else class="uploadImg" :src="form.qrCode" alt="">
+          <form enctype="multipart/form-data" id="uploadForm"><input class="file" @change="upload($event)" type="file" name="file" /></form>
+        </div>
         <van-button type="primary" block native-type="submit">Save</van-button>
       </van-form>
     </div>
@@ -37,7 +42,8 @@
 
 <script>
 import NavTit from '../NavAndTit.vue';
-import { addPayment } from '@/api/api';
+import { addPayment, upload } from '@/api/api';
+import axios from 'axios';
 export default {
   name: 'Add',
   components: {
@@ -66,20 +72,39 @@ export default {
   },
   created() {
     this.type = this.$route.query.type;
+    this.$store.state.loading = false;
   },
   mounted() {},
   methods: {
+    upload(event) {
+      const self = this;
+      const form = document.getElementById('uploadForm');
+      const formdata = new FormData(form);
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          const res = JSON.parse(xhr.responseText);
+          if (res.code == 200) {
+            self.form.qrCode = res.result.ossUrl;
+          } else {
+            self.$toast(res.message);
+          }
+        }
+      };
+      xhr.open('POST', 'http://47.243.16.119:8080/exchange/m/sell/upload');
+      xhr.send(formdata);
+    },
     addPayment(parmas) {
       addPayment(parmas)
         .then(res => {
           if (res.code == 200) {
-            this.$toast(res.message);
+            this.$toast('Payment method added successfully');
             setTimeout(() => {
               this.$router.push({
                 path: 'payment',
                 query: {}
               });
-            }, 1000);
+            }, 2000);
           }
         })
         .catch(err => {
@@ -91,8 +116,14 @@ export default {
       this.addPayment(this.form);
     },
     afterRead(file) {
-      this.form.qrCode = file.content;
-      console.log(this.form);
+      // console.log(file);
+      // this.form.qrCode = file.content;
+      // console.log(this.form);
+      // upload(file)
+      //   .then(res => {
+      //     // console.log(res);
+      //   })
+      //   .catch(err => {});
     }
   }
 };

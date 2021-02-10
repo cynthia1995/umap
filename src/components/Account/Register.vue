@@ -77,15 +77,16 @@ export default {
       }
     },
     checkPhone(event) {
-      // if (!this.form.phone) {
-      //   this.errMsg.phone = 'Phone Number cannot be empty';
-      // } else {
-      //   if (!this.phonePattern.test(this.form.phone)) {
-      //     this.errMsg.phone = 'Phone Number format is incorrect';
-      //   } else {
-      //     this.errMsg.phone = '';
-      //   }
-      // }
+      if (!this.form.phone) {
+        this.errMsg.phone = 'Phone Number cannot be empty';
+      } else {
+        this.errMsg.phone = '';
+        // if (!this.phonePattern.test(this.form.phone)) {
+        //   this.errMsg.phone = 'Phone Number format is incorrect';
+        // } else {
+        //   this.errMsg.phone = '';
+        // }
+      }
     },
     checkPassword(event) {
       if (!this.form.password) {
@@ -95,7 +96,6 @@ export default {
       }
     },
     onSubmit() {
-      console.log('dss');
       this.checkEmail();
       this.checkPhone();
       this.checkPassword();
@@ -103,7 +103,7 @@ export default {
         if (this.checked) {
           register(this.form)
             .then(res => {
-              if (res.success) {
+              if (res.code == 200) {
                 this.$router.push({
                   path: '/verificationcode',
                   query: {
@@ -111,8 +111,6 @@ export default {
                     phone: this.form.phone
                   }
                 });
-              } else {
-                this.$toast(res.messages);
               }
             })
             .catch(err => {
