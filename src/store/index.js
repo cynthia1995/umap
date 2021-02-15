@@ -8,7 +8,6 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     //存放的键值对就是所要管理的状态
-    name: 'helloVueX',
     loading: true,
     address: '',
     payment: {}

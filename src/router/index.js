@@ -22,8 +22,11 @@ import ForgetPwd from '@/components/Account/ForgetPwd.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [{
+    path: '/',
+    redirect: '/home',
+  }, {
     path: '/home',
     name: 'Home',
     component: Home,
