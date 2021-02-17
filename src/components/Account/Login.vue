@@ -153,8 +153,6 @@ export default {
             if (res.success) {
               Cookies.set('token', res.result.token, { expires: 7 });
               this.$router.push({ path: '/home' });
-            } else {
-              this.$toast(res.messages);
             }
           })
           .catch(err => {
