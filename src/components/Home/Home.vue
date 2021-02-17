@@ -90,7 +90,7 @@ export default {
   mounted() {},
   methods: {
     onClickRight() {
-      this.$toast('按钮');
+      // this.$toast('按钮');
     },
     toSell() {
       this.$router.push({
