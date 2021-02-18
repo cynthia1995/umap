@@ -29,7 +29,7 @@
         <van-field
           v-model="form.password"
           name="password"
-          label="Reset Pssword"
+          label="Reset Password"
           placeholder="Enter the new Password"
           :rules="[{ required: true, message: 'New Password cannot be empty' }]"
         />
