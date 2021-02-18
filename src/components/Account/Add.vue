@@ -25,7 +25,7 @@
           name="bankName"
           label="Bank name(optional)"
           placeholder="Please Enter Your Bank name"
-          :rules="[{ required: true, message: 'Bank name cannot be empty' }]"
+          :rules="[{ required: false, message: '' }]"
         />
         <van-field v-if="type == 'UPI'" class="qrCode" v-model="form.qrCode" name="qrCode" label="Add your receipt QR code (optional)" :rules="[{ required: false }]" />
         <!-- <van-uploader v-if="type == 'UPI'" v-model="fileList" multiple :max-count="1" :after-read="afterRead" /> -->
@@ -114,17 +114,17 @@ export default {
     onSubmit() {
       console.log(this.form);
       this.addPayment(this.form);
-    },
-    afterRead(file) {
-      // console.log(file);
-      // this.form.qrCode = file.content;
-      // console.log(this.form);
-      // upload(file)
-      //   .then(res => {
-      //     // console.log(res);
-      //   })
-      //   .catch(err => {});
     }
+    // afterRead(file) {
+    //   // console.log(file);
+    //   // this.form.qrCode = file.content;
+    //   // console.log(this.form);
+    //   // upload(file)
+    //   //   .then(res => {
+    //   //     // console.log(res);
+    //   //   })
+    //   //   .catch(err => {});
+    // }
   }
 };
 </script>
