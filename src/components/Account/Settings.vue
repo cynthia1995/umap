@@ -15,7 +15,9 @@
         <span class="color-8c9fad">v1.2.1</span>
       </li>
     </ul>
-    <div class="fixedLogout"><van-button type="primary" @click="logOut" block>Logout</van-button></div>
+    <div class="fixedLogout">
+      <van-button type="primary" @click="logOut" block>{{ btnText }}</van-button>
+    </div>
   </div>
 </template>
 
@@ -30,17 +32,28 @@ export default {
   data() {
     return {
       title: 'Settings',
-      arrow: require('@/assets/img/arrow@2x.png')
+      arrow: require('@/assets/img/arrow@2x.png'),
+      btnText: 'LogIn'
     };
   },
-  created() {},
+  created() {
+    if (Cookies.get('token')) {
+      this.btnText = 'LogOut';
+    }
+  },
   mounted() {},
   methods: {
     logOut() {
-      Cookies.remove('token');
-      this.$router.push({
-        path: '/home'
-      });
+      if (Cookies.get('token')) {
+        Cookies.remove('token');
+        this.$router.push({
+          path: '/home'
+        });
+      } else {
+        this.$router.push({
+          path: '/login'
+        });
+      }
     },
     toPrivacy() {
       this.$router.push({

@@ -83,7 +83,7 @@
               <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
               <label for="agree">
                 I have read and agreed to the
-                <router-link to="/home">Terms of Service</router-link>
+                <router-link to="/termofservice">Terms of Service</router-link>
                 of MAPU
               </label>
             </div>
