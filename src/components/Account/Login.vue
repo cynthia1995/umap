@@ -10,7 +10,7 @@
       <van-tabs v-model="active" @change="changeType">
         <van-tab title="Email">
           <van-form @submit="onSubmit">
-            <van-field
+            <!-- <van-field
               @focus="focus($event)"
               v-model="form.email"
               name="email"
@@ -18,6 +18,14 @@
               placeholder="Please Enter Your Email"
               @blur="checkEmail($event)"
               :error-message="errMsg.email"
+            /> -->
+            <van-field
+              @focus="focus($event)"
+              v-model="form.email"
+              name="email"
+              label="Email"
+              placeholder="Please Enter Your Email"
+              :rules="[{ required: true, message: 'E-mail cannot be empty' }]"
             />
             <van-field
               @focus="focus($event)"
@@ -26,7 +34,7 @@
               label="Password"
               placeholder="Please Enter Your Password"
               :type="show ? 'text' : 'password'"
-              :rules="[{ required: true, message: 'Please Enter Your Password' }]"
+              :rules="[{ required: true, message: 'Password cannot be empty' }]"
             >
               <template #right-icon>
                 <img v-show="show" @click="toggleEye" src="../../assets/img/login_show_icon@2x.png" alt="" />
@@ -39,7 +47,7 @@
               <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
               <label for="agree">
                 I have read and agreed to the
-                <router-link to="/home">Terms of Service</router-link>
+                <router-link to="/termofservice">Terms of Service</router-link>
                 of MAPU
               </label>
             </div>
@@ -53,7 +61,7 @@
               name="phone"
               label="Mobile"
               placeholder="Please Enter Your Mobile"
-              :rules="[{ required: true, message: 'Please Enter Your Mobile' }]"
+              :rules="[{ required: true, message: 'Mobile cannot be empty' }]"
             />
             <van-field
               @focus="focus($event)"
@@ -62,7 +70,7 @@
               label="Password"
               placeholder="Please Enter Your Password"
               :type="show ? 'text' : 'password'"
-              :rules="[{ required: true, message: 'Please Enter Your Password' }]"
+              :rules="[{ required: true, message: 'Password cannot be empty' }]"
             >
               <template #right-icon>
                 <img v-show="show" @click="toggleEye" src="../../assets/img/login_show_icon@2x.png" alt="" />
@@ -82,7 +90,7 @@
           </van-form>
         </van-tab>
       </van-tabs>
-      <router-link class="toRegister block white-color margin0auto text-center radius4" to="/register">Free Registration</router-link>
+      <router-link v-show="hideshow" class="toRegister block white-color margin0auto text-center radius4" to="/register">Free Registration</router-link>
     </section>
   </div>
 </template>
@@ -108,13 +116,34 @@ export default {
         email: '',
         phone: '',
         password: ''
-      }
+      },
+      docmHeight: document.documentElement.clientHeight || document.body.clientHeight,
+      showHeight: document.documentElement.clientHeight || document.body.clientHeight,
+      hideshow: true //显示或者隐藏footer
     };
+  },
+  watch: {
+    //监听显示高度
+    showHeight: function() {
+      if (this.docmHeight > this.showHeight) {
+        //隐藏
+        this.hideshow = false;
+      } else {
+        //显示
+        this.hideshow = true;
+      }
+    }
   },
   created() {
     this.$store.state.loading = false;
   },
-  mounted() {},
+  mounted() {
+    window.onresize = () => {
+      return (() => {
+        this.showHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      })();
+    };
+  },
   methods: {
     checkEmail(event) {
       if (!this.form.email) {

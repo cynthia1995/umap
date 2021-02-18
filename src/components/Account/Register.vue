@@ -25,7 +25,7 @@
           <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
           <label for="agree">
             I have read and agreed to the
-            <router-link to="/home">Terms of Service</router-link>
+            <router-link to="/termofservice">Terms of Service</router-link>
             of MAPU
           </label>
         </div>
@@ -43,7 +43,7 @@ export default {
       title: 'Create a free acount',
       checked: false,
       emailPattern: /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/,
-      phonePattern: /^(6|7|8|9)\\d{9}$/,
+      phonePattern: /^[6-9]\d{9}$/,
       form: {
         email: '',
         phone: '',

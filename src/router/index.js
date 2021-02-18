@@ -10,10 +10,13 @@ import Account from '@/components/Account/Account.vue'
 import HelpAndSupport from '@/components/Account/HelpAndSupport.vue'
 import Answer from '@/components/Account/Answer.vue'
 import AboutUs from '@/components/Account/AboutUs.vue'
+import TermOfService from '@/components/Account/TermOfService.vue'
+import PrivacyPolicy from '@/components/Account/PrivacyPolicy.vue'
 import Settings from '@/components/Account/Settings.vue'
 import Payment from '@/components/Account/Payment.vue'
 import AddMethod from '@/components/Account/AddMethod.vue'
 import Add from '@/components/Account/Add.vue'
+import Invite from '@/components/Account/Invite.vue'
 import Login from '@/components/Account/Login.vue'
 import Register from '@/components/Account/Register.vue'
 import VerificationCode from '@/components/Account/VerificationCode.vue'
@@ -83,6 +86,14 @@ export default new Router({
     name: 'AboutUs',
     component: AboutUs
   }, {
+    path: '/termofservice',
+    name: 'TermOfService',
+    component: TermOfService
+  }, {
+    path: '/privacypolicy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy
+  }, {
     path: '/settings',
     name: 'Settings',
     component: Settings
@@ -98,6 +109,10 @@ export default new Router({
     path: '/add',
     name: 'Add',
     component: Add
+  }, {
+    path: '/invite',
+    name: 'Invite',
+    component: Invite
   }, {
     path: '/login',
     name: 'Login',

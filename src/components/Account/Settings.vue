@@ -2,11 +2,11 @@
   <div class="settings paddingtop-50">
     <div class="padding-20"><NavTit :title="title" :noTit="false"></NavTit></div>
     <ul class="list fontsize16">
-      <li>
+      <li @click="toPrivacy">
         <b class="fontweight-m">Privacy Policy</b>
         <img :src="arrow" alt="" />
       </li>
-      <li>
+      <li @click="toService">
         <b class="fontweight-m">Terms & Service</b>
         <img :src="arrow" alt="" />
       </li>
@@ -40,6 +40,16 @@ export default {
       Cookies.remove('token');
       this.$router.push({
         path: '/home'
+      });
+    },
+    toPrivacy() {
+      this.$router.push({
+        path: '/privacypolicy'
+      });
+    },
+    toService() {
+      this.$router.push({
+        path: '/termofservice'
       });
     }
   }
