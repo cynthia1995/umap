@@ -152,6 +152,11 @@ export default {
           this.confirmOrder = true;
         } else {
           this.$toast('To add payment method');
+          setTimeout(() => {
+            this.$router.push({
+              path: '/addmethod'
+            });
+          }, 2000);
         }
       }
     },

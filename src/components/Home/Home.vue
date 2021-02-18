@@ -9,7 +9,7 @@
       </template>
     </van-nav-bar>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in homeInfo.advList" :key="index"><img :src="item.advImg" alt="" /></van-swipe-item>
+      <van-swipe-item v-for="(item, index) in homeInfo.advList" :key="index"><img :src="item.advImg" @click="linkTo(item.advAddress)" alt="" /></van-swipe-item>
       <!-- <van-swipe-item><img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item> -->
     </van-swipe>
     <section class="main">
@@ -90,12 +90,17 @@ export default {
   mounted() {},
   methods: {
     onClickRight() {
-      // this.$toast('按钮');
+      this.$router.push({
+        path: '/helpandsupport'
+      });
     },
     toSell() {
       this.$router.push({
         path: '/sell'
       });
+    },
+    linkTo(url) {
+      location.href = url;
     }
   }
 };
