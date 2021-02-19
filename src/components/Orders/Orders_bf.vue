@@ -8,27 +8,32 @@
       <van-tab title="Open">
         <div v-if="isLogin">
           <NoOrder v-if="noOpen" style="margin-top: 10px;"></NoOrder>
-          <div v-else>
-            <ul class="orderList" v-if="openList && openList.length > 0">
-              <li v-for="(item, index) in openList" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.goodsId)">
-                <p class="text-center">
-                  <b class="fontsize12">
-                    ₹
-                    <span class="fontsize16 fontweight-m">{{ item.price }}</span>
-                    <em class="block margintop-10 color-8c9fad">PRICE</em>
-                  </b>
-                </p>
-                <p class="text-center">
-                  <b class="fontsize12">
-                    <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
-                    <em class="block margintop-10 color-8c9fad">QUANTITY</em>
-                  </b>
-                </p>
-                <p class="status fontsize16 flex text-left">
-                  <span :class="'color-6d4ffd fontweight-m status' + item.status">{{ getStatus(item.status) }}</span>
-                </p>
-              </li>
-            </ul>
+          <div class="open subTabs" v-else>
+            <van-tabs v-model="openActive" type="card">
+              <van-tab v-for="(item, index) in addressType" :title="item" :key="index">
+                <ul class="orderList" v-if="openList[item] && openList[item].length > 0">
+                  <li v-for="(subItem, subIndex) in openList[item]" :key="subIndex" class="marginbottom-10 flex" @click="orderDetail(subItem.goodsId)">
+                    <p class="text-center">
+                      <b class="fontsize12">
+                        ₹
+                        <span class="fontsize16 fontweight-m">{{ subItem.price }}</span>
+                        <em class="block margintop-10 color-8c9fad">PRICE</em>
+                      </b>
+                    </p>
+                    <p class="text-center">
+                      <b class="fontsize12">
+                        <span class="fontsize16 fontweight-m">{{ subItem.quantity }}</span>
+                        <em class="block margintop-10 color-8c9fad">QUANTITY</em>
+                      </b>
+                    </p>
+                    <p class="status fontsize16 flex text-left">
+                      <span :class="'color-6d4ffd fontweight-m status' + subItem.status">{{ getStatus(subItem.status) }}</span>
+                    </p>
+                  </li>
+                </ul>
+                <NoOrder v-else></NoOrder>
+              </van-tab>
+            </van-tabs>
           </div>
         </div>
         <div class="noLogin" v-else>
@@ -40,27 +45,32 @@
       <van-tab title="Completed">
         <div v-if="isLogin">
           <NoOrder v-if="noCompleted" style="margin-top: 10px;"></NoOrder>
-          <div v-else>
-            <ul class="orderList" v-if="completedList && completedList.length > 0">
-              <li v-for="(item, index) in completedList" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.goodsId)">
-                <p class="text-center">
-                  <b class="fontsize12">
-                    ₹
-                    <span class="fontsize16 fontweight-m">{{ item.price }}</span>
-                    <em class="block margintop-10 color-8c9fad">PRICE</em>
-                  </b>
-                </p>
-                <p class="text-center">
-                  <b class="fontsize12">
-                    <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
-                    <em class="block margintop-10 color-8c9fad">QUANTITY</em>
-                  </b>
-                </p>
-                <p class="status fontsize16 flex text-left">
-                  <span :class="'color-6d4ffd fontweight-m status' + item.status">{{ getStatus(item.status) }}</span>
-                </p>
-              </li>
-            </ul>
+          <div class="completed subTabs" v-else>
+            <van-tabs v-model="completedActive" type="card">
+              <van-tab v-for="(item, index) in addressType" :title="item" :key="index">
+                <ul class="orderList" v-if="completedList[item] && completedList[item].length > 0">
+                  <li v-for="(subItem, subIndex) in completedList[item]" :key="subIndex" class="marginbottom-10 flex" @click="orderDetail(subItem.goodsId)">
+                    <p class="text-center">
+                      <b class="fontsize12">
+                        ₹
+                        <span class="fontsize16 fontweight-m">{{ subItem.price }}</span>
+                        <em class="block margintop-10 color-8c9fad">PRICE</em>
+                      </b>
+                    </p>
+                    <p class="text-center">
+                      <b class="fontsize12">
+                        <span class="fontsize16 fontweight-m">{{ subItem.quantity }}</span>
+                        <em class="block margintop-10 color-8c9fad">QUANTITY</em>
+                      </b>
+                    </p>
+                    <p class="status fontsize16 flex text-left">
+                      <span :class="'color-6d4ffd fontweight-m status' + subItem.status">{{ getStatus(subItem.status) }}</span>
+                    </p>
+                  </li>
+                </ul>
+                <NoOrder v-else></NoOrder>
+              </van-tab>
+            </van-tabs>
           </div>
         </div>
         <div class="noLogin" v-else>
@@ -91,8 +101,8 @@ export default {
       noCompleted: true,
       addressType: [],
       searchType: 'open',
-      openList: [],
-      completedList: []
+      openList: {},
+      completedList: {}
     };
   },
   created() {
@@ -116,16 +126,16 @@ export default {
           if (res.code == 200) {
             if (self.searchType == 'open') {
               res.result.forEach(function(ele) {
-                self.openList = self.openList.concat(ele.goodsList);
+                self.openList[ele.addressType] = ele.goodsList;
               });
-              if (self.openList.length > 0) {
+              if (Object.keys(self.openList).length > 0) {
                 self.noOpen = false;
               }
             } else if (self.searchType == 'completed') {
               res.result.forEach(function(ele) {
-                self.completedList = self.completedList.concat(ele.goodsList);
+                self.completedList[ele.addressType] = ele.goodsList;
               });
-              if (self.completedList.length > 0) {
+              if (Object.keys(self.completedList).length > 0) {
                 self.noCompleted = false;
               }
             }
@@ -230,7 +240,7 @@ export default {
   width: 10px;
 }
 /deep/ .van-tabs__content {
-  padding: 20px 20px 0;
+  padding: 10px 20px 0;
 }
 .subTabs {
   /deep/ .van-tabs__nav--card {
@@ -301,7 +311,7 @@ export default {
       color: #03ad8f;
     }
     .statusDisapproved,
-    .satusCanceled {
+    .satusCanceled{
       color: #8c9fad;
     }
   }
