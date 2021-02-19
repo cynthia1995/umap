@@ -78,6 +78,7 @@ export default {
   methods: {
     upload(event) {
       const self = this;
+      self.$store.commit('showLoading');
       const form = document.getElementById('uploadForm');
       const formdata = new FormData(form);
       let xhr = new XMLHttpRequest();
@@ -86,8 +87,7 @@ export default {
           const res = JSON.parse(xhr.responseText);
           if (res.code == 200) {
             self.form.qrCode = res.result.ossUrl;
-          } else {
-            self.$toast(res.message);
+            self.$store.commit('hideLoading');
           }
         }
       };
