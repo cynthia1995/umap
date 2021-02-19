@@ -13,12 +13,11 @@
               <li v-for="(item, index) in openList" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.goodsId)">
                 <p class="text-center">
                   <b class="fontsize12">
-                    ₹
-                    <span class="fontsize16 fontweight-m">{{ item.price }}</span>
+                    ₹<span class="fontsize16 fontweight-m">{{ item.price }}</span>
                     <em class="block margintop-10 color-8c9fad">PRICE</em>
                   </b>
                 </p>
-                <p class="text-center">
+                <p class="text-center quantity">
                   <b class="fontsize12">
                     <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
                     <em class="block margintop-10 color-8c9fad">QUANTITY</em>
@@ -270,19 +269,23 @@ export default {
 }
 .orderList li {
   background-color: #ffffff;
-  padding: 25px 15px;
+  padding: 25px 10px;
   justify-content: space-between;
   p {
     flex: 1;
   }
+  .quantity{
+    flex: 0.8;
+  }
   .status {
     align-items: center;
-    flex: 1.8;
+    flex: 1.6;
     justify-content: flex-end;
     span {
       background: url(../../assets/img/arrow@2x.png) no-repeat right center;
       background-size: 22px;
       padding-right: 28px;
+      text-align: right;
     }
     .statusPaymentConfirm {
       padding: 0;
