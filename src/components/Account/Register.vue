@@ -19,7 +19,7 @@
           :error-message="errMsg.password"
         />
         <van-field v-model="form.phone" name="mobile" label="Phone Number" placeholder="Please Enter Your Phone Number" @blur="checkPhone($event)" :error-message="errMsg.phone" />
-        <van-field v-model="form.referralId" name="referral" label="Referral ID(Optional)" placeholder="Please Enter Referral ID" :rules="[{ required: false }]" />
+        <van-field style="display:none" v-model="form.referralId" name="referral" label="Referral ID(Optional)" placeholder="Please Enter Referral ID" :rules="[{ required: false }]" />
         <van-button type="primary" block native-type="submit">Register</van-button>
         <div class="agree">
           <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
@@ -80,12 +80,12 @@ export default {
       if (!this.form.phone) {
         this.errMsg.phone = 'Phone Number cannot be empty';
       } else {
-        this.errMsg.phone = '';
-        // if (!this.phonePattern.test(this.form.phone)) {
-        //   this.errMsg.phone = 'Phone Number format is incorrect';
-        // } else {
-        //   this.errMsg.phone = '';
-        // }
+        // this.errMsg.phone = '';
+        if (!this.phonePattern.test(this.form.phone)) {
+          this.errMsg.phone = 'Phone Number format is incorrect';
+        } else {
+          this.errMsg.phone = '';
+        }
       }
     },
     checkPassword(event) {
