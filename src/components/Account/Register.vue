@@ -117,7 +117,7 @@ export default {
               console.log(err);
             });
         } else {
-          this.$toast('请阅读条款');
+          this.$toast('Please read and agree to the terms of service first');
         }
       } else {
       }
