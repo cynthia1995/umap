@@ -120,6 +120,7 @@ export default {
   margin: 20px auto 0;
   padding: 20px 25px;
   box-sizing: border-box;
+  border-radius: 12px;
   .p1 {
     line-height: 18px;
     margin-bottom: 46px;
