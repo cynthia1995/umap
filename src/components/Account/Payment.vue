@@ -112,15 +112,14 @@ export default {
   font-size: 18px;
 }
 .methodList li {
-  background: url(../../assets/img/card_method@2x.png) no-repeat center;
+  background: url(../../assets/img/card_method@2x.png) repeat-y center;
   width: 100%;
-  // width: 335px;
   height: 150px;
-  background-size: cover;
+  background-size: 100%;
   margin: 20px auto 0;
   padding: 20px 25px;
   box-sizing: border-box;
-  border-radius: 12px;
+  border-radius: 10px;
   .p1 {
     line-height: 18px;
     margin-bottom: 46px;
