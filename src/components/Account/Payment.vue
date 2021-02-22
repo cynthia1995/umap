@@ -112,7 +112,7 @@ export default {
   font-size: 18px;
 }
 .methodList li {
-  background: url(../../assets/img/card_method@2x.png) repeat-y center;
+  background: url(../../assets/img/card_method@2x.png) repeat-y center top;
   width: 100%;
   height: 150px;
   background-size: 100%;
