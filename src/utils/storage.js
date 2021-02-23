@@ -18,7 +18,7 @@ export const getStore = name => {
 }
 
 /**
- * 删除sessionStorage
+ * 根据name删除sessionStorage
  */
 export const removeStore = name => {
   if (!name) return

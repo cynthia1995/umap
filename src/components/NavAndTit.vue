@@ -29,7 +29,7 @@ export default {
       this.$router.go(-1);
     },
     onClickRight() {
-      // this.$toast('客服');
+      location.href = 'https://t.me/joinchat/I76Batq1XdFxqxdo';
     }
   }
 };

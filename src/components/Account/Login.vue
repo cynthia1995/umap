@@ -47,7 +47,7 @@
               <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
               <label for="agree">
                 I have read and agreed to the
-                <router-link to="/termofservice">Terms of Service</router-link>
+                <router-link @click.native="saveForm" to="/termofservice">Terms of Service</router-link>
                 of MAPU
               </label>
             </div>
@@ -83,7 +83,7 @@
               <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
               <label for="agree">
                 I have read and agreed to the
-                <router-link to="/termofservice">Terms of Service</router-link>
+                <router-link @click.native="saveForm" to="/termofservice">Terms of Service</router-link>
                 of MAPU
               </label>
             </div>
@@ -136,6 +136,16 @@ export default {
   },
   created() {
     this.$store.state.loading = false;
+    const loginActive = this.getStore('login_active');
+    if (loginActive) {
+      this.active = parseInt(loginActive);
+      if (this.active === 0) {
+        this.form = JSON.parse(this.getStore('emailform'));
+      } else if (this.active === 1) {
+        this.form = JSON.parse(this.getStore('mobileform'))
+      }
+    }
+    sessionStorage.clear();
   },
   mounted() {
     window.onresize = () => {
@@ -160,7 +170,6 @@ export default {
       this.$router.go(-1);
     },
     focus(event) {
-      console.log('event');
       document.getElementsByClassName('main')[0].className = 'main slideUp';
       const toRegister = document.getElementsByClassName('toRegister')[0];
       toRegister.className = 'toRegister block white-color margin0auto text-center radius4 fixed';
@@ -174,6 +183,14 @@ export default {
         phone: '',
         password: ''
       };
+    },
+    saveForm() {
+      if (this.active === 0) {
+        this.setStore('emailform', this.form);
+      } else if (this.active === 1) {
+        this.setStore('mobileform', this.form);
+      }
+      this.setStore('login_active', this.active);
     },
     onSubmit() {
       if (this.checked) {

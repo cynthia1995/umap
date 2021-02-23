@@ -19,13 +19,20 @@
           :error-message="errMsg.password"
         />
         <van-field v-model="form.phone" name="mobile" label="Phone Number" placeholder="Please Enter Your Phone Number" @blur="checkPhone($event)" :error-message="errMsg.phone" />
-        <van-field style="display:none" v-model="form.referralId" name="referral" label="Referral ID(Optional)" placeholder="Please Enter Referral ID" :rules="[{ required: false }]" />
+        <van-field
+          style="display:none"
+          v-model="form.referralId"
+          name="referral"
+          label="Referral ID(Optional)"
+          placeholder="Please Enter Referral ID"
+          :rules="[{ required: false }]"
+        />
         <van-button type="primary" block native-type="submit">Register</van-button>
         <div class="agree">
           <van-checkbox name="agree" v-model="checked" shape="square"></van-checkbox>
           <label for="agree">
             I have read and agreed to the
-            <router-link to="/termofservice">Terms of Service</router-link>
+            <router-link @click.native="saveForm" to="/termofservice">Terms of Service</router-link>
             of MAPU
           </label>
         </div>
@@ -59,6 +66,12 @@ export default {
   },
   created() {
     this.$store.state.loading = false;
+    const registerForm = this.getStore('register_form');
+    if (registerForm) {
+      console.log(registerForm);
+      this.form = JSON.parse(registerForm);
+    }
+    this.removeStore('register_form');
   },
   mounted() {},
   methods: {
@@ -95,6 +108,9 @@ export default {
         this.errMsg.password = '';
       }
     },
+    saveForm() {
+      this.setStore('register_form', this.form);
+    },
     onSubmit() {
       this.checkEmail();
       this.checkPhone();
@@ -119,7 +135,6 @@ export default {
         } else {
           this.$toast('Please read and agree to the terms of service first');
         }
-      } else {
       }
     }
   }
