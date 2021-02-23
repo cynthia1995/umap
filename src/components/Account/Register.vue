@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       title: 'Create a free acount',
-      checked: false,
+      checked: true,
       emailPattern: /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/,
       phonePattern: /^[6-9]\d{9}$/,
       form: {
