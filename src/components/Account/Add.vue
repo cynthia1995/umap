@@ -32,7 +32,7 @@
         <div v-if="type == 'UPI'" class="uploader">
           <van-icon v-if="!form.qrCode" name="plus" size="24px" color="#6d4ffd"/>
           <img v-else class="uploadImg" :src="form.qrCode" alt="">
-          <form enctype="multipart/form-data" id="uploadForm"><input class="file" @change="upload($event)" type="file" name="file" /></form>
+          <form enctype="multipart/form-data" id="uploadForm"><input class="file" accept="image/*" @change="upload($event)" type="file" name="file" /></form>
         </div>
         <van-button type="primary" block native-type="submit">Save</van-button>
       </van-form>
