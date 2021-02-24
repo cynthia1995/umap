@@ -276,7 +276,7 @@
       <p>
         <b>7.1 General.</b>
         You agree to pay UMAP the fees set forth at
-        <a class="color-6d4ffd" href="https://UMAP.com/fee">https://UMAP.com/fees</a>
+        <a class="color-6d4ffd" href="www.umapvip.com">www.umapvip.com</a>
         which may be updated from time to time in our sole discretion. Any such updated fees will apply prospectively to any trades or other transactions that take place following
         the effective date of such updated fees. You authorize UMAP to remove any amounts from your Account for any applicable fees owed by you under this Agreement.
       </p>
@@ -288,7 +288,7 @@
       <p>
         <b>7.3 Service fees.</b>
         UMAP applies a Maker / Taker fee structure for customers who trade Supported Cryptocurrency using the Services. Please consult the page set forth at
-        <a class="color-6d4ffd" href="https://UMAP.com/fees">https://UMAP.com/fees</a>
+        <a class="color-6d4ffd" href="www.umapvip.com">www.umapvip.com</a>
         for further information on applicable Maker and Taker fees. UMAP will, at the time of any transaction on the UMAP Exchange, notify you of any fees that will apply to the
         transaction. By proceeding with any transaction, you accept and agree to the applicable fees. Such fees will also be displayed in your transaction history upon completion
         of the transaction.
