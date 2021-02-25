@@ -145,18 +145,18 @@ export default {
   },
   mounted() {},
   beforeDestroy() {
-    if (this.form.from) {
-      this.setStore('from_' + this.id, this.form.from);
-    }
-    if (this.form.txid) {
-      this.setStore('txid_' + this.id, this.form.txid);
-    }
-     if (this.paymentMethod) {
-      this.setStore('payment_' + this.id, this.paymentMethod);
-    }
-    if (this.form.voucher) {
-      this.setStore('voucher_' + this.id, this.form.voucher);
-    }
+    // if (this.form.from) {
+    //   this.setStore('from_' + this.id, this.form.from);
+    // }
+    // if (this.form.txid) {
+    //   this.setStore('txid_' + this.id, this.form.txid);
+    // }
+    //  if (this.paymentMethod) {
+    //   this.setStore('payment_' + this.id, this.paymentMethod);
+    // }
+    // if (this.form.voucher) {
+    //   this.setStore('voucher_' + this.id, this.form.voucher);
+    // }
   },
   methods: {
     upload(event) {
@@ -206,6 +206,18 @@ export default {
     //   });
     // },
     toSelectPayment() {
+      if (this.form.from) {
+        this.setStore('from_' + this.id, this.form.from);
+      }
+      if (this.form.txid) {
+        this.setStore('txid_' + this.id, this.form.txid);
+      }
+      if (this.paymentMethod) {
+        this.setStore('payment_' + this.id, this.paymentMethod);
+      }
+      if (this.form.voucher) {
+        this.setStore('voucher_' + this.id, this.form.voucher);
+      }
       this.$router.push({
         path: '/payment',
         query: {
