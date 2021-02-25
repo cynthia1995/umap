@@ -9,7 +9,7 @@
     <p class="desc padding-20">{{ desc }}</p>
     <b class="text1 text-center fontweight-m">{{ transferAmount }}</b>
     <span class="ammount text-center">
-      <em class="fontweight-m">{{ $route.query.amount }}</em>
+      <em class="fontweight-m">{{ $route.query.total }}</em>
       USDT
     </span>
     <section class="main">
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { getCoinsAddrList } from '@/api/api';
+import { getCoinsAddrList, confirmOrder } from '@/api/api';
 export default {
   name: 'SellAdress',
   components: {},
@@ -78,14 +78,36 @@ export default {
       this.$toast('Copy failed, please try again');
     },
     selectAddress() {
-      this.setStore('address_' + this.id, {
-        address: this.addressList[this.active].address,
-        addrType: this.addressList[this.active].addrType
-      });
+      console.log(this.addressList[this.active].addrType, this.addressList[this.active].address);
+      // this.setStore("address_" + this.id, {
+      //   address: this.addressList[this.active].address,
+      //   addrType: this.addressList[this.active].addrType
+      // });
       // this.$store.commit('coverAddress', '');
       // this.$store.commit('coverAddress', this.addressList[this.active].address);
       // console.log(this.$store.state.address);
-      this.$router.go(-1);
+      // this.$router.go(-1);
+      confirmOrder({
+        volume: this.$route.query.volume,
+        price: this.$route.query.mapuPrice,
+        fee: this.$route.query.fee,
+        total: this.$route.query.total,
+        addrType: this.addressList[this.active].addrType,
+        toAddr: this.addressList[this.active].address
+      })
+        .then(res => {
+          if (res.code == 200) {
+            this.$router.push({
+              path: '/uploadvoucher',
+              query: {
+                id: res.result.id
+              }
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };

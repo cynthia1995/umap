@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { getHome, getPaymentList, confirmOrder } from '@/api/api';
+import { getHome, getPaymentList } from '@/api/api';
 export default {
   name: 'Sell',
   components: {},
@@ -161,29 +161,18 @@ export default {
       }
     },
     sellSubmit() {
+      this.$router.push({
+        path: '/sellAddress',
+        query: {
+          volume: this.volumeUSDT,
+          price: this.mapuPrice,
+          fee: this.fee,
+          total: (this.volumeUSDT * this.mapuPrice).toFixed(2)
+        }
+      });
       this.confirmOrder = false;
-      confirmOrder({
-        volume: this.volumeUSDT,
-        price: this.mapuPrice,
-        fee: this.fee,
-        total: (this.volumeUSDT * this.mapuPrice).toFixed(2)
-      })
-        .then(res => {
-          if (res.code == 200) {
-            console.log(res);
-            this.$router.push({
-              path: '/uploadvoucher',
-              query: {
-                id: res.result.id
-              }
-            });
-            this.volumeUSDT = '';
-            this.totalINR = '';
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.volumeUSDT = '';
+      this.totalINR = '';
     }
   }
 };

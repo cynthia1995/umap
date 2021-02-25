@@ -30,8 +30,8 @@
         <van-field v-if="type == 'UPI'" class="qrCode" v-model="form.qrCode" name="qrCode" label="Add your receipt QR code (optional)" :rules="[{ required: false }]" />
         <!-- <van-uploader v-if="type == 'UPI'" v-model="fileList" multiple :max-count="1" :after-read="afterRead" /> -->
         <div v-if="type == 'UPI'" class="uploader">
-          <van-icon v-if="!form.qrCode" name="plus" size="24px" color="#6d4ffd"/>
-          <img v-else class="uploadImg" :src="form.qrCode" alt="">
+          <van-icon v-if="!form.qrCode" name="plus" size="24px" color="#6d4ffd" />
+          <img v-else class="uploadImg" :src="form.qrCode" alt="" />
           <form enctype="multipart/form-data" id="uploadForm"><input class="file" accept="image/*" @change="upload($event)" type="file" name="file" /></form>
         </div>
         <van-button type="primary" block native-type="submit">Save</van-button>
@@ -91,7 +91,7 @@ export default {
           }
         }
       };
-      xhr.open('POST', 'http://47.243.16.119:8080/exchange/m/sell/upload');
+      xhr.open('POST', 'http://114.215.179.110:8080/exchange/m/sell/upload');
       xhr.send(formdata);
     },
     addPayment(parmas) {
@@ -100,10 +100,7 @@ export default {
           if (res.code == 200) {
             this.$toast('Payment method added successfully');
             setTimeout(() => {
-              this.$router.push({
-                path: 'payment',
-                query: {}
-              });
+              this.$router.go(-2);
             }, 2000);
           }
         })

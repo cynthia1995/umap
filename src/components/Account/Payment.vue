@@ -18,12 +18,12 @@
           </p>
         </li>
       </ul>
-      <div v-if="this.from !== 'UploadVoucher'"><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
+      <div><van-button class="addedBtn" icon="plus" type="primary" color="#6d4ffd" plain @click="toAddMethod">Add</van-button></div>
     </div>
     <div v-else class="noadded text-center color-8c9fad">
       <img src="../../assets/img/noPay@2x.png" alt="" />
       <p>{{ addedTxt }}</p>
-      <van-button v-if="this.from !== 'UploadVoucher'" type="primary" block @click="toAddMethod">Add</van-button>
+      <van-button type="primary" block @click="toAddMethod">Add</van-button>
     </div>
   </div>
 </template>
@@ -65,7 +65,10 @@ export default {
     toAddMethod() {
       this.$router.push({
         path: '/addmethod',
-        query: {}
+        query: {
+          // from: this.$route.query.from,
+          // id: this.$route.query.id
+        }
       });
     },
     selectMethod(item) {

@@ -80,15 +80,13 @@ export default {
         phone: this.phone
       })
         .then(res => {
-          if (res.success) {
-            this.$toast(res.message);
+          if (res.code == 200) {
+            this.$toast('Account created');
             setTimeout(() => {
               this.$router.push({
                 path: '/login'
               });
             }, 2000);
-          } else {
-            this.$toast(res.message);
           }
         })
         .catch(err => {

@@ -13,11 +13,12 @@
               <li v-for="(item, index) in openList" :key="index" class="marginbottom-10 flex" @click="orderDetail(item.goodsId)">
                 <p class="text-center">
                   <b class="fontsize12">
-                    ₹<span class="fontsize16 fontweight-m">{{ item.price }}</span>
+                    ₹
+                    <span class="fontsize16 fontweight-m">{{ item.price }}</span>
                     <em class="block margintop-10 color-8c9fad">PRICE</em>
                   </b>
                 </p>
-                <p class="text-center quantity">
+                <p class="text-center">
                   <b class="fontsize12">
                     <span class="fontsize16 fontweight-m">{{ item.quantity }}</span>
                     <em class="block margintop-10 color-8c9fad">QUANTITY</em>
@@ -89,7 +90,7 @@ export default {
       noOpen: true,
       noCompleted: true,
       addressType: [],
-      searchType: 'open',
+      searchType: 'Open',
       openList: [],
       completedList: []
     };
@@ -113,14 +114,14 @@ export default {
       })
         .then(res => {
           if (res.code == 200) {
-            if (self.searchType == 'open') {
+            if (self.searchType == 'Open') {
               res.result.forEach(function(ele) {
                 self.openList = self.openList.concat(ele.goodsList);
               });
               if (self.openList.length > 0) {
                 self.noOpen = false;
               }
-            } else if (self.searchType == 'completed') {
+            } else if (self.searchType == 'Completed') {
               res.result.forEach(function(ele) {
                 self.completedList = self.completedList.concat(ele.goodsList);
               });
@@ -136,12 +137,12 @@ export default {
     },
     onClick(name, title) {
       if (name === 0) {
-        this.searchType = 'open';
+        this.searchType = 'Open';
         if (this.noOpen) {
           this.getOrders();
         }
       } else if (name === 1) {
-        this.searchType = 'completed';
+        this.searchType = 'Completed';
         if (this.noCompleted) {
           this.getOrders();
         }
@@ -274,12 +275,9 @@ export default {
   p {
     flex: 1;
   }
-  .quantity{
-    flex: 0.8;
-  }
   .status {
     align-items: center;
-    flex: 1.6;
+    flex: 1.8;
     justify-content: flex-end;
     span {
       background: url(../../assets/img/arrow@2x.png) no-repeat right center;
