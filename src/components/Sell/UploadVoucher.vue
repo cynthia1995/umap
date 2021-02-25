@@ -115,23 +115,23 @@ export default {
           this.form.addrType = this.orderDetail.addrType;
           if (this.getStore('from_' + this.id)) {
             this.form.from = this.getStore('from_' + this.id);
+            this.removeStore('from_' + this.id);
           } else {
             this.form.from = this.orderDetail.fromAddress;
           }
           if (this.getStore('txid_' + this.id)) {
             this.form.txid = this.getStore('txid_' + this.id);
+            this.removeStore('txid_' + this.id);
           } else {
             this.form.txid = this.orderDetail.transactionNumber;
           }
           if (this.getStore('voucher_' + this.id)) {
             this.form.voucher = this.getStore('voucher_' + this.id);
+            this.removeStore('voucher_' + this.id);
           }
-          // voucher
-          // if (this.getStore('address_' + this.id)) {
-          //   this.form.addrType = JSON.parse(this.getStore('address_' + this.id)).addrType;
-          // }
           if (this.getStore('payment_' + this.id)) {
             this.paymentMethod = JSON.parse(this.getStore('payment_' + this.id));
+            this.removeStore('payment_' + this.id);
           } else {
             this.paymentMethod = this.orderDetail.paymentVo;
           }
@@ -150,6 +150,9 @@ export default {
     }
     if (this.form.txid) {
       this.setStore('txid_' + this.id, this.form.txid);
+    }
+     if (this.paymentMethod) {
+      this.setStore('payment_' + this.id, this.paymentMethod);
     }
     if (this.form.voucher) {
       this.setStore('voucher_' + this.id, this.form.voucher);
@@ -175,7 +178,6 @@ export default {
       xhr.send(formdata);
     },
     onSubmit() {
-      console.log(this.form);
       uploadcertificate(this.form)
         .then(res => {
           if (res.code == 200) {

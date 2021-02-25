@@ -145,7 +145,7 @@ export default {
         this.form = JSON.parse(this.getStore('mobileform'))
       }
     }
-    sessionStorage.clear();
+    window.localStorage.clear();
   },
   mounted() {
     window.onresize = () => {

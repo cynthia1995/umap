@@ -25,6 +25,13 @@
           </b>
           <span class="fontweight-m">₹{{ orderDetail.price }}</span>
         </p>
+        <p class="flex">
+          <b>
+            MARKET PRICE
+            <em class="inlineblock">(Per USDT)</em>
+          </b>
+          <span class="fontweight-m">₹{{ orderDetail.marketPrice }}</span>
+        </p>
         <div class="fontweight-m flex">
           <b>TOTAL</b>
           <span>
@@ -205,7 +212,10 @@ export default {
   line-height: 1;
   p {
     &:nth-child(2) {
-      margin: 24px 0 22px;
+      margin: 24px 0;
+    }
+    &:nth-child(3) {
+      margin-bottom: 22px;
     }
   }
   div {
