@@ -174,7 +174,7 @@ export default {
           }
         }
       };
-      xhr.open('POST', 'http://114.215.179.110:8080/exchange/m/sell/upload');
+      xhr.open('POST', 'http://api.testumap.lxk-soft.cn:8080/exchange/m/sell/upload');
       xhr.send(formdata);
     },
     onSubmit() {
