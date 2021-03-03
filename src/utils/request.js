@@ -9,7 +9,7 @@ import store from '../store/index.js'
 
 // 统一请求路径前缀
 // const base = '/ccma-server/api'   // 服务器地址/
-const base = 'http://api.testumap.lxk-soft.cn:8080' // 本地///
+const base = 'http://api.umap.vip:8080' // 本地///
 // 超时设定
 axios.defaults.timeout = 15000
 

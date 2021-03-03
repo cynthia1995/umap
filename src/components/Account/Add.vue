@@ -91,7 +91,7 @@ export default {
           }
         }
       };
-      xhr.open('POST', 'http://api.testumap.lxk-soft.cn:8080/exchange/m/sell/upload');
+      xhr.open('POST', 'http://api.umap.vip:8080/exchange/m/sell/upload');
       xhr.send(formdata);
     },
     addPayment(parmas) {
