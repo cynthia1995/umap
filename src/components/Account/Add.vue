@@ -7,7 +7,7 @@
         <van-field
           v-model="form.account"
           name="bankAccount"
-          label="Bank account"
+          :label="type == 'UPI' ? 'UPI account' : 'Bank Account'"
           placeholder="Please Enter Your Bank account"
           :rules="[{ required: true, message: 'Bank account cannot be empty' }]"
         />

@@ -9,7 +9,7 @@
     <p class="desc padding-20">{{ desc }}</p>
     <b class="text1 text-center fontweight-m">{{ transferAmount }}</b>
     <span class="ammount text-center">
-      <em class="fontweight-m">{{ $route.query.total }}</em>
+      <em class="fontweight-m">{{ $route.query.volume }}</em>
       USDT
     </span>
     <section class="main">
@@ -117,7 +117,8 @@ export default {
   width: 140px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: center;
 }
 /deep/ .van-tab {
   flex: none;
@@ -125,6 +126,7 @@ export default {
   background: url(../../assets/img/check_n@2x.png) no-repeat left center;
   background-size: 14px 14px;
   padding-left: 20px;
+  padding-right: 0;
 }
 /deep/ .van-tab--active {
   color: #6d4ffd;
