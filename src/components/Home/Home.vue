@@ -9,8 +9,8 @@
       </template>
     </van-nav-bar>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in homeInfo.advList" :key="index"><img :src="item.advImg" @click="linkTo(item.advAddress)" alt="" /></van-swipe-item>
-      <!-- <van-swipe-item><img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item> -->
+      <van-swipe-item v-for="(item, index) in advList" :key="index"><img :src="item.advImg" @click="linkTo(item.advAddress)" alt="" /></van-swipe-item>
+      <!-- <van-swipe-item>< img src="../../assets/img/static/banner_home@2x.png" alt="" /></van-swipe-item> -->
     </van-swipe>
     <section class="main">
       <van-button type="primary" block @click="toSell">Sell USDT</van-button>
@@ -20,42 +20,42 @@
             UMAP
             <br />
             PRICE
-          </p>
+          </p >
           <p class="bg-ffffff">
             <b class="fontsize20 fontweight-m">1</b>
             <span class="relativetop2">USDT</span>
             <b class="fontsize20">&nbsp;=&nbsp;</b>
             <em class="relativetop2">₹</em>
-            <b class="fontsize20 fontweight-m">{{ homeInfo.todayPrice.mapuPrice }}</b>
-          </p>
+            <b class="fontsize20 fontweight-m">{{ mapuPrice }}</b>
+          </p >
         </div>
         <div class="line line2">
           <p class="bg-edf5ff fontsize10 text-center fontweight-m">
             MARKET
             <br />
             PRICE
-          </p>
+          </p >
           <p class="bg-ffffff">
             <b class="fontsize20 fontweight-m">1</b>
             <span class="relativetop2">USDT</span>
             <b class="fontsize20">&nbsp;=&nbsp;</b>
             <em class="relativetop2">₹</em>
-            <b class="fontsize20 fontweight-m">{{ homeInfo.todayPrice.marketPrice }}</b>
-          </p>
+            <b class="fontsize20 fontweight-m">{{ marketPrice }}</b>
+          </p >
         </div>
         <div class="line line3">
-          <p class="bg-8ceaff fontweight-m fontsize12 color-2f3462">YOU EARN</p>
+          <p class="bg-8ceaff fontweight-m fontsize12 color-2f3462">YOU EARN</p >
           <p class="bg-00d0ff">
             <b class="fontsize24 white-color">≈</b>
             &nbsp;
             <span class="relativetop2">₹</span>
-            <b class="fontsize24 fontweight-m">{{ homeInfo.todayPrice.eran }}</b>
+            <b class="fontsize24 fontweight-m">{{ eran }}</b>
             <em class="fontsize10">&nbsp;/Sell 1 USDT</em>
-          </p>
+          </p >
         </div>
       </div>
       <div class="part part2 text-center color-6d4ffd bg-f6f7fb fontweight-m">
-        <count-to class="fontweight-m" :start-val="0" :end-val="homeInfo.todayLimteVolume" :duration="2000" />
+        <count-to class="fontweight-m" :start-val="0" :end-val="todayLimteVolume" :duration="2000" />
       </div>
     </section>
   </div>
@@ -71,15 +71,23 @@ export default {
   },
   data() {
     return {
-      homeInfo: {}
+      advList: [],
+      mapuPrice: null,
+      marketPrice: null,
+      eran: null,
+      todayLimteVolume: null
     };
   },
   created() {
     getHome()
       .then(res => {
         if (res.success) {
-          this.homeInfo = res.result;
-          console.log(this.homeInfo);
+          const homeInfo =  res.result;
+          this.advList = homeInfo.advList;
+          this.mapuPrice = homeInfo.todayPrice.mapuPrice;
+          this.marketPrice = homeInfo.todayPrice.marketPrice;
+          this.eran = homeInfo.todayPrice.eran;
+          this.todayLimteVolume = homeInfo.todayLimteVolume;
         } else {
         }
       })
