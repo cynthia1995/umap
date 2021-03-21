@@ -6,6 +6,7 @@ import {
 import router from '../router/index.js'
 import Cookies from 'js-cookie'
 import store from '../store/index.js'
+import { getStoreToken, removeStoreToken } from './storage'
 
 // 统一请求路径前缀
 // const base = '/ccma-server/api'   // 服务器地址/
@@ -29,7 +30,8 @@ axios.interceptors.response.use(response => {
   switch (data.code) {
     case 401:
       // 未登录 清除已登录状态
-      Cookies.set('token', '')
+      // Cookies.set('token', '')
+      removeStoreToken();
       if (router.history.current.name !== 'login') {
         if (data.message !== null) {
           Notify(data.message)
@@ -67,7 +69,8 @@ axios.interceptors.response.use(response => {
 })
 
 export const getRequest = (url, params) => {
-  const token = Cookies.get('token');
+  // const token = Cookies.get('token');
+  const token = getStoreToken();
   return axios({
     method: 'get',
     url: `${base}${url}`,
@@ -79,7 +82,8 @@ export const getRequest = (url, params) => {
 }
 
 export const postRequest = (url, params) => {
-  const token = Cookies.get('token');
+  // const token = Cookies.get('token');
+  const token = getStoreToken();
   return axios({
     method: 'post',
     url: `${base}${url}`,
@@ -92,7 +96,8 @@ export const postRequest = (url, params) => {
 }
 
 export const putRequest = (url, params) => {
-  const token = Cookies.get('token');
+  // const token = Cookies.get('token');
+  const token = getStoreToken();
   return axios({
     method: 'put',
     url: `${base}${url}`,
@@ -112,7 +117,8 @@ export const putRequest = (url, params) => {
 }
 
 export const deleteRequest = (url, params) => {
-  const token = Cookies.get('token');
+  // const token = Cookies.get('token');
+  const token = getStoreToken();
   return axios({
     method: 'delete',
     url: `${base}${url}`,

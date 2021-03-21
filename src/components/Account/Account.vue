@@ -43,7 +43,7 @@
 <script>
 import { getUserInfo } from '@/api/api';
 import CountTo from 'vue-count-to';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 export default {
   name: 'Account',
   components: {
@@ -84,7 +84,7 @@ export default {
     };
   },
   created() {
-    if (Cookies.get('token')) {
+    if (this.getStoreToken()) {
       getUserInfo()
         .then(res => {
           if (res.code == 200) {

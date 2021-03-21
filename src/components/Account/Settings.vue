@@ -23,7 +23,7 @@
 
 <script>
 import NavTit from '../NavAndTit.vue';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 export default {
   name: 'Settings',
   components: {
@@ -37,15 +37,16 @@ export default {
     };
   },
   created() {
-    if (Cookies.get('token')) {
+    if (this.getStoreToken()) {
       this.btnText = 'LogOut';
     }
   },
   mounted() {},
   methods: {
     logOut() {
-      if (Cookies.get('token')) {
-        Cookies.remove('token');
+      if (this.getStoreToken()) {
+        this.removeStoreToken()
+        // Cookies.remove('token');
         this.$router.push({
           path: '/home'
         });
