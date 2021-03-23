@@ -37,7 +37,10 @@
         <img :src="item.img" alt="" />
       </li>
       <li class="contact">
-        <b @click="toggle" class="fontweight-m fontsize16">Contact Us</b>
+        <div @click="toggle" style="display: flex;">
+          <b class="fontweight-m fontsize16">Contact Us</b>
+          <img src="../../assets/img/contactus.png" alt="" />
+        </div>
         <ul v-if="contactShow" class="userListSub">
           <li @click="contactus('tele')" class="fontweight-r fontsize16">telegram</li>
           <li @click="contactus('whats')" class="fontweight-r fontsize16">Whatsapp</li>
@@ -92,6 +95,7 @@ export default {
     };
   },
   created() {
+    this.$store.state.loading = false;
     if (this.getStoreToken()) {
       getUserInfo()
         .then(res => {
@@ -195,7 +199,7 @@ export default {
     height: auto;
     .userListSub {
       display: block;
-      padding-left: 20px;
+      padding-left: 10px;
       li {
         padding: 8px 0;
       }
