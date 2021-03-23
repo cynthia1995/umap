@@ -36,6 +36,13 @@
         <span v-if="noAdded && index == 0" class="color-ff5a75 fontweight-m">Not added</span>
         <img :src="item.img" alt="" />
       </li>
+      <li class="contact">
+        <b @click="toggle" class="fontweight-m fontsize16">Contact Us</b>
+        <ul v-if="contactShow" class="userListSub">
+          <li @click="contactus('tele')" class="fontweight-r fontsize16">telegram</li>
+          <li @click="contactus('whats')" class="fontweight-r fontsize16">Whatsapp</li>
+        </ul>
+      </li>
     </ul>
   </div>
 </template>
@@ -54,6 +61,7 @@ export default {
       isLogin: false,
       noAdded: false,
       userInfo: {},
+      contactShow: false,
       list: [
         {
           name: 'Payment Method(s)',
@@ -114,6 +122,16 @@ export default {
       this.$router.push({
         path: '/login'
       });
+    },
+    toggle() {
+      this.contactShow = !this.contactShow;
+    },
+    contactus(type) {
+      if(type == 'tele') {
+        location.href = 'https://t.me/joinchat/VsPTFb4MZvRxqxdo';
+      } else if (type == 'whats') {
+        location.href = 'http://wa.me/919319609962';
+      }
     }
   }
 };
@@ -151,6 +169,7 @@ export default {
 }
 .userList {
   margin-top: 10px;
+  padding-bottom: 50px;
   li {
     height: 30px;
     line-height: 30px;
@@ -169,6 +188,17 @@ export default {
       position: absolute;
       right: 40px;
       top: 15px;
+    }
+  }
+  .contact {
+    display: block;
+    height: auto;
+    .userListSub {
+      display: block;
+      padding-left: 20px;
+      li {
+        padding: 8px 0;
+      }
     }
   }
 }
