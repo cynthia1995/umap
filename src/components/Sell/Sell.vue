@@ -96,7 +96,7 @@ export default {
     };
   },
   created() {
-    this.loading = true;
+    // this.loading = true;
     getHome()
       .then(res => {
         if (res.code == 200) {

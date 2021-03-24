@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home/Home.vue'
+import SellIndex from '@/components/Sell/SellIndex.vue'
 import Sell from '@/components/Sell/Sell.vue'
 import SellAddress from '@/components/Sell/SellAddress.vue'
 import UploadVoucher from '@/components/Sell/UploadVoucher.vue'
@@ -39,7 +40,11 @@ export default new Router({
   }, {
     path: '/sell',
     name: 'Sell',
-    component: Sell,
+    component: Sell
+  }, {
+    path: '/sellIndex',
+    name: 'SellIndex',
+    component: SellIndex,
     meta: {
       navShow: true
     }

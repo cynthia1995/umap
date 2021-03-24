@@ -1,7 +1,7 @@
 <template>
   <div class="tab-bar" v-show="$route.meta.navShow">
     <router-link to="/home" tag="li">home</router-link>
-    <router-link to="/sell" tag="li">sell</router-link>
+    <router-link to="/sellIndex" tag="li">sell</router-link>
     <router-link to="/orders" tag="li">orders</router-link>
     <router-link to="/account" tag="li">account</router-link>
   </div>
