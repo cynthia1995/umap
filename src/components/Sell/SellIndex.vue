@@ -65,6 +65,28 @@ export default {
     font-size: 14px;
     padding: 40px 40px 65.6px;
     line-height: 24px;
+    position: relative;
+    &::before{
+      position: absolute;
+      content: "";
+      background: url(../../assets/img/icon1.png) no-repeat center;
+      background-size: cover;
+      width: 10px;
+      height: 10px;
+      top: 30px;
+      left: 30px;
+    }
+    &::after{
+      position: absolute;
+      content: "";
+      background: url(../../assets/img/icon1.png) no-repeat center;
+      background-size: cover;
+      width: 10px;
+      height: 10px;
+      bottom: 60px;
+      right: 30px;
+      transform: rotate(180deg);
+    }
   }
   .title_sub {
     width: 277px;
