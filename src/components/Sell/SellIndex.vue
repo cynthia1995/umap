@@ -6,11 +6,23 @@
       <br />
       It’s 24×7,safe and absolutely legal!
     </p>
-    <img class="title_sub" src="../../assets/img/title_sub.png" alt="">
+    <img class="title_sub" src="../../assets/img/title_sub.png" alt="" />
     <ul class="steps">
-    	<li>
-        <h3>Buy USDT on Bitbns</h3>
-        <p>UMAP helps you convert your USDT to money instantly where UMAP acts as an escrow for safekeeping of transaction.</p>
+      <li>
+        <h3 class="fontsize16 fontweight-m">Buy USDT on Bitbns</h3>
+        <p class="fontweight-r">UMAP helps you convert your USDT to money instantly where UMAP acts as an escrow for safekeeping of transaction.</p>
+        <img @click="navigateTo('https://bitbns.com/trade/#/usdt')" src="../../assets/img/btn_buy.png" alt="" />
+      </li>
+      <li>
+        <h3 class="fontsize16 fontweight-m">Buy USDT on Bitbns</h3>
+        <p class="fontweight-r">UMAP helps you convert your USDT to money instantly where UMAP acts as an escrow for safekeeping of transaction.</p>
+        <img @click="toSell" src="../../assets/img/btn_sell.png" alt="" />
+      </li>
+      <li>
+        <h3 class="fontsize16 fontweight-m">Buy USDT on Bitbns</h3>
+        <p class="fontweight-r">UMAP helps you convert your USDT to money instantly where UMAP acts as an escrow for safekeeping of transaction.</p>
+        <img @click="navigateTo('http://cdn.umap.vip/doc/umap%20tutorial.pdf')" src="../../assets/img/btn_tutorial.png" alt="" />
+        <img @click="navigateTo('http://cdn.umap.vip/voide/1616566580874646.mp4')" src="../../assets/img/btn_video.png" alt="" />
       </li>
     </ul>
   </div>
@@ -23,15 +35,26 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    this.$store.state.loading = false;
+  },
   mounted() {},
-  methods: {}
+  methods: {
+    navigateTo(url) {
+      location.href = url;
+    },
+    toSell() {
+      this.$router.push({
+        path: '/sell'
+      });
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .sellIndex {
-  background: url(../../assets/img/bg.png) no-repeat center top;
+  background: url(../../assets/img/bg.png) no-repeat center top #ffffff;
   background-size: 100%;
   padding-top: 40px;
   .title {
@@ -46,6 +69,57 @@ export default {
   .title_sub {
     width: 277px;
     margin: 0 auto;
+  }
+  .steps {
+    padding: 0 24px 50px;
+    li {
+      margin-top: 23px;
+      padding-bottom: 10px;
+      &:nth-child(1) {
+        h3 {
+          background: url(../../assets/img/step1.png) no-repeat left center;
+          background-size: 55px;
+        }
+        p {
+          background: url(../../assets/img/icon_step1.png) no-repeat left center;
+          background-size: 60px;
+        }
+      }
+      &:nth-child(2) {
+        h3 {
+          background: url(../../assets/img/step2.png) no-repeat left center;
+          background-size: 55px;
+        }
+        p {
+          background: url(../../assets/img/icon_step2.png) no-repeat left center;
+          background-size: 60px;
+        }
+      }
+      &:nth-child(3) {
+        h3 {
+          background: url(../../assets/img/step3.png) no-repeat left center;
+          background-size: 55px;
+        }
+        p {
+          background: url(../../assets/img/icon_step3.png) no-repeat left center;
+          background-size: 60px;
+        }
+      }
+    }
+    img {
+      width: 167px;
+      margin: 0 auto;
+    }
+    h3 {
+      color: #060d56;
+      padding: 8px 0 10px 72px;
+    }
+    p {
+      font-size: 15px;
+      margin: 18px 0 22px;
+      padding-left: 72px;
+      line-height: 20px;
+    }
   }
 }
 </style>

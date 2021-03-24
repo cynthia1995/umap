@@ -14,6 +14,9 @@
     </van-swipe>
     <section class="main">
       <van-button type="primary" block @click="toSell">Sell USDT</van-button>
+      <van-swipe class="marquee" vertical :show-indicators="false" :autoplay="5000">
+        <van-swipe-item v-for="(item, index) in marquees" :key="index">{{item}}</van-swipe-item>
+      </van-swipe>
       <div class="part part1 bg-dbeaff">
         <div class="line line1">
           <p class="bg-edf5ff fontsize10 text-center fontweight-m">
@@ -75,7 +78,15 @@ export default {
       mapuPrice: null,
       marketPrice: null,
       eran: null,
-      todayLimteVolume: null
+      todayLimteVolume: null,
+      marquees: [
+        '93***293 just earned 356Rs',
+        '83***207 successfully sold 1800 USDT',
+        '95***395 just earned 420Rs',
+        '65***197 successfully sold 2000 USDT',
+        '87***796 just earned 1000Rs',
+        '91***253 just earned 198Rs'
+      ]
     };
   },
   created() {
@@ -151,6 +162,14 @@ export default {
   top: -20px;
   background: url(../../assets/img/logo3@2x.png) no-repeat center bottom 50px #ffffff;
   background-size: 77px 20px;
+  .marquee{
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    background-color: #f6f7fb;
+    text-align: center;
+    border-radius: 4px;
+  }
   .part {
     position: relative;
     margin-top: 20px;

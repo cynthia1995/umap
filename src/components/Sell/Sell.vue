@@ -1,6 +1,11 @@
 <template>
   <div class="sell">
-    <h3 class="white-color fontweight-m fontsize28">Sell USDT</h3>
+    <van-nav-bar @click-left="onClickLeft">
+      <template #left>
+        <img src="../../assets/img/Left-white@2x.png" alt="" />
+      </template>
+    </van-nav-bar>
+    <h3 class="title padding-20 fontweight-m white-color">Sell USDT</h3>
     <div class="line line1">
       <p class="bg-8ceaff flex fontsize12">
         <img src="../../assets/img/USDT@2x.png" alt="" />
@@ -111,6 +116,9 @@ export default {
   },
   mounted() {},
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     getPaymentList() {
       getPaymentList()
         .then(res => {
@@ -198,7 +206,8 @@ export default {
   background: url(../../assets/img/bg_sell@2x.png) no-repeat center top;
   background-size: 100%;
   h3 {
-    padding: 22px 20px 0;
+    padding: 50px 20px 0;
+    font-size: 28px;
   }
   .line1 {
     width: 80%;
