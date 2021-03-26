@@ -13,6 +13,7 @@ import Answer from '@/components/Account/Answer.vue'
 import AboutUs from '@/components/Account/AboutUs.vue'
 import TermOfService from '@/components/Account/TermOfService.vue'
 import PrivacyPolicy from '@/components/Account/PrivacyPolicy.vue'
+import Tutorial from '@/components/Account/Tutorial.vue'
 import Settings from '@/components/Account/Settings.vue'
 import Payment from '@/components/Account/Payment.vue'
 import AddMethod from '@/components/Account/AddMethod.vue'
@@ -98,6 +99,10 @@ export default new Router({
     path: '/privacypolicy',
     name: 'PrivacyPolicy',
     component: PrivacyPolicy
+  }, {
+    path: '/tutorial',
+    name: 'Tutorial',
+    component: Tutorial
   }, {
     path: '/settings',
     name: 'Settings',
