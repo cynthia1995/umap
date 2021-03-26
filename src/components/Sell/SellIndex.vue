@@ -21,7 +21,7 @@
       <li>
         <h3 class="fontsize16 fontweight-m">Buy USDT on Bitbns</h3>
         <p class="fontweight-r">UMAP helps you convert your USDT to money instantly where UMAP acts as an escrow for safekeeping of transaction.</p>
-        <img @click="navigateTo('http://cdn.umap.vip/doc/umap%20tutorial.pdf')" src="../../assets/img/btn_tutorial.png" alt="" />
+        <img @click="toTutorial" src="../../assets/img/btn_tutorial.png" alt="" />
         <img @click="navigateTo('http://cdn.umap.vip/voide/1616566580874646.mp4')" src="../../assets/img/btn_video.png" alt="" />
       </li>
     </ul>
@@ -47,6 +47,11 @@ export default {
       this.$router.push({
         path: '/sell'
       });
+    },
+    toTutorial() {
+      this.$router.push({
+        path: '/tutorial'
+      });
     }
   }
 };
@@ -66,9 +71,9 @@ export default {
     padding: 40px 40px 65.6px;
     line-height: 24px;
     position: relative;
-    &::before{
+    &::before {
       position: absolute;
-      content: "";
+      content: '';
       background: url(../../assets/img/icon1.png) no-repeat center;
       background-size: cover;
       width: 10px;
@@ -76,9 +81,9 @@ export default {
       top: 30px;
       left: 30px;
     }
-    &::after{
+    &::after {
       position: absolute;
-      content: "";
+      content: '';
       background: url(../../assets/img/icon1.png) no-repeat center;
       background-size: cover;
       width: 10px;
@@ -99,7 +104,7 @@ export default {
       padding-bottom: 10px;
       &:nth-child(1) {
         h3 {
-          background: url(../../assets/img/step1.png) no-repeat left center;
+          background: url(../../assets/img/step1.png) no-repeat left 1px;
           background-size: 55px;
         }
         p {
@@ -109,7 +114,7 @@ export default {
       }
       &:nth-child(2) {
         h3 {
-          background: url(../../assets/img/step2.png) no-repeat left center;
+          background: url(../../assets/img/step2.png) no-repeat left 1px;
           background-size: 55px;
         }
         p {
@@ -119,7 +124,7 @@ export default {
       }
       &:nth-child(3) {
         h3 {
-          background: url(../../assets/img/step3.png) no-repeat left center;
+          background: url(../../assets/img/step3.png) no-repeat left 1px;
           background-size: 55px;
         }
         p {
@@ -134,7 +139,7 @@ export default {
     }
     h3 {
       color: #060d56;
-      padding: 8px 0 10px 72px;
+      padding: 10px 0 10px 72px;
     }
     p {
       font-size: 15px;
