@@ -14,13 +14,13 @@
         <img @click="navigateTo('https://bitbns.com/trade/#/usdt')" src="../../assets/img/btn_buy.png" alt="" />
       </li>
       <li>
-        <h3 class="fontsize16 fontweight-m">Buy USDT on Bitbns</h3>
-        <p class="fontweight-r">UMAP helps you convert your USDT to money instantly where UMAP acts as an escrow for safekeeping of transaction.</p>
+        <h3 class="fontsize16 fontweight-m">Sell USDT on UMAP at higher Price</h3>
+        <p class="fontweight-r">Send USDT from Bitbns to UMAP,and you will receive money from buyer Via Bank transfer.</p>
         <img @click="toSell" src="../../assets/img/btn_sell.png" alt="" />
       </li>
       <li>
-        <h3 class="fontsize16 fontweight-m">Buy USDT on Bitbns</h3>
-        <p class="fontweight-r">UMAP helps you convert your USDT to money instantly where UMAP acts as an escrow for safekeeping of transaction.</p>
+        <h3 class="fontsize16 fontweight-m">CONFIRM RECEIVING THE PAYMENT</h3>
+        <p class="fontweight-r">UMAP will transfer the USDT to the buyer only after acknowledge receiving payment.</p>
         <img @click="toTutorial" src="../../assets/img/btn_tutorial.png" alt="" />
         <img @click="navigateTo('http://cdn.umap.vip/voide/1616566580874646.mp4')" src="../../assets/img/btn_video.png" alt="" />
       </li>
@@ -98,7 +98,7 @@ export default {
     margin: 0 auto;
   }
   .steps {
-    padding: 0 24px 50px;
+    padding: 0 18px 50px;
     li {
       margin-top: 23px;
       padding-bottom: 10px;
