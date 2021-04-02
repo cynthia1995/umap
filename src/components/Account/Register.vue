@@ -127,7 +127,7 @@ export default {
       this.checkPhone();
       this.checkPassword();
       this.checkReferral();
-      if (!this.errMsg.email && !this.errMsg.phone && !this.errMsg.password) {
+      if (!this.errMsg.email && !this.errMsg.phone && !this.errMsg.password && !this.errMsg.referral) {
         if (this.checked) {
           register(this.form)
             .then(res => {
