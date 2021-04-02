@@ -20,12 +20,12 @@
         />
         <van-field v-model="form.phone" name="mobile" label="Phone Number" placeholder="Please Enter Your Phone Number" @blur="checkPhone($event)" :error-message="errMsg.phone" />
         <van-field
-          style="display:none"
           v-model="form.referralId"
           name="referral"
-          label="Referral ID(Optional)"
-          placeholder="Please Enter Referral ID"
-          :rules="[{ required: false }]"
+          label="Referral"
+          placeholder="Please Enter Your ReferralCode"
+          @blur="checkReferral($event)"
+          :error-message="errMsg.referral"
         />
         <van-button type="primary" block native-type="submit">Register</van-button>
         <div class="agree">
@@ -51,6 +51,7 @@ export default {
       checked: true,
       emailPattern: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
       phonePattern: /^[6-9]\d{9}$/,
+      ReferralPattern: /^[0-9a-zA-Z]{0,8}$/,
       form: {
         email: '',
         phone: '',
@@ -60,7 +61,8 @@ export default {
       errMsg: {
         email: '',
         phone: '',
-        password: ''
+        password: '',
+        referral: ''
       }
     };
   },
@@ -86,6 +88,15 @@ export default {
           this.errMsg.email = 'E-mail format is incorrect';
         } else {
           this.errMsg.email = '';
+        }
+      }
+    },
+    checkReferral(event) {
+      if (this.form.referralId) {
+        if (!this.ReferralPattern.test(this.form.referralId)) {
+          this.errMsg.referral = 'No more than 8 characters in length';
+        } else {
+          this.errMsg.referral = '';
         }
       }
     },
@@ -115,6 +126,7 @@ export default {
       this.checkEmail();
       this.checkPhone();
       this.checkPassword();
+      this.checkReferral();
       if (!this.errMsg.email && !this.errMsg.phone && !this.errMsg.password) {
         if (this.checked) {
           register(this.form)
