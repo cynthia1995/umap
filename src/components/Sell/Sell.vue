@@ -33,7 +33,7 @@
       <div class="icons flex"><img v-for="(item, index) in payList" :key="index" :src="getIcon(item)" alt="" /></div>
       <van-button type="primary" block @click="confirmSubmit">Sell USDT</van-button>
       <p class="msg text-center">
-        <span>₹{{ fee.toFixed(2) }}</span>
+        <span>{{ fee }} USDT</span>
         fee included
       </p>
     </section>
@@ -59,7 +59,7 @@
           <b>Fee</b>
           <span class="fontweight-m">
             <!-- <em class="inlineblock">₹2000.00</em> -->
-            ₹{{ fee.toFixed(2) }}
+            {{ fee }} USDT
           </span>
         </p>
         <div class="fontweight-m flex">
@@ -67,7 +67,7 @@
           <span>
             ₹
             <i class="fontsize20 fontweight-m">
-              {{ (volumeUSDT * mapuPrice).toFixed(2) }}
+              {{ ((volumeUSDT - fee) * mapuPrice).toFixed(2) }}
               <!-- {{
                 noFee
                   ? (perUSDT * parseFloat(volumeUSDT.replace('₹', '')) - perUSDT * parseFloat(volumeUSDT.replace('₹', '')) * fee).toFixed(2)
@@ -94,7 +94,7 @@ export default {
       volumeUSDT: '',
       totalINR: '',
       confirmOrder: false,
-      fee: 0.0,
+      fee: 0,
       noFee: false,
       mapuPrice: 0,
       payList: []
@@ -107,6 +107,7 @@ export default {
         if (res.code == 200) {
           this.homeInfo = res.result;
           this.mapuPrice = this.homeInfo.todayPrice.mapuPrice;
+          this.fee = this.homeInfo.todayPrice.sellFee;
         }
       })
       .catch(err => {
@@ -144,13 +145,13 @@ export default {
       if (this.volumeUSDT == '') {
         this.totalINR = '';
       } else {
-        this.totalINR = (parseFloat(this.volumeUSDT) * this.mapuPrice).toFixed(2);
+        this.totalINR = (parseFloat(this.volumeUSDT - this.fee) * this.mapuPrice).toFixed(2);
       }
     },
     exchange() {
       const flag = this.volumeUSDT;
       this.volumeUSDT = this.totalINR;
-      this.totalINR = (this.volumeUSDT * this.mapuPrice).toFixed(2);
+      this.totalINR = ((this.volumeUSDT - this.fee) * this.mapuPrice).toFixed(2);
     },
     confirmSubmit() {
       if (!this.volumeUSDT) {
@@ -175,7 +176,7 @@ export default {
           volume: this.volumeUSDT,
           price: this.mapuPrice,
           fee: this.fee,
-          total: (this.volumeUSDT * this.mapuPrice).toFixed(2)
+          total: ((this.volumeUSDT - this.fee)* this.mapuPrice).toFixed(2)
         }
       });
       this.confirmOrder = false;
