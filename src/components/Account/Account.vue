@@ -52,7 +52,9 @@
           <!-- <img src="../../assets/img/contactus.png" alt="" /> -->
         </div>
         <ul v-if="ReferralCodeShow" class="userListSub">
-          <li class="fontweight-r fontsize16">{{userInfo.referrlCode}}</li>
+          <li class="fontweight-r fontsize16">{{userInfo.referrlCode}} 
+            <span v-clipboard:copy="userInfo.referrlCode" v-clipboard:success="onCopy" v-clipboard:error="onError">copy</span>
+          </li>
         </ul>
       </li>
     </ul>
@@ -151,6 +153,12 @@ export default {
       } else if (type == 'whats') {
         location.href = 'http://wa.me/919319609962';
       }
+    },
+    onCopy() {
+      this.$toast('Copied to clipboard');
+    },
+    onError() {
+      this.$toast('Copy failed, please try again');
     }
   }
 };
@@ -218,6 +226,18 @@ export default {
       li {
         padding: 8px 0;
       }
+    }
+  }
+  .referralCode {
+    span {
+      position: static;
+      color: #7041ff;
+      background-color: #f7f8fc;
+      display: inline-block;
+      padding: 0 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      letter-spacing: 1px;
     }
   }
 }
