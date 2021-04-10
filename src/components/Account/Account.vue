@@ -46,6 +46,15 @@
           <li @click="contactus('whats')" class="fontweight-r fontsize16">Whatsapp</li>
         </ul>
       </li>
+      <li v-if="ReferralCode" class="referralCode">
+        <div @click="toggle2" style="display: flex;">
+          <b class="fontweight-m fontsize16">My ReferralCode</b>
+          <!-- <img src="../../assets/img/contactus.png" alt="" /> -->
+        </div>
+        <ul v-if="ReferralCodeShow" class="userListSub">
+          <li class="fontweight-r fontsize16">{{userInfo.referrlCode}}</li>
+        </ul>
+      </li>
     </ul>
   </div>
 </template>
@@ -65,6 +74,8 @@ export default {
       noAdded: false,
       userInfo: {},
       contactShow: false,
+      ReferralCode: '',
+      ReferralCodeShow: false,
       list: [
         {
           name: 'Payment Method(s)',
@@ -102,6 +113,7 @@ export default {
           if (res.code == 200) {
             this.isLogin = true;
             this.userInfo = res.result;
+            this.ReferralCode = this.userInfo.referrlCode;
             if (this.userInfo.paymentMethod && this.userInfo.paymentMethod.length > 0) {
               this.noAdded = false;
             } else {
@@ -129,6 +141,9 @@ export default {
     },
     toggle() {
       this.contactShow = !this.contactShow;
+    },
+    toggle2() {
+      this.ReferralCodeShow = !this.ReferralCodeShow;
     },
     contactus(type) {
       if(type == 'tele') {
@@ -173,7 +188,7 @@ export default {
 }
 .userList {
   margin-top: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 60px;
   li {
     height: 30px;
     line-height: 30px;
@@ -194,7 +209,7 @@ export default {
       top: 15px;
     }
   }
-  .contact {
+  .contact, .referralCode {
     display: block;
     height: auto;
     .userListSub {
